@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/default/hibernate-core-3.3.0.SP1.jar"/>
+	<classpathentry kind="lib" path="lib/default/log4j-1.2.11.jar"/>
+	<classpathentry kind="lib" path="lib/default/spring-2.5.6.jar"/>
+	<classpathentry kind="lib" path="lib/test/servlet-api-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/default/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="lib/default/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/default/asm-1.5.3.jar"/>
+	<classpathentry kind="lib" path="lib/default/asm-attrs-1.5.3.jar"/>
+	<classpathentry kind="lib" path="lib/default/cglib-2.1_3.jar"/>
+	<classpathentry kind="lib" path="lib/default/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="lib/default/commons-lang-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/default/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/default/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/default/ehcache-1.2.3.jar"/>
+	<classpathentry kind="lib" path="lib/default/hibernate-3.2.6.ga.jar"/>
+	<classpathentry kind="lib" path="lib/default/hibernate-annotations-3.4.0.GA.jar"/>
+	<classpathentry kind="lib" path="lib/default/hibernate-commons-annotations-3.1.0.GA.jar"/>
+	<classpathentry kind="lib" path="lib/default/jta-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/default/slf4j-api-1.4.2.jar"/>
+	<classpathentry kind="lib" path="lib/default/spring-beans-2.5.5.jar"/>
+	<classpathentry kind="lib" path="lib/default/spring-context-2.5.5.jar"/>
+	<classpathentry kind="lib" path="lib/default/spring-context-support-2.5.5.jar"/>
+	<classpathentry kind="lib" path="lib/default/spring-core-2.5.5.jar"/>
+	<classpathentry kind="lib" path="lib/default/spring-web-2.5.5.jar"/>
+	<classpathentry kind="lib" path="lib/default/spring-webmvc-2.5.5.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="lib" path="lib/test/spring-test-2.5.6.jar"/>
+	<classpathentry kind="lib" path="lib/default/persistence-api-1.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
