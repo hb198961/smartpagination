@@ -100,7 +100,7 @@ public class PagingHead extends TagSupport {
 		String fullUrl = contextPath + url + "&"
 				+ BasePagingController.PAGE_SIZE_PARAM + "=" + pm.getPageSize()
 				+ "&" + BasePagingController.TO_PAGE_NO_PARAM + "="
-				+ pm.computeNewPageNo() + "&"
+				+ pm.computeNewPageNoInTag() + "&"
 				+ BasePagingController.ORDER_BY_PARAM + "=" + orderBy + "&"
 				+ BasePagingController.ORDER_DIR_PARAM + "=" + currDir;
 
