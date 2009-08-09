@@ -35,6 +35,12 @@
 		<javac encoding="utf-8" destdir="${classes.dir}" classpathref="lib.path.id" debug="${build.debug}">
 			<src path="src" />
 		</javac>
+		<copy todir="${classes.dir}">
+			<fileset dir="src">
+				<include name="**/*.*" />
+				<exclude name="**/*.java" />
+		</fileset>
+		</copy>
 		<!-- copy the property files to class path-->
 		<native2ascii src="src" dest="${classes.dir}" includes="*.properties" encoding="UTF-8"/>
 		<copy todir="${web.dir}/WEB-INF/classes">
