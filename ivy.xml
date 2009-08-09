@@ -8,12 +8,20 @@
 	<dependencies>
 		<dependency org="org.apache" name="log4j" rev="1.2.11" conf="default"/>
         <dependency org="org.springframework" name="spring" rev="2.5.6" conf="default"/>
-        <dependency org="org.springframework" name="spring-webmvc" rev="2.5.5" conf="default"/>
+        <dependency org="cglib" name="cglib" rev="2.2" conf="default"/>
+        <dependency org="cglib" name="cglib-nodep" rev="2.2" conf="default"/>
+        <dependency org="javassist" name="javassist" rev="3.8.0.GA" conf="default"/>
+        
+        <dependency org="org.springframework" name="spring-webmvc" rev="2.5.6" conf="default"/>
 		<dependency org="org.apache" name="commons-lang" rev="2.1" conf="default"/>
+		<dependency org="commons-dbcp" name="commons-dbcp" rev="1.2.1" conf="default"/>
 		<dependency org="org.apache" name="commons-collections" rev="3.1" conf="default"/>	
         <dependency org="org.hibernate" name="hibernate" rev="3.2.6.ga" conf="default->runtime"/>
         <dependency org="org.hibernate" name="hibernate-annotations" rev="3.4.0.GA" conf="default"/>
         <dependency org="javax.persistence" name="persistence-api" rev="1.0" conf="default"/>
+        <dependency org="org.slf4j" name="slf4j-jdk14" rev="1.5.0" conf="default"/>
+        
+        <dependency org="hsqldb" name="hsqldb" rev="1.8.0.7" conf="default"/>
         
         <dependency org="javax.servlet" name="servlet-api" rev="2.4" conf="test->default"/>
 

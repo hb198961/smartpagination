@@ -84,7 +84,7 @@ abstract public class BasePagingController<T_Criterial, T_OrderBy> {
 			}
 		}
 
-		PageResult pageResult = findByExpressionPaging(pi);
+		PageResult pageResult = findByPage(pi);
 
 		pm.setTotalRecordsNumber(pageResult.getTotalRecordsNumber());
 
@@ -107,7 +107,7 @@ abstract public class BasePagingController<T_Criterial, T_OrderBy> {
 	/**
 	 * 由子类重写，调用service查询
 	 */
-	abstract public PageResult findByExpressionPaging(
+	abstract public PageResult findByPage(
 			PageInfo<T_Criterial, T_OrderBy> pageInfo);
 
 }

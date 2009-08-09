@@ -3,10 +3,13 @@ package org.powerstone.smartpagination.sample;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
+//@Table(name = "USER")
 public class UserModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -60,5 +63,13 @@ public class UserModel {
 
 	public void setBirth(Date birth) {
 		this.birth = birth;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 }
