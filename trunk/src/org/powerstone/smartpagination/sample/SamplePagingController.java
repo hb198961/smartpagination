@@ -13,6 +13,7 @@ import org.powerstone.smartpagination.hibernate.BaseHbmPagingController;
 import org.powerstone.smartpagination.hibernate.HbmPageInfo;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
+import org.springframework.web.servlet.view.RedirectView;
 
 public class SamplePagingController extends MultiActionController {
 	private BaseHibernateDao baseHibernateDao;
@@ -31,12 +32,8 @@ public class SamplePagingController extends MultiActionController {
 				return pi;
 			}
 		};
-		try {
-			ctrl.handleRequest(request, response);
-		} catch (RuntimeException e) {
-			e.printStackTrace();
-		}
-		return new ModelAndView("userList", "userList", ctrl
+		ctrl.handleRequest(request, response);
+		return new ModelAndView("userList", "userList", BaseHbmPagingController
 				.getPageData(request));
 	}
 
@@ -52,13 +49,14 @@ public class SamplePagingController extends MultiActionController {
 		for (int i = 0; i < 17; i++) {
 			user = new UserModel();
 			user.setBirth(new Date());
-			user.setEmail(i + "liyingquan@gmail.com");
-			user.setRealName(i + "liyingquan");
+			user.setEmail("liyingquan@gmail.com" + i);
+			user.setRealName("liyingquan" + i);
 			user.setSex("m");
-			user.setUserName(i + "admin");
+			user.setUserName("admin" + i);
 			baseHibernateDao.saveOrUpdate(user);
 		}
-		return list(request, response);
+		return new ModelAndView(new RedirectView(request.getContextPath()
+				+ "/list.htm"));
 	}
 
 	public void setBaseHibernateDao(BaseHibernateDao baseHibernateDao) {
