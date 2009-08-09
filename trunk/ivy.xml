@@ -23,10 +23,17 @@
         
         <dependency org="hsqldb" name="hsqldb" rev="1.8.0.7" conf="default"/>
         
+        <dependency org="javax.servlet" name="jstl" rev="1.1.2" conf="default"/>
+        <dependency org="taglibs" name="standard" rev="1.1.2"/>
+        
         <dependency org="javax.servlet" name="servlet-api" rev="2.4" conf="test->default"/>
+        <dependency org="javax.servlet" name="jsp-api" rev="2.0" conf="test->default"/>
 
         <dependency org="org.springframework" name="spring-test" rev="2.5.6" conf="test->default"/>
         <dependency org="junit" name="junit" rev="4.5" conf="test->default"/>
+        <dependency org="org.mockito" name="mockito-all" rev="1.5" conf="test->default"/>
+        <dependency org="ant-contrib" name="ant-contrib" rev="1.0b3" conf="test->default"/>
+        
 	</dependencies>
 	
 </ivy-module>
