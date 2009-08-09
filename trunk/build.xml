@@ -67,13 +67,17 @@
 			<format property="jar.time" pattern="MM/dd/yyyy hh:mm aa" locale="en" />
 		</tstamp>
 		<buildnumber />
-		<jar destfile="${build.dir}/${ant.project.name}.jar">
+		<jar destfile="dist/${ant.project.name}.jar">
 			<manifest>
 				<attribute name="Build-Version" value="${publish.version}" />
 				<attribute name="Build-On" value="${jar.time}" />
 				<attribute name="Build-Number" value="${build.number}" />
 			</manifest>
-			<fileset dir="${classes.dir}" />
+			<metainf dir="tld" includes="*.tld" />
+			<fileset dir="${classes.dir}">
+				<include name="**/*.class" />
+				<include name="paging_messages.properties" />
+			</fileset>
 		</jar>
 	</target>
 
