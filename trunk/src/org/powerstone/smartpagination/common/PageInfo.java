@@ -6,16 +6,16 @@ import java.util.List;
 abstract public class PageInfo<T_Criterial, T_OrderBy> {
 	private Class<?> entityClass;
 	private T_Criterial expression;
-	private List<T_OrderBy> orderBy = new ArrayList<T_OrderBy>();
+	private List<T_OrderBy> orderByList = new ArrayList<T_OrderBy>();
 	private int pageSize;// 0相当于取全部
 	private int pageNo;// 如果end参数不为空，忽略pageNo
 	private Boolean end;// end:true->首页;false->尾页
 
 	public PageInfo(Class<?> entityClass, T_Criterial expression,
-			List<T_OrderBy> orderBy, int pageNo, int pageSize, Boolean end) {
+			List<T_OrderBy> orderByList, int pageNo, int pageSize, Boolean end) {
 		this.entityClass = entityClass;
 		this.expression = expression;
-		this.orderBy = orderBy;
+		this.orderByList = orderByList;
 		this.pageNo = pageNo;
 		this.pageSize = pageSize;
 		this.end = end;
@@ -25,7 +25,7 @@ abstract public class PageInfo<T_Criterial, T_OrderBy> {
 			List<T_OrderBy> orderBy, int pageNo, int pageSize) {
 		this.entityClass = entityClass;
 		this.expression = expression;
-		this.orderBy = orderBy;
+		this.orderByList = orderBy;
 		this.pageNo = pageNo;
 		this.pageSize = pageSize;
 		this.end = null;
@@ -78,12 +78,12 @@ abstract public class PageInfo<T_Criterial, T_OrderBy> {
 		this.end = end;
 	}
 
-	public List<T_OrderBy> getOrderBy() {
-		return orderBy;
+	public List<T_OrderBy> getOrderByList() {
+		return orderByList;
 	}
 
-	public void setOrderBy(List<T_OrderBy> orderBy) {
-		this.orderBy = orderBy;
+	public void setOrderByList(List<T_OrderBy> orderBy) {
+		this.orderByList = orderBy;
 	}
 
 	abstract public void addOrderByAsc(String orderBy);
