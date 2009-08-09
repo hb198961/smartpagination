@@ -32,5 +32,10 @@
 	<classpathentry kind="lib" path="lib/default/cglib-nodep-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/default/hsqldb-1.8.0.7.jar"/>
 	<classpathentry kind="lib" path="lib/default/javassist-3.8.0.GA.jar"/>
+	<classpathentry kind="lib" path="lib/default/jstl-1.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/test/jsp-api-2.0.jar"/>
+	<classpathentry kind="lib" path="E:/X27/apache-tomcat-5.5.20/common/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="E:/X27/apache-tomcat-5.5.20/common/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="lib/default/standard-1.1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
