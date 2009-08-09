@@ -22,17 +22,18 @@ public class SamplePagingControllerTest extends TestCase {
 		SamplePagingController spc = new SamplePagingController();
 
 		request.setMethod("GET");
-		
+
 		request.addParameter("pOrder", "code1");
 
-		spc.test(request, response);
+		spc.list(request, response);
 
 		PageModel pm = (PageModel) request
 				.getAttribute(BasePagingController.DEFAULT_PAGE_MODEL_NAME);
-		List data=(List) request.getAttribute(BasePagingController.DEFAULT_PAGE_DATA_NAME);
-		
-		Assert.assertEquals(10,data.size());
-		Assert.assertEquals(11,pm.computePageCount());
+		List data = (List) request
+				.getAttribute(BasePagingController.DEFAULT_PAGE_DATA_NAME);
+
+		Assert.assertEquals(10, data.size());
+		Assert.assertEquals(11, pm.computePageCount());
 	}
 
 }

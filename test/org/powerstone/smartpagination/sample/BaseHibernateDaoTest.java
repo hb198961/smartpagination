@@ -5,6 +5,7 @@ import java.util.Date;
 import junit.framework.Assert;
 
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.powerstone.smartpagination.common.PageResult;
 import org.powerstone.smartpagination.hibernate.HbmPageInfo;
 import org.springframework.test.AbstractTransactionalSpringContextTests;
@@ -35,16 +36,30 @@ public class BaseHibernateDaoTest extends
 	}
 
 	public void testFindByPage() {
-		HbmPageInfo pi=new HbmPageInfo();
+		HbmPageInfo pi = new HbmPageInfo();
 		pi.setCountDistinctProjections("id");
 		pi.setExpression(DetachedCriteria.forClass(UserModel.class));
 		pi.addOrderByAsc("email");
 		pi.setPageNo(2);
 		pi.setPageSize(10);
-		PageResult pageResult=baseHibernateDao.findByPage(pi);
+		PageResult pageResult = baseHibernateDao.findByPage(pi);
 		Assert.assertEquals(7, pageResult.getPageData().size());
 		Assert.assertEquals(2, pageResult.getPageAmount());
 		Assert.assertEquals(17, pageResult.getTotalRecordsNumber());
+	}
+
+	public void testFindByPage_NoResult() {
+		HbmPageInfo pi = new HbmPageInfo();
+		pi.setCountDistinctProjections("id");
+		pi.setExpression(DetachedCriteria.forClass(UserModel.class).add(
+				Restrictions.eq("email", "xxxxcx")));
+		pi.addOrderByAsc("id");
+		pi.setPageNo(2);
+		pi.setPageSize(10);
+		PageResult pageResult = baseHibernateDao.findByPage(pi);
+		Assert.assertEquals(0, pageResult.getPageData().size());
+		Assert.assertEquals(0, pageResult.getPageAmount());
+		Assert.assertEquals(0, pageResult.getTotalRecordsNumber());
 	}
 
 	public void testCountRecordsNumber() {
