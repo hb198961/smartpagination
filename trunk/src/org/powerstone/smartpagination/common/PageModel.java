@@ -26,25 +26,33 @@ public class PageModel {
 	private String orderDirection = ORDER_DESC;
 
 	public int computeNewPageNo() {
-		Integer pageNum = (currPageNo != null ? new Integer(currPageNo) : new Integer("0"));
+		Integer pageNum = (currPageNo != null ? new Integer(currPageNo)
+				: new Integer("0"));
 		int newCurrPageNo = 0;
-		int pageCount = computePageCount();
 
 		if (pageTo != null) {
 			newCurrPageNo = new Integer(pageTo).intValue();
 		} else if (!beFirst && !beLast && !beNext && !beEnd) {
 			newCurrPageNo = 1;
-		} else if (beFirst) {
-			newCurrPageNo = 1;
 		} else if (beLast) {
 			newCurrPageNo = pageNum.intValue() - 1;
 		} else if (beNext) {
 			newCurrPageNo = pageNum.intValue() + 1;
-		} else if (beEnd) {
-			newCurrPageNo = pageCount;
 		}
 		if (newCurrPageNo < 1) {
 			newCurrPageNo = 1;
+		}
+		return newCurrPageNo;
+	}
+
+	public int computeNewPageNoInTag() {
+		int newCurrPageNo = this.computeNewPageNo();
+		int pageCount = computePageCount();
+
+		if (beFirst) {
+			newCurrPageNo = 1;
+		} else if (beEnd) {
+			newCurrPageNo = pageCount;
 		}
 		if (newCurrPageNo > pageCount) {
 			newCurrPageNo = pageCount;
@@ -151,5 +159,9 @@ public class PageModel {
 
 	public boolean isOrderAsc() {
 		return getOrderDirection().equals(ORDER_ASC);
+	}
+
+	public int computeRecordsBeginNo() {
+		return (computeNewPageNoInTag() - 1) * pageSize;
 	}
 }

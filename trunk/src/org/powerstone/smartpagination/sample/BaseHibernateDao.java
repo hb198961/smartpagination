@@ -53,7 +53,7 @@ public class BaseHibernateDao extends HibernateDaoSupport {
 	public int countRecordsNumber(DetachedCriteria dc,
 			String countDistinctProjections) {
 		dc.setProjection(Projections.countDistinct(countDistinctProjections));
-		List list = this.findByCriteria(dc);
+		List list = this.getHibernateTemplate().findByCriteria(dc);
 		int result = 0;
 		for (Iterator it = list.iterator(); it.hasNext();) {
 			Integer item = (Integer) it.next();
