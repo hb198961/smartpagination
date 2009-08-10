@@ -4,13 +4,10 @@
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/default/hibernate-core-3.3.0.SP1.jar"/>
-	<classpathentry kind="lib" path="lib/default/log4j-1.2.11.jar"/>
 	<classpathentry kind="lib" path="lib/test/servlet-api-2.4.jar"/>
 	<classpathentry kind="lib" path="lib/default/antlr-2.7.6.jar"/>
 	<classpathentry kind="lib" path="lib/default/aopalliance-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/default/asm-attrs-1.5.3.jar"/>
-	<classpathentry kind="lib" path="lib/default/commons-collections-3.1.jar"/>
-	<classpathentry kind="lib" path="lib/default/commons-lang-2.1.jar"/>
 	<classpathentry kind="lib" path="lib/default/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/default/dom4j-1.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/default/ehcache-1.2.3.jar"/>
@@ -34,9 +31,10 @@
 	<classpathentry kind="lib" path="lib/default/javassist-3.8.0.GA.jar"/>
 	<classpathentry kind="lib" path="lib/default/jstl-1.1.2.jar"/>
 	<classpathentry kind="lib" path="lib/test/jsp-api-2.0.jar"/>
-	<classpathentry kind="lib" path="E:/X27/apache-tomcat-5.5.20/common/lib/jsp-api.jar"/>
-	<classpathentry kind="lib" path="E:/X27/apache-tomcat-5.5.20/common/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="lib/default/standard-1.1.2.jar"/>
 	<classpathentry kind="lib" path="lib/test/mockito-all-1.5.jar"/>
+	<classpathentry kind="lib" path="lib/default/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/default/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/default/log4j-1.2.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
