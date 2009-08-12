@@ -1,11 +1,16 @@
 package org.powerstone.smartpagination.tag;
 
+import javax.servlet.jsp.PageContext;
+
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.mockito.Mockito;
 import org.powerstone.smartpagination.common.PageModel;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
 
 public class PagingHeadTest extends TestCase {
 
@@ -27,6 +32,11 @@ public class PagingHeadTest extends TestCase {
 		PageModel pm = new PageModel();
 		pm.setOrderBy("xxxxx");
 		pm.setPageSize(10);
+
+		PageContext pageContext = Mockito.mock(PageContext.class);
+		Mockito.stub(pageContext.getRequest()).toReturn(new MockHttpServletRequest());
+		Mockito.stub(pageContext.getResponse()).toReturn(new MockHttpServletResponse());
+		ph.setPageContext(pageContext);
 
 		String result = ph.genHtml(pm, "/bms");
 		logger.debug(result);
@@ -51,7 +61,13 @@ public class PagingHeadTest extends TestCase {
 		pm.setOrderDirection("desc");
 		pm.setPageSize(10);
 
+		pageContext = Mockito.mock(PageContext.class);
+		Mockito.stub(pageContext.getRequest()).toReturn(new MockHttpServletRequest());
+		Mockito.stub(pageContext.getResponse()).toReturn(new MockHttpServletResponse());
+		ph.setPageContext(pageContext);
+
 		result = ph.genHtml(pm, "/bms");
+
 		logger.debug(result);
 		Assert.assertTrue(result.indexOf("PPP1") > 0);
 		Assert.assertTrue(result.indexOf("-down") > 0);

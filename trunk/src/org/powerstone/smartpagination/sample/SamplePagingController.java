@@ -18,13 +18,11 @@ import org.springframework.web.servlet.view.RedirectView;
 public class SamplePagingController extends MultiActionController {
 	private BaseHibernateDao baseHibernateDao;
 
-	public ModelAndView list(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		BaseHbmPagingController ctrl = new BaseHbmPagingController(
-				baseHibernateDao) {
+	public ModelAndView list(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		BaseHbmPagingController ctrl = new BaseHbmPagingController(baseHibernateDao) {
 			@Override
-			protected PageInfo<DetachedCriteria, Order> makePageInfo(
-					HttpServletRequest request) {
+			protected PageInfo<DetachedCriteria, Order> makePageInfo(HttpServletRequest request) {
 				HbmPageInfo pi = new HbmPageInfo();
 				pi.setCountDistinctProjections("id");
 				pi.setExpression(DetachedCriteria.forClass(UserModel.class));
@@ -37,10 +35,9 @@ public class SamplePagingController extends MultiActionController {
 				.getPageData(request));
 	}
 
-	public ModelAndView initData(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		List data = baseHibernateDao.findByCriteria(DetachedCriteria
-				.forClass(UserModel.class));
+	public ModelAndView initData(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		List data = baseHibernateDao.findByCriteria(DetachedCriteria.forClass(UserModel.class));
 		for (Object o : data) {
 			baseHibernateDao.delete(UserModel.class, ((UserModel) o).getId());
 		}
@@ -55,8 +52,9 @@ public class SamplePagingController extends MultiActionController {
 			user.setUserName("admin" + i);
 			baseHibernateDao.saveOrUpdate(user);
 		}
-		return new ModelAndView(new RedirectView(request.getContextPath()
-				+ "/list.htm"));
+		return list(request, response);
+		//		return new ModelAndView(new RedirectView(request.getContextPath()
+		//				+ "/list.htm"));
 	}
 
 	public void setBaseHibernateDao(BaseHibernateDao baseHibernateDao) {

@@ -28,9 +28,9 @@ public class SamplePagingControllerTest extends TestCase {
 		spc.setBaseHibernateDao(dao);
 
 		PageResult pageResult = new PageResult();
-		pageResult.setPageAmount(0);
+		pageResult.setPageAmount(5);
 		pageResult.setPageData(new ArrayList());
-		pageResult.setTotalRecordsNumber(0);
+		pageResult.setTotalRecordsNumber(48);
 		Mockito.stub(dao.findByPage(Matchers.isA(HbmPageInfo.class))).toReturn(
 				pageResult);
 
@@ -45,7 +45,10 @@ public class SamplePagingControllerTest extends TestCase {
 				.getAttribute(BasePagingController.DEFAULT_PAGE_DATA_NAME);
 
 		Assert.assertEquals(0, data.size());
-		Assert.assertEquals(0, pm.computePageCount());
+		Assert.assertEquals(5, pm.computePageCount());
+		Assert.assertEquals(48, pm.getTotalRecordsNumber());
+		Assert.assertEquals(10, pm.getPageSize());
+		Assert.assertEquals(1, pm.computeNewPageNoInTag());
 	}
 
 }
