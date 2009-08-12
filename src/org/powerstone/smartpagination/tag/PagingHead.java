@@ -3,13 +3,19 @@ package org.powerstone.smartpagination.tag;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 import org.apache.log4j.Logger;
 import org.powerstone.smartpagination.common.BasePagingController;
 import org.powerstone.smartpagination.common.PageModel;
+import org.powerstone.smartpagination.hdiv.HdivUtil;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class PagingHead extends TagSupport {
 	private static final long serialVersionUID = -887745989108474554L;
@@ -26,6 +32,8 @@ public class PagingHead extends TagSupport {
 
 	private String align = "left";
 
+	private boolean enableHdiv;
+
 	@Override
 	public int doStartTag() throws JspException {
 		PageModel pm = (PageModel) pageContext.getRequest().getAttribute(
@@ -33,17 +41,14 @@ public class PagingHead extends TagSupport {
 
 		if (pm == null) {
 			log.warn("There is no PageModel in request:"
-					+ ((HttpServletRequest) pageContext.getRequest())
-							.getRequestURI());
+					+ ((HttpServletRequest) pageContext.getRequest()).getRequestURI());
 			pm = new PageModel();
 		}
 		// write out
 		try {
-			String contextPath = ((HttpServletRequest) pageContext.getRequest())
-					.getContextPath();
+			String contextPath = ((HttpServletRequest) pageContext.getRequest()).getContextPath();
 			String html = genHtml(pm, contextPath);
-			pageContext.getOut().println(
-					html.substring(0, html.indexOf("</label>")));
+			pageContext.getOut().println(html.substring(0, html.indexOf("</label>")));
 		} catch (IOException ioe) {
 			throw new JspException(ioe);
 		}
@@ -57,17 +62,14 @@ public class PagingHead extends TagSupport {
 				BasePagingController.DEFAULT_PAGE_MODEL_NAME);
 		if (pm == null) {
 			log.warn("There is no PageModel in request:"
-					+ ((HttpServletRequest) pageContext.getRequest())
-							.getRequestURI());
+					+ ((HttpServletRequest) pageContext.getRequest()).getRequestURI());
 			pm = new PageModel();
 		}
 		// write out
 		try {
-			String contextPath = ((HttpServletRequest) pageContext.getRequest())
-					.getContextPath();
+			String contextPath = ((HttpServletRequest) pageContext.getRequest()).getContextPath();
 			String html = genHtml(pm, contextPath);
-			pageContext.getOut().println(
-					html.substring(html.indexOf("</label>")));
+			pageContext.getOut().println(html.substring(html.indexOf("</label>")));
 		} catch (IOException ioe) {
 			throw new JspException(ioe);
 		}
@@ -97,12 +99,10 @@ public class PagingHead extends TagSupport {
 		} else {
 			currImg = "NULL";
 		}
-		String fullUrl = contextPath + url + "&"
-				+ BasePagingController.PAGE_SIZE_PARAM + "=" + pm.getPageSize()
-				+ "&" + BasePagingController.TO_PAGE_NO_PARAM + "="
-				+ pm.computeNewPageNoInTag() + "&"
-				+ BasePagingController.ORDER_BY_PARAM + "=" + orderBy + "&"
-				+ BasePagingController.ORDER_DIR_PARAM + "=" + currDir;
+		String fullUrl = contextPath + url + "&" + BasePagingController.PAGE_SIZE_PARAM + "="
+				+ pm.getPageSize() + "&" + BasePagingController.TO_PAGE_NO_PARAM + "="
+				+ pm.computeNewPageNoInTag() + "&" + BasePagingController.ORDER_BY_PARAM + "="
+				+ orderBy + "&" + BasePagingController.ORDER_DIR_PARAM + "=" + currDir;
 
 		if (styleClass == null || styleClass.length() == 0) {
 			style = "style=\"font-size:12px;line-height:22px;color: #FFFFFF;"
@@ -126,7 +126,8 @@ public class PagingHead extends TagSupport {
 		htmlBuff.append("cellpadding=\"0\" cellspacing=\"0\" ");
 		htmlBuff.append(style);
 		htmlBuff.append(" onclick=\"{location='");
-		htmlBuff.append(fullUrl);
+		htmlBuff.append(this.hdivEncodeUrl(fullUrl, pageContext.getRequest(), pageContext
+				.getResponse()));
 		htmlBuff.append("'}\">\n<tr>\n\t");
 
 		// 左边空白
@@ -228,5 +229,31 @@ public class PagingHead extends TagSupport {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public boolean isEnableHdiv() {
+		return enableHdiv;
+	}
+
+	public void setEnableHdiv(boolean enableHdiv) {
+		this.enableHdiv = enableHdiv;
+	}
+
+	private String hdivEncodeUrl(String url, ServletRequest request, ServletResponse response) {
+		if (!this.isEnableHdiv()) {
+			return url;
+		} else {
+			WebApplicationContext wac = WebApplicationContextUtils
+					.getRequiredWebApplicationContext(pageContext.getServletContext());
+			String[] beanNamesForType = wac.getBeanNamesForType(HdivUtil.class);
+			if (beanNamesForType != null && beanNamesForType.length > 0) {
+				HdivUtil util = (HdivUtil) wac.getBean(beanNamesForType[0]);
+				return util.encodeUrl(url, (HttpServletRequest) request,
+						(HttpServletResponse) response);
+			} else {
+				log.warn("enableHdiv is true,but no HdivUtil exists!!!!!!!!!!!!!!!");
+				return url;
+			}
+		}
 	}
 }
