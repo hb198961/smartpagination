@@ -10,8 +10,7 @@ import org.powerstone.smartpagination.common.PageResult;
 import org.powerstone.smartpagination.hibernate.HbmPageInfo;
 import org.springframework.test.AbstractTransactionalSpringContextTests;
 
-public class BaseHibernateDaoTest extends
-		AbstractTransactionalSpringContextTests {
+public class BaseHibernateDaoTest extends AbstractTransactionalSpringContextTests {
 	private BaseHibernateDao baseHibernateDao;
 	private UserModel user;
 
@@ -48,6 +47,22 @@ public class BaseHibernateDaoTest extends
 		Assert.assertEquals(17, pageResult.getTotalRecordsNumber());
 	}
 
+	public void testFindByPage_WithPageQuery() {
+		UserModelQuery umq = new UserModelQuery();
+		umq.setEmail("liyingquan@gmail.com");
+		umq.setRealName("liyingquan");
+		umq.setSex("m");
+		umq.setUserName("admin");
+		umq.setUserNameLike(true);
+		HbmPageInfo pi = (HbmPageInfo) umq.generatePageInfo();
+		pi.setPageNo(2);
+		pi.setPageSize(10);
+		PageResult pageResult = baseHibernateDao.findByPage(pi);
+		Assert.assertEquals(7, pageResult.getPageData().size());
+		Assert.assertEquals(2, pageResult.getPageAmount());
+		Assert.assertEquals(17, pageResult.getTotalRecordsNumber());
+	}
+
 	public void testFindByPage_NoResult() {
 		HbmPageInfo pi = new HbmPageInfo();
 		pi.setCountDistinctProjections("id");
@@ -63,14 +78,14 @@ public class BaseHibernateDaoTest extends
 	}
 
 	public void testCountRecordsNumber() {
-		Assert.assertEquals(17, baseHibernateDao.countRecordsNumber(
-				DetachedCriteria.forClass(UserModel.class), "id"));
+		Assert.assertEquals(17, baseHibernateDao.countRecordsNumber(DetachedCriteria
+				.forClass(UserModel.class), "id"));
 	}
 
 	public void testDelete() {
 		baseHibernateDao.delete(UserModel.class, user.getId());
-		Assert.assertEquals(16, baseHibernateDao.countRecordsNumber(
-				DetachedCriteria.forClass(UserModel.class), "id"));
+		Assert.assertEquals(16, baseHibernateDao.countRecordsNumber(DetachedCriteria
+				.forClass(UserModel.class), "id"));
 	}
 
 	public void testFindByCriteria() {
