@@ -24,11 +24,6 @@
 			<required>false</required>
 			<rtexprvalue>false</rtexprvalue>
 		</attribute>
-		<attribute>
-			<name>enableHdiv</name>
-			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
-		</attribute>
 	</tag>
 	<tag>
 		<name>hdivPagebar</name>
@@ -46,11 +41,6 @@
 		</attribute>
 		<attribute>
 			<name>margin</name>
-			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>enableHdiv</name>
 			<required>false</required>
 			<rtexprvalue>false</rtexprvalue>
 		</attribute>
@@ -84,11 +74,6 @@
 			<required>false</required>
 			<rtexprvalue>false</rtexprvalue>
 		</attribute>
-		<attribute>
-			<name>enableHdiv</name>
-			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
-		</attribute>
 	</tag>
 	<tag>
 		<name>hdivPagehead</name>
@@ -116,11 +101,6 @@
 		</attribute>
 		<attribute>
 			<name>align</name>
-			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>enableHdiv</name>
 			<required>false</required>
 			<rtexprvalue>false</rtexprvalue>
 		</attribute>

@@ -14,6 +14,11 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 public class HdivPagingBar extends PagingBar {
 
 	private static final long serialVersionUID = 3586765351015746943L;
+	
+	public HdivPagingBar() {
+		super();
+		super.setEnableHdiv(true);
+	}
 
 	@Override
 	protected String generateHiddenForForm(String url, String[] formInputs) {

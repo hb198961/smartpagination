@@ -38,19 +38,6 @@
 	</listener>
 	
 	<filter>
-		<filter-name>ValidatorFilter</filter-name>
-		<filter-class>org.hdiv.filter.ValidatorFilter</filter-class>
-	</filter>
- 	<filter-mapping>
-		<filter-name>ValidatorFilter</filter-name>
-		<url-pattern>*.htm</url-pattern>
-	</filter-mapping>	
-	<filter-mapping>
-		<filter-name>ValidatorFilter</filter-name>
-		<url-pattern>*.jsp</url-pattern>
-	</filter-mapping>
-
-	<filter>
 		<filter-name>springEncodingFilter</filter-name>
 		<filter-class>
 			org.springframework.web.filter.CharacterEncodingFilter
@@ -63,6 +50,19 @@
 	<filter-mapping>
 		<filter-name>springEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>ValidatorFilter</filter-name>
+		<filter-class>org.hdiv.filter.ValidatorFilter</filter-class>
+	</filter>
+ 	<filter-mapping>
+		<filter-name>ValidatorFilter</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>	
+	<filter-mapping>
+		<filter-name>ValidatorFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
 	</filter-mapping>
 
 	<filter>
@@ -87,7 +87,7 @@
 		</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:mvc-main.xml</param-value>
+			<param-value>classpath:mvc.xml</param-value>
 		</init-param>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
