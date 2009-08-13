@@ -110,7 +110,12 @@ public class PagingBar extends TagSupport {
 		String hiddenInForm = this.generateHiddenForForm(generateBaseUrl(pm), new String[] {
 				BasePagingController.PAGE_SIZE_PARAM, BasePagingController.TO_PAGE_NO_PARAM });
 		htmlBuff.append("<form id=\"" + PAGINATION_FORM_ID + "\" action=\"" + generateBaseUrl(pm)
-				+ "\" method=\"GET\">\n");
+				+ "\" method=\"GET\" ");
+		htmlBuff.append("onsubmit=\"return go2page(");
+		htmlBuff.append("document.all." + BasePagingController.TO_PAGE_NO_PARAM + ".value,");
+		htmlBuff.append("document.all." + BasePagingController.PAGE_SIZE_PARAM + ".value,");
+		htmlBuff.append(totalPages);
+		htmlBuff.append(")\">");
 
 		//hidden name="_HDIV_STATE_"
 		htmlBuff.append("<input type=\"hidden\" ");
@@ -237,37 +242,33 @@ public class PagingBar extends TagSupport {
 				+ " value=");
 		htmlBuff.append(newPageNo);
 		htmlBuff.append(">\n");
-		htmlBuff.append("<input type=\"button\" value=\"Go\" ");
-		htmlBuff.append("onclick=javascript:go2page(");
-		htmlBuff.append("document.all." + BasePagingController.TO_PAGE_NO_PARAM + ".value,");
-		htmlBuff.append("document.all." + BasePagingController.PAGE_SIZE_PARAM + ".value,");
-		htmlBuff.append(totalPages);
-		htmlBuff.append(")></span>");
+		htmlBuff.append("<input type=\"submit\" value=\"Go\" ></span>");
 		// format the end of the bar
 		htmlBuff.append("</td>");
 		htmlBuff.append("<td width=\"");
 		htmlBuff.append(margin);
-		htmlBuff.append("\"></td>");
-		htmlBuff.append("\n</tr>\n</table>\n");
+		htmlBuff.append("\"></td></tr></table>");
+
 		htmlBuff.append("</form>");
 
-		// Javascript code for paging bar
+		// JS code for paging bar
 		StringBuffer jsBuff = new StringBuffer();
-		// set the javascript code for paging bar
 		jsBuff.append("<script langage=javascript>\n");
 		jsBuff.append("function go2page(page, pageSize, totalpages){\n");
-
 		jsBuff.append("if(isNaN(pageSize) | pageSize < 1 | pageSize > 100){\n");
 		jsBuff.append("alert(\"");
 		jsBuff.append(rb.getString("errorpagesize"));
-		jsBuff.append("\")\n");
+		jsBuff.append("\");\n ");
+		jsBuff.append("document.all." + BasePagingController.PAGE_SIZE_PARAM
+				+ ".focus(); return false;\n");
 		jsBuff.append("}else if(isNaN(page) | page < 1 | page > totalpages){\n");
 		jsBuff.append("alert(\"");
 		jsBuff.append(rb.getString("errorpage"));
-		jsBuff.append("\")\n");
+		jsBuff.append("\");\n ");
+		jsBuff.append("document.all." + BasePagingController.TO_PAGE_NO_PARAM
+				+ ".focus(); return false;\n");
 		jsBuff.append("}else{\n");
-		jsBuff.append(PAGINATION_FORM_ID + ".submit();\n");
-		jsBuff.append("}\n");// end of else
+		jsBuff.append("return true;}\n");// end of else
 		jsBuff.append("}\n");// end of function
 		jsBuff.append("</script>\n");
 
