@@ -6,19 +6,22 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hdiv.web.validator.EditableParameterValidator;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.powerstone.smartpagination.common.PageInfo;
+import org.powerstone.smartpagination.common.PageQuery;
+import org.powerstone.smartpagination.common.PageResult;
 import org.powerstone.smartpagination.hibernate.BaseHbmPagingController;
+import org.powerstone.smartpagination.hibernate.BaseHibernateQueryFormPagingController;
 import org.powerstone.smartpagination.hibernate.HbmPageInfo;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
-import org.springframework.web.servlet.view.RedirectView;
 
 public class SamplePagingController extends MultiActionController {
 	private BaseHibernateDao baseHibernateDao;
 
-	public ModelAndView list(HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView listHibernate(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		BaseHbmPagingController ctrl = new BaseHbmPagingController(baseHibernateDao) {
 			@Override
@@ -35,6 +38,31 @@ public class SamplePagingController extends MultiActionController {
 				.getPageData(request));
 	}
 
+	public ModelAndView queryHibernate(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		BaseHibernateQueryFormPagingController ctrl = new BaseHibernateQueryFormPagingController() {
+			@Override
+			protected PageResult findByPageInfo(PageInfo<DetachedCriteria, Order> pi) {
+				return baseHibernateDao.findByPage((HbmPageInfo) pi);
+			}
+
+			@Override
+			protected PageQuery<DetachedCriteria, Order> makePageQuery() {
+				return new UserModelQuery();
+			}
+		};
+
+		ctrl.setCommandClass(UserModel.class);
+		ctrl.setCommandName("userModel");
+		ctrl.setFormView("userModelQuery");
+		ctrl.setSuccessView("redirect:/query.htm");
+
+		ctrl.setPagingDataName("userList");
+
+		ctrl.setValidator(new EditableParameterValidator());
+		return ctrl.handleRequest(request, response);
+	}
+
 	public ModelAndView initData(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		List data = baseHibernateDao.findByCriteria(DetachedCriteria.forClass(UserModel.class));
@@ -43,7 +71,7 @@ public class SamplePagingController extends MultiActionController {
 		}
 
 		UserModel user = null;
-		for (int i = 0; i < 17; i++) {
+		for (int i = 0; i < 256; i++) {
 			user = new UserModel();
 			user.setBirth(new Date());
 			user.setEmail("liyingquan@gmail.com" + i);
@@ -52,9 +80,8 @@ public class SamplePagingController extends MultiActionController {
 			user.setUserName("admin" + i);
 			baseHibernateDao.saveOrUpdate(user);
 		}
-		return list(request, response);
-		//		return new ModelAndView(new RedirectView(request.getContextPath()
-		//				+ "/list.htm"));
+		//return listHibernate(request, response);
+		return new ModelAndView("redirect:/");
 	}
 
 	public void setBaseHibernateDao(BaseHibernateDao baseHibernateDao) {

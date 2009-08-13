@@ -37,7 +37,7 @@ public class SamplePagingControllerTest extends TestCase {
 		request.setMethod("GET");
 		request.setRequestURI("/list.htm");
 
-		spc.list(request, response);
+		spc.listHibernate(request, response);
 
 		PageModel pm = (PageModel) request
 				.getAttribute(BasePagingController.DEFAULT_PAGE_MODEL_NAME);
