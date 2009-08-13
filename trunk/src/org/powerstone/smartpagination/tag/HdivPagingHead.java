@@ -12,6 +12,11 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 public class HdivPagingHead extends PagingHead {
 	private static final long serialVersionUID = 9114274801582407739L;
 
+	public HdivPagingHead() {
+		super();
+		super.setEnableHdiv(true);
+	}
+	
 	@Override
 	protected String hdivEncodeUrl(String url, ServletRequest request, ServletResponse response) {
 		if (!this.isEnableHdiv()) {

@@ -22,19 +22,19 @@
 				</tr>
 				<tr>
 					<td>
-						<paging:hdivPagehead url="/list.htm" orderBy="userName" enableHdiv="true">userName</paging:hdivPagehead>
+						<paging:hdivPagehead url="/list.htm" orderBy="userName" >userName</paging:hdivPagehead>
 					</td>
 					<td>
-						<paging:hdivPagehead url="/list.htm" orderBy="realName" enableHdiv="true">realName</paging:hdivPagehead>
+						<paging:hdivPagehead url="/list.htm" orderBy="realName" >realName</paging:hdivPagehead>
 					</td>	
 					<td>
-						<paging:hdivPagehead  align="center" url="/list.htm" orderBy="email" enableHdiv="true">email</paging:hdivPagehead>
+						<paging:hdivPagehead  align="center" url="/list.htm" orderBy="email" >email</paging:hdivPagehead>
 					</td>	
 					<td>
-						<paging:hdivPagehead align="center" url="/list.htm" orderBy="birth" enableHdiv="true">birth</paging:hdivPagehead>
+						<paging:hdivPagehead align="center" url="/list.htm" orderBy="birth" >birth</paging:hdivPagehead>
 					</td>
 					<td>
-						<paging:hdivPagehead align="center" url="/list.htm" orderBy="sex" enableHdiv="true">sex</paging:hdivPagehead>
+						<paging:hdivPagehead align="center" url="/list.htm" orderBy="sex" >sex</paging:hdivPagehead>
 					</td>
 				</tr>
 				
@@ -50,7 +50,7 @@
 					<tr><td class="listViewHRS1" colSpan="6"></td></tr>
 				</c:forEach>
 				<tr>
-					<td colspan="5"><paging:hdivPagebar url="/list.htm" styleClass="pagebar" enableHdiv="true"/></td>
+					<td colspan="5"><paging:hdivPagebar url="/list.htm" styleClass="pagebar" /></td>
 				</tr>
 				</c:if>
 				
