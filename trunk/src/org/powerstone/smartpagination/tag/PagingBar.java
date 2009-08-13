@@ -6,18 +6,12 @@ import java.util.ResourceBundle;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 import org.apache.log4j.Logger;
-import org.hdiv.dataComposer.IDataComposer;
-import org.hdiv.util.HDIVUtil;
 import org.powerstone.smartpagination.common.BasePagingController;
 import org.powerstone.smartpagination.common.PageModel;
-import org.powerstone.smartpagination.hdiv.HdivUtil;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class PagingBar extends TagSupport {
 	protected static final String _HDIV_STATE_ = "_HDIV_STATE_";
@@ -26,7 +20,7 @@ public class PagingBar extends TagSupport {
 
 	private static final long serialVersionUID = 6670041132688723682L;
 
-	private final Logger log = Logger.getLogger(this.getClass());
+	protected final Logger log = Logger.getLogger(this.getClass());
 
 	private String styleClass;
 
@@ -300,76 +294,12 @@ public class PagingBar extends TagSupport {
 		return formUrl;
 	}
 
-	private String generateHiddenForForm(String url, String[] formInputs) {
-
-		IDataComposer dataComposer = (IDataComposer) this.pageContext.getRequest().getAttribute(
-				"dataComposer");
-		if (dataComposer != null) {
-			if (url.contains("?")) {
-				url = url.substring(0, url.indexOf("?"));
-			}
-			dataComposer.beginRequest(HDIVUtil.getActionMappingName(url));
-			if (formInputs != null && formInputs.length > 0) {
-				for (String input : formInputs) {
-					dataComposer.compose(input, "", true, "text");
-				}
-			}
-			return dataComposer.endRequest();
-		} else {
-			log.warn("no dataComposer in session!!!!!!!!!!!!!!!");
-			return null;
-		}
+	protected String generateHiddenForForm(String url, String[] formInputs) {
+		return null;
 	}
 
-	private String hdivEncodeUrl(String url, ServletRequest request, ServletResponse response) {
-		if (!this.getEnableHdiv()) {
-			return url;
-		} else {
-			WebApplicationContext wac = WebApplicationContextUtils
-					.getRequiredWebApplicationContext(pageContext.getServletContext());
-			String[] beanNamesForType = wac.getBeanNamesForType(HdivUtil.class);
-			if (beanNamesForType != null && beanNamesForType.length > 0) {
-				HdivUtil util = (HdivUtil) wac.getBean(beanNamesForType[0]);
-				return util.encodeUrl(url, (HttpServletRequest) request,
-						(HttpServletResponse) response);
-			} else {
-				log.warn("enableHdiv is true,but no HdivUtil exists!!!!!!!!!!!!!!!");
-				return url;
-			}
-		}
+	protected String hdivEncodeUrl(String url, ServletRequest request, ServletResponse response) {
+		return url;
 	}
 
-	protected String hdivSubString(String url, String token) {
-		if (url.indexOf(token) < 0) {
-			return null;
-		} else {
-			return url.substring(url.indexOf(token) + token.length());
-		}
-	}
-
-	//	private String generateHDIVParameter() {
-	//		IDataComposer dataComposer = (IDataComposer) this.pageContext.getRequest().getAttribute(
-	//				"dataComposer");
-	//		if (dataComposer == null) {
-	//			log.warn("No dataComposer Attribute exists in session!!!!!!!!!!!!!!!");
-	//			return "";
-	//		}
-	//		String requestId = dataComposer.endRequest();
-	//		String hdivState = (String) HDIVUtil.getHttpSession().getAttribute("HDIVParameter");
-	//		if (requestId != null && requestId.length() > 0 && hdivState != null
-	//				&& hdivState.length() > 0) {
-	//			StringBuffer hdivParameter = new StringBuffer();
-	//
-	//			hdivParameter.append("<input type=\"hidden\" ");
-	//			hdivParameter.append("name=\"" + hdivState + "\" ");
-	//			hdivParameter.append("value=\"" + hdivState + "\" ");
-	//			hdivParameter.append(">\n");
-	//
-	//			return hdivParameter.toString();
-	//		} else {
-	//			log.warn("requestId is [" + requestId + "]" + "!!!!!!!!!!!!!!!");
-	//			log.warn("hdivState is [" + hdivState + "]" + "!!!!!!!!!!!!!!!");
-	//			return "";
-	//		}
-	//	}
 }
