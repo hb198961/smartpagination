@@ -18,7 +18,6 @@ public class UserModelQuery extends UserModel implements PageQuery<DetachedCrite
 		this.userNameLike = userNameLike;
 	}
 
-	@Override
 	public PageInfo<DetachedCriteria, Order> generatePageInfo() {
 		HbmPageInfo pi = new HbmPageInfo();
 		DetachedCriteria dc = DetachedCriteria.forClass(UserModel.class);
