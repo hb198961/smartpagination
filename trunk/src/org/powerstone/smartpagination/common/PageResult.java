@@ -3,10 +3,12 @@ package org.powerstone.smartpagination.common;
 import java.util.List;
 
 public class PageResult {
+	@SuppressWarnings("unchecked")
 	private List pageData;
 	private int totalRecordsNumber;
 	private int pageAmount;
 
+	@SuppressWarnings("unchecked")
 	public PageResult(List data, int recordsNumber, int pageAmount) {
 		super();
 		this.pageData = data;
@@ -17,10 +19,12 @@ public class PageResult {
 	public PageResult() {
 	}
 
+	@SuppressWarnings("unchecked")
 	public List getPageData() {
 		return pageData;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void setPageData(List data) {
 		this.pageData = data;
 	}

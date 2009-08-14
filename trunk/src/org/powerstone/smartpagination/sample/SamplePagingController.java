@@ -63,6 +63,7 @@ public class SamplePagingController extends MultiActionController {
 		return ctrl.handleRequest(request, response);
 	}
 
+	@SuppressWarnings("unchecked")
 	public ModelAndView initData(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		List data = baseHibernateDao.findByCriteria(DetachedCriteria.forClass(UserModel.class));

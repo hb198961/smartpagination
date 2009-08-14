@@ -14,6 +14,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class BaseHibernateDao extends HibernateDaoSupport {
 
+	@SuppressWarnings("unchecked")
 	public PageResult findByPage(HbmPageInfo pageInfo) {
 		int recordsNumber = countRecordsNumber(pageInfo.getExpression(),
 				pageInfo.getCountDistinctProjections());

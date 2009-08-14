@@ -24,6 +24,7 @@ public abstract class BaseQueryFormPagingController<T_Criterial, T_OrderBy> exte
 		super.setSessionForm(true);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response,
 			Object command, BindException errors) throws Exception {

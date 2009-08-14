@@ -20,6 +20,7 @@ public class SamplePagingControllerTest extends TestCase {
 
 	protected MockHttpServletResponse response;
 
+	@SuppressWarnings("unchecked")
 	public void testList() throws Exception {
 		request = new MockHttpServletRequest();
 		response = new MockHttpServletResponse();
