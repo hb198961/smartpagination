@@ -27,7 +27,7 @@ public class PagingHeadTest extends TestCase {
 	public void testGenHtml() {
 		PagingHead ph = new PagingHead();
 		ph.setOrderBy("PPP1");
-		ph.setUrl("/home.uaas");
+		ph.setUrl("/home.do");
 		ph.setStyleClass("styleClass");
 		PageModel pm = new PageModel();
 		pm.setOrderBy("xxxxx");
@@ -38,7 +38,7 @@ public class PagingHeadTest extends TestCase {
 		Mockito.stub(pageContext.getResponse()).toReturn(new MockHttpServletResponse());
 		ph.setPageContext(pageContext);
 
-		String result = ph.genHtml(pm, "/bms");
+		String result = ph.genHtml(pm, "/smart");
 		logger.debug(result);
 		Assert.assertTrue(result.indexOf("PPP1") > 0);
 		Assert.assertTrue(result.indexOf("-up") < 0);
@@ -47,14 +47,14 @@ public class PagingHeadTest extends TestCase {
 		pm.setOrderBy("PPP1");
 		ph.setStyleClass("styleClass");
 		pm.setPageSize(10);
-		result = ph.genHtml(pm, "/bms");
+		result = ph.genHtml(pm, "/smart");
 		logger.debug(result);
 		Assert.assertTrue(result.indexOf("PPP1") > 0);
 		Assert.assertTrue(result.indexOf("-up") < 0);
 
 		ph = new PagingHead();
 		ph.setOrderBy("PPP1");
-		ph.setUrl("/home.uaas");
+		ph.setUrl("/home.do");
 		ph.setStyleClass("styleClass");
 		pm = new PageModel();
 		pm.setOrderBy("PPP1");
@@ -66,7 +66,7 @@ public class PagingHeadTest extends TestCase {
 		Mockito.stub(pageContext.getResponse()).toReturn(new MockHttpServletResponse());
 		ph.setPageContext(pageContext);
 
-		result = ph.genHtml(pm, "/bms");
+		result = ph.genHtml(pm, "/smart");
 
 		logger.debug(result);
 		Assert.assertTrue(result.indexOf("PPP1") > 0);
