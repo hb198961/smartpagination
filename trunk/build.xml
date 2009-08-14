@@ -117,10 +117,10 @@
 			</classpath>
 			<formatter type="xml" />
 			<formatter type="brief" usefile="false" />
-			<batchtest todir="${test.dir}/data" unless="testcase">
+			<batchtest todir="${test.dir}/data" if="testcase">
 				<fileset dir="${test.dir}">
-					<include name="**/*Test.class*" />
-					<exclude name="**/AbstractBaseTest.class" />
+					<include name="**/*${testcase}*" />
+					<exclude name="**/*TestCase.class" />
 				</fileset>
 			</batchtest>
 			<batchtest todir="${test.dir}/data" unless="testcase">
