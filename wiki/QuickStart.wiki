@@ -2,9 +2,11 @@
 
 安装Ant：建议1.7，设环境变量ANT_HOME，添加%ANT_HOME%/bin到PATH环境变量，
 
-安装Ivy：下载ivy.jar，放到ANT_HOME/lib，
+安装Ivy：到http://ant.apache.org/ivy/download.cgi下载，复制ivy.jar到ANT_HOME/lib，
 
-下载junit.jar放到ANT_HOME/lib，
+运行命令：ant resolve，Ivy会把需要的jar下载到lib目录
+
+复制lib/test/junit-4.5.jar 到ANT_HOME/lib，
 
 运行命令：ant test，如果测试成功，说明一切就绪。
 
