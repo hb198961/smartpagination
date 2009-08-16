@@ -2,7 +2,7 @@
 	<!-- ivy properties used -->
 	<property name="publish.version" value="0.1" />
 	<property name="ivy.report.todir" value="build" />
-	<property name="repository.dir" value="Local_Repository" />
+	<property name="repository.dir" value="d:/Local_Repository" />
 	<property name="build.debug" value="on" />
 	<property name="build.dir" value="${basedir}/build" />
 	<property name="classes.dir" value="${build.dir}/classes" />
@@ -63,6 +63,7 @@
 	</target>
 
 	<target name="jar" depends="compile" description="--> make a jar file for this project">
+		<mkdir dir="dist" />
 		<tstamp>
 			<format property="jar.time" pattern="MM/dd/yyyy hh:mm aa" locale="en" />
 		</tstamp>
@@ -83,7 +84,7 @@
 
 	<target name="publish" depends="jar" description="publish">
 		<ivy:publish resolver="local" pubrevision="${publish.version}" overwrite="true">
-			<artifacts pattern="${build.dir}/[artifact].[ext]" />
+			<artifacts pattern="dist/[artifact].[ext]" />
 		</ivy:publish>
 		<echo message="project ${ant.project.name} released with version ${publish.version}" />
 	</target>
