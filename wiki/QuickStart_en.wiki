@@ -10,7 +10,7 @@ Copy lib/test/junit-4.5.jar to ANT_HOME/lib，
 
 Run commond "ant test",if get success message,it means every thing done;
 
-Run commond "ant war",then copy the war in /dist to tomcat/webapps;
+Run commond "ant war",then copy the war in /dist to tomcat/webapps;(Or download demo directly from http://code.google.com/p/smartpagination/downloads/list )
 
 Start tomcat and access the Sample application by IE from http://127.0.0.1:8080/smart_pagination/ ,so far it doesn't work very well in firefox;
 
