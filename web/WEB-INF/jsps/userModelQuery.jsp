@@ -23,18 +23,18 @@
 				</tr>
 				<tr>
 					<td align="right">UserName:</td>
-					<td><form:input path="userName" id="userName" maxlength="30"/>like
+					<td><form:input path="userName" id="userName" maxlength="50"/>like
                         <form:checkbox path="userNameLike" id="userNameLike"/>
 						<form:errors path="userName"/>
 					</td>
 					<td align="right">Email:</td>
-					<td><form:input path="email" id="email" maxlength="30"/>(LIKE)
+					<td><form:input path="email" id="email" maxlength="50"/>(LIKE)
 						<form:errors path="email"/>
 					</td>
 				</tr>
 				<tr>
 					<td align="right">RealName:</td>
-					<td><form:input path="realName" id="realName" maxlength="30"/>(LIKE)
+					<td><form:input path="realName" id="realName" maxlength="50"/>(LIKE)
 						<form:errors path="realName"/>
 					</td>
 					<td align="right">Sex:</td>
