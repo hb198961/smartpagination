@@ -36,5 +36,6 @@
 	<bean id="samplePagingController"
 		class="org.powerstone.smartpagination.sample.SamplePagingController">
 		<property name="baseHibernateDao" ref="baseHibernateDao" />
+		<property name="baseJdbcDao" ref="baseJdbcDao" />
 	</bean>
 </beans>
