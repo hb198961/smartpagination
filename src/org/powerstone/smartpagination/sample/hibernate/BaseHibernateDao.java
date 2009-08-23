@@ -1,4 +1,4 @@
-package org.powerstone.smartpagination.sample;
+package org.powerstone.smartpagination.sample.hibernate;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -9,7 +9,6 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.powerstone.smartpagination.common.PageResult;
-import org.powerstone.smartpagination.hibernate.HbmPageInfo;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class BaseHibernateDao extends HibernateDaoSupport {

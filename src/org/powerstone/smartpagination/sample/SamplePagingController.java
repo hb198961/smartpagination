@@ -17,11 +17,14 @@ import org.powerstone.smartpagination.common.BaseQueryFormPagingController;
 import org.powerstone.smartpagination.common.PageInfo;
 import org.powerstone.smartpagination.common.PageQuery;
 import org.powerstone.smartpagination.common.PageResult;
-import org.powerstone.smartpagination.hibernate.BaseHbmPagingController;
-import org.powerstone.smartpagination.hibernate.BaseHibernateQueryFormPagingController;
-import org.powerstone.smartpagination.hibernate.HbmPageInfo;
-import org.powerstone.smartpagination.jdbc.BaseJdbcDao;
-import org.powerstone.smartpagination.jdbc.JdbcPageInfo;
+import org.powerstone.smartpagination.sample.hibernate.BaseHbmPagingController;
+import org.powerstone.smartpagination.sample.hibernate.BaseHibernateDao;
+import org.powerstone.smartpagination.sample.hibernate.BaseHibernateQueryFormPagingController;
+import org.powerstone.smartpagination.sample.hibernate.HbmPageInfo;
+import org.powerstone.smartpagination.sample.hibernate.UserModelHibernateQuery;
+import org.powerstone.smartpagination.sample.jdbc.BaseJdbcDao;
+import org.powerstone.smartpagination.sample.jdbc.JdbcPageInfo;
+import org.powerstone.smartpagination.sample.jdbc.UserModelJdbcQuery;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
@@ -65,7 +68,7 @@ public class SamplePagingController extends MultiActionController {
 
 			@Override
 			protected PageQuery<DetachedCriteria, Order> makePageQuery() {
-				return new UserModelQuery();
+				return new UserModelHibernateQuery();
 			}
 		};
 

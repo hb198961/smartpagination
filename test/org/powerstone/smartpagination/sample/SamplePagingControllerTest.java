@@ -11,7 +11,8 @@ import org.mockito.Mockito;
 import org.powerstone.smartpagination.common.BasePagingController;
 import org.powerstone.smartpagination.common.PageModel;
 import org.powerstone.smartpagination.common.PageResult;
-import org.powerstone.smartpagination.hibernate.HbmPageInfo;
+import org.powerstone.smartpagination.sample.hibernate.BaseHibernateDao;
+import org.powerstone.smartpagination.sample.hibernate.HbmPageInfo;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 

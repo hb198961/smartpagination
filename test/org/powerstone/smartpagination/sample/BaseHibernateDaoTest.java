@@ -7,7 +7,9 @@ import junit.framework.Assert;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.powerstone.smartpagination.common.PageResult;
-import org.powerstone.smartpagination.hibernate.HbmPageInfo;
+import org.powerstone.smartpagination.sample.hibernate.BaseHibernateDao;
+import org.powerstone.smartpagination.sample.hibernate.HbmPageInfo;
+import org.powerstone.smartpagination.sample.hibernate.UserModelHibernateQuery;
 import org.springframework.test.AbstractTransactionalSpringContextTests;
 
 public class BaseHibernateDaoTest extends AbstractTransactionalSpringContextTests {
@@ -48,7 +50,7 @@ public class BaseHibernateDaoTest extends AbstractTransactionalSpringContextTest
 	}
 
 	public void testFindByPage_WithPageQuery() {
-		UserModelQuery umq = new UserModelQuery();
+		UserModelHibernateQuery umq = new UserModelHibernateQuery();
 		umq.setEmail("liyingquan@gmail.com");
 		umq.setRealName("liyingquan");
 		umq.setSex("m");

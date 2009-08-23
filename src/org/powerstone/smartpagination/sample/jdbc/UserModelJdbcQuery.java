@@ -1,4 +1,4 @@
-package org.powerstone.smartpagination.sample;
+package org.powerstone.smartpagination.sample.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.powerstone.smartpagination.common.PageInfo;
 import org.powerstone.smartpagination.common.PageQuery;
-import org.powerstone.smartpagination.jdbc.JdbcPageInfo;
+import org.powerstone.smartpagination.sample.UserModel;
 import org.springframework.jdbc.core.RowMapper;
 
 @SuppressWarnings("unchecked")

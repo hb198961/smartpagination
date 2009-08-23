@@ -9,9 +9,11 @@ import junit.framework.Assert;
 
 import org.apache.log4j.Logger;
 import org.powerstone.smartpagination.common.PageResult;
-import org.powerstone.smartpagination.sample.BaseHibernateDao;
 import org.powerstone.smartpagination.sample.UserModel;
-import org.powerstone.smartpagination.sample.UserModelJdbcQuery;
+import org.powerstone.smartpagination.sample.hibernate.BaseHibernateDao;
+import org.powerstone.smartpagination.sample.jdbc.BaseJdbcDao;
+import org.powerstone.smartpagination.sample.jdbc.JdbcPageInfo;
+import org.powerstone.smartpagination.sample.jdbc.UserModelJdbcQuery;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.AbstractTransactionalDataSourceSpringContextTests;
 

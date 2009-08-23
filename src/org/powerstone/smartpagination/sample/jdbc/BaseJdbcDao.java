@@ -1,4 +1,4 @@
-package org.powerstone.smartpagination.jdbc;
+package org.powerstone.smartpagination.sample.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
