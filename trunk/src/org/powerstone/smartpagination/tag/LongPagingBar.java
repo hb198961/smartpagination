@@ -13,14 +13,13 @@ import org.apache.log4j.Logger;
 import org.powerstone.smartpagination.common.BasePagingController;
 import org.powerstone.smartpagination.common.PageModel;
 
-public class PagingBar extends TagSupport {
-	protected static final String _HDIV_STATE_ = "_HDIV_STATE_";
-
-	protected static final String PAGINATION_FORM_ID = "smart_pagination_form";
-
-	private static final long serialVersionUID = 6670041132688723682L;
+public class LongPagingBar extends TagSupport {
+	private static final long serialVersionUID = 2688787428535660895L;
 
 	protected final Logger log = Logger.getLogger(this.getClass());
+
+	protected static ResourceBundle rb = ResourceBundle
+			.getBundle("paging_messages");
 
 	private String styleClass;
 
@@ -67,30 +66,34 @@ public class PagingBar extends TagSupport {
 		return TagSupport.SKIP_BODY;
 	}
 
-	public static int computeRowNo(HttpServletRequest request) {
-		PageModel pm = (PageModel) request
-				.getAttribute(BasePagingController.DEFAULT_PAGE_MODEL_NAME);
-		if (pm == null) {
-			return 0;
-		} else {
-			return pm.computeRecordsBeginNo() + 1;
-		}
-	}
-
 	@Override
 	public int doEndTag() throws JspException {
-		ResourceBundle rb = ResourceBundle.getBundle("paging_messages");
+
+		// write out
+		try {
+			pageContext.getOut().println(this.genBarJs());
+			pageContext.getOut().println(this.genBarHtml());
+		} catch (IOException ioe) {
+			throw new JspException(ioe);
+		}
+
+		return EVAL_PAGE;
+	}
+
+	protected String genBarHtml() {
 		// get the paging model from reuest context
 		PageModel pm = (PageModel) pageContext.getRequest().getAttribute(
 				BasePagingController.DEFAULT_PAGE_MODEL_NAME);
 
 		if (pm == null) {
 			log.warn("There is no PageModel in request:"
-					+ ((HttpServletRequest) pageContext.getRequest()).getRequestURI());
+					+ ((HttpServletRequest) pageContext.getRequest())
+							.getRequestURI());
 			pm = new PageModel();
 		}
 		String fullUrl = generateBaseUrl(pm);
-		fullUrl += "&" + BasePagingController.PAGE_SIZE_PARAM + "=" + pm.getPageSize();
+		fullUrl += "&" + BasePagingController.PAGE_SIZE_PARAM + "="
+				+ pm.getPageSize();
 
 		int newPageNo = pm.computeNewPageNoInTag();
 		int totalPages = pm.computePageCount();
@@ -101,19 +104,22 @@ public class PagingBar extends TagSupport {
 
 		// html bar for paging bar
 		StringBuffer htmlBuff = new StringBuffer();
-		String hiddenInForm = this.generateHiddenForForm(generateBaseUrl(pm), new String[] {
-				BasePagingController.PAGE_SIZE_PARAM, BasePagingController.TO_PAGE_NO_PARAM });
-		htmlBuff.append("<form id=\"" + PAGINATION_FORM_ID + "\" action=\"" + generateBaseUrl(pm)
-				+ "\" method=\"GET\" ");
+		String hiddenInForm = this.generateHiddenForForm(generateBaseUrl(pm),
+				new String[] { BasePagingController.PAGE_SIZE_PARAM,
+						BasePagingController.TO_PAGE_NO_PARAM });
+		htmlBuff.append("<form id=\"" + PagingBar.PAGINATION_FORM_ID
+				+ "\" action=\"" + generateBaseUrl(pm) + "\" method=\"GET\" ");
 		htmlBuff.append("onsubmit=\"return go2page(");
-		htmlBuff.append("document.all." + BasePagingController.TO_PAGE_NO_PARAM + ".value,");
-		htmlBuff.append("document.all." + BasePagingController.PAGE_SIZE_PARAM + ".value,");
+		htmlBuff.append("document.all." + BasePagingController.TO_PAGE_NO_PARAM
+				+ ".value,");
+		htmlBuff.append("document.all." + BasePagingController.PAGE_SIZE_PARAM
+				+ ".value,");
 		htmlBuff.append(totalPages);
 		htmlBuff.append(")\">");
 
-		//hidden name="_HDIV_STATE_"
+		// hidden name="_HDIV_STATE_"
 		htmlBuff.append("<input type=\"hidden\" ");
-		htmlBuff.append("name=\"" + _HDIV_STATE_ + "\" ");
+		htmlBuff.append("name=\"" + PagingBar._HDIV_STATE_ + "\" ");
 		htmlBuff.append("value=\"" + hiddenInForm + "\" ");
 		htmlBuff.append(">\n");
 
@@ -139,12 +145,14 @@ public class PagingBar extends TagSupport {
 			htmlBuff.append("<span><a title=\"");
 			htmlBuff.append(rb.getString("first"));
 			htmlBuff.append("\" href=\"");
-			htmlBuff.append(this.hdivEncodeUrl(fullUrl + "&" + BasePagingController.TO_FIRST_PARAM
-					+ "=true", pageContext.getRequest(), pageContext.getResponse()));
+			htmlBuff.append(this.hdivEncodeUrl(fullUrl + "&"
+					+ BasePagingController.TO_FIRST_PARAM + "=true",
+					pageContext.getRequest(), pageContext.getResponse()));
 			htmlBuff.append("\"><font face=webdings>9</font></a></span>");
 		}
 
-		String currPage = "&" + BasePagingController.CURR_PAGE_PARAM + "=" + newPageNo;
+		String currPage = "&" + BasePagingController.CURR_PAGE_PARAM + "="
+				+ newPageNo;
 
 		// link to previous page
 		if (nearPages[0] > 0) {
@@ -152,8 +160,8 @@ public class PagingBar extends TagSupport {
 			htmlBuff.append(rb.getString("last"));
 			htmlBuff.append("\" href=\"");
 			htmlBuff.append(this.hdivEncodeUrl(fullUrl + currPage + "&"
-					+ BasePagingController.TO_LAST_PARAM + "=true", pageContext.getRequest(),
-					pageContext.getResponse()));
+					+ BasePagingController.TO_LAST_PARAM + "=true", pageContext
+					.getRequest(), pageContext.getResponse()));
 			htmlBuff.append("\" ><font face=webdings>7</font></a></span>");
 		} else {
 			htmlBuff.append("<span><font face=webdings>7</font></span>\n");
@@ -168,8 +176,9 @@ public class PagingBar extends TagSupport {
 				} else {
 					htmlBuff.append("<span><b><a href=\"");
 					htmlBuff.append(this.hdivEncodeUrl(fullUrl + "&"
-							+ BasePagingController.TO_PAGE_NO_PARAM + "=" + nearPages[i],
-							pageContext.getRequest(), pageContext.getResponse()));
+							+ BasePagingController.TO_PAGE_NO_PARAM + "="
+							+ nearPages[i], pageContext.getRequest(),
+							pageContext.getResponse()));
 					htmlBuff.append("\">");
 					htmlBuff.append(nearPages[i]);
 					htmlBuff.append("</a></b></span>");
@@ -183,8 +192,8 @@ public class PagingBar extends TagSupport {
 			htmlBuff.append(rb.getString("next"));
 			htmlBuff.append("\" href=\"");
 			htmlBuff.append(this.hdivEncodeUrl(fullUrl + currPage + "&"
-					+ BasePagingController.TO_NEXT_PARAM + "=true", pageContext.getRequest(),
-					pageContext.getResponse()));
+					+ BasePagingController.TO_NEXT_PARAM + "=true", pageContext
+					.getRequest(), pageContext.getResponse()));
 			htmlBuff.append("\"><font face=webdings>8</font></a></span>");
 		} else {
 			htmlBuff.append("<span><font face=webdings>8</font></span>");
@@ -197,8 +206,9 @@ public class PagingBar extends TagSupport {
 			htmlBuff.append("<span><a title=\"");
 			htmlBuff.append(rb.getString("end"));
 			htmlBuff.append("\" href=\"");
-			htmlBuff.append(this.hdivEncodeUrl(fullUrl + "&" + BasePagingController.TO_END_PARAM
-					+ "=true", pageContext.getRequest(), pageContext.getResponse()));
+			htmlBuff.append(this.hdivEncodeUrl(fullUrl + "&"
+					+ BasePagingController.TO_END_PARAM + "=true", pageContext
+					.getRequest(), pageContext.getResponse()));
 			htmlBuff.append("\"><font face=webdings>:</font></a></span>");
 		}
 
@@ -213,9 +223,10 @@ public class PagingBar extends TagSupport {
 
 		htmlBuff.append(rb.getString("every"));
 		htmlBuff.append(":");
-		htmlBuff.append("<input type=text id=\"" + BasePagingController.PAGE_SIZE_PARAM + "\"");
-		htmlBuff.append(" maxlength=2 size=1 name=\"" + BasePagingController.PAGE_SIZE_PARAM
-				+ "\" value=");
+		htmlBuff.append("<input type=text id=\""
+				+ BasePagingController.PAGE_SIZE_PARAM + "\"");
+		htmlBuff.append(" maxlength=2 size=1 name=\""
+				+ BasePagingController.PAGE_SIZE_PARAM + "\" value=");
 		htmlBuff.append(pm.getPageSize());
 		htmlBuff.append(">\n");
 
@@ -231,9 +242,10 @@ public class PagingBar extends TagSupport {
 		// Go form
 		htmlBuff.append("<span>");
 		htmlBuff.append(rb.getString("goto"));
-		htmlBuff.append("<input type=text id=\"" + BasePagingController.TO_PAGE_NO_PARAM + "\"");
-		htmlBuff.append(" maxlength=5 size=1 name=" + BasePagingController.TO_PAGE_NO_PARAM
-				+ " value=");
+		htmlBuff.append("<input type=text id=\""
+				+ BasePagingController.TO_PAGE_NO_PARAM + "\"");
+		htmlBuff.append(" maxlength=5 size=1 name="
+				+ BasePagingController.TO_PAGE_NO_PARAM + " value=");
 		htmlBuff.append(newPageNo);
 		htmlBuff.append(">\n");
 		htmlBuff.append("<input type=\"submit\" value=\"Go\" ></span>");
@@ -244,7 +256,13 @@ public class PagingBar extends TagSupport {
 		htmlBuff.append("\"></td></tr></table>");
 
 		htmlBuff.append("</form>");
+		String barHtml = htmlBuff.toString();
+		log.debug(barHtml);
 
+		return barHtml;
+	}
+
+	protected String genBarJs() {
 		// JS code for paging bar
 		StringBuffer jsBuff = new StringBuffer();
 		jsBuff.append("<script langage=javascript>\n");
@@ -255,7 +273,8 @@ public class PagingBar extends TagSupport {
 		jsBuff.append("\");\n ");
 		jsBuff.append("document.all." + BasePagingController.PAGE_SIZE_PARAM
 				+ ".focus(); return false;\n");
-		jsBuff.append("}else if(isNaN(page) | page < 1 | page > totalpages){\n");
+		jsBuff
+				.append("}else if(isNaN(page) | page < 1 | page > totalpages){\n");
 		jsBuff.append("alert(\"");
 		jsBuff.append(rb.getString("errorpage"));
 		jsBuff.append("\");\n ");
@@ -266,30 +285,24 @@ public class PagingBar extends TagSupport {
 		jsBuff.append("}\n");// end of function
 		jsBuff.append("</script>\n");
 
-		String barHtml = htmlBuff.toString();
 		String barJs = jsBuff.toString();
 		log.debug(barJs);
-		log.debug(barHtml);
-		// write out
-		try {
-			pageContext.getOut().println(barJs);
-			pageContext.getOut().println(barHtml);
-		} catch (IOException ioe) {
-			throw new JspException(ioe);
-		}
-
-		return EVAL_PAGE;
+		return barJs;
 	}
 
 	// return /bms/url?orderBy=xx&orderDir=xxx
 	private String generateBaseUrl(PageModel pm) {
-		String formUrl = ((HttpServletRequest) pageContext.getRequest()).getContextPath() + url;
+		String formUrl = ((HttpServletRequest) pageContext.getRequest())
+				.getContextPath()
+				+ url;
 		if (formUrl.indexOf("?") < 0) {
 			formUrl += "?";
 		}
 		if (pm.getOrderBy() != null) {
-			formUrl += "&" + BasePagingController.ORDER_BY_PARAM + "=" + pm.getOrderBy() + "&"
-					+ BasePagingController.ORDER_DIR_PARAM + "=" + pm.getOrderDirection();
+			formUrl += "&" + BasePagingController.ORDER_BY_PARAM + "="
+					+ pm.getOrderBy() + "&"
+					+ BasePagingController.ORDER_DIR_PARAM + "="
+					+ pm.getOrderDirection();
 		}
 		return formUrl;
 	}
@@ -298,7 +311,8 @@ public class PagingBar extends TagSupport {
 		return null;
 	}
 
-	protected String hdivEncodeUrl(String url, ServletRequest request, ServletResponse response) {
+	protected String hdivEncodeUrl(String url, ServletRequest request,
+			ServletResponse response) {
 		return url;
 	}
 

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 abstract public class PageInfo<T_Criterial, T_OrderBy> {
-	private Class<?> entityClass;
-	private T_Criterial expression;
-	private List<T_OrderBy> orderByList = new ArrayList<T_OrderBy>();
-	private int pageSize;// 0相当于取全部
-	private int pageNo;// 如果end参数不为空，忽略pageNo
-	private Boolean end;// end:true->首页;false->尾页
+	protected Class<?> entityClass;
+	protected T_Criterial expression;
+	protected List<T_OrderBy> orderByList = new ArrayList<T_OrderBy>();
+	protected int pageSize;// 0相当于取全部
+	protected int pageNo;// 如果end参数不为空，忽略pageNo
+	protected Boolean end;// end:true->首页;false->尾页
 
 	public PageInfo(Class<?> entityClass, T_Criterial expression,
 			List<T_OrderBy> orderByList, int pageNo, int pageSize, Boolean end) {
