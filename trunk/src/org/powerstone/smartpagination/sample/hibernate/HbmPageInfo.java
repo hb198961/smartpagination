@@ -1,4 +1,4 @@
-package org.powerstone.smartpagination.hibernate;
+package org.powerstone.smartpagination.sample.hibernate;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;

@@ -1,13 +1,13 @@
-package org.powerstone.smartpagination.sample;
+package org.powerstone.smartpagination.sample.hibernate;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.powerstone.smartpagination.common.PageInfo;
 import org.powerstone.smartpagination.common.PageQuery;
-import org.powerstone.smartpagination.hibernate.HbmPageInfo;
+import org.powerstone.smartpagination.sample.UserModel;
 
-public class UserModelQuery extends UserModel implements
+public class UserModelHibernateQuery extends UserModel implements
 		PageQuery<DetachedCriteria, Order> {
 	private boolean userNameLike;
 

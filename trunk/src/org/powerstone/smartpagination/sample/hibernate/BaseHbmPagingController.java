@@ -1,11 +1,10 @@
-package org.powerstone.smartpagination.hibernate;
+package org.powerstone.smartpagination.sample.hibernate;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.powerstone.smartpagination.common.BasePagingController;
 import org.powerstone.smartpagination.common.PageInfo;
 import org.powerstone.smartpagination.common.PageResult;
-import org.powerstone.smartpagination.sample.BaseHibernateDao;
 
 abstract public class BaseHbmPagingController extends
 		BasePagingController<DetachedCriteria, Order> {
