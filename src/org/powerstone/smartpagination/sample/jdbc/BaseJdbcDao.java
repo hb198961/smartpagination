@@ -25,6 +25,7 @@ public class BaseJdbcDao {
 		this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 
+	@SuppressWarnings("unchecked")
 	public PageResult findByPage(JdbcPageInfo pageInfo) {
 		int recordsNumber = countRecordsNumberByExample(pageInfo);
 
@@ -54,6 +55,7 @@ public class BaseJdbcDao {
 		return new PageResult(pageData, recordsNumber, pageAmount);
 	}
 
+	@SuppressWarnings("unchecked")
 	private List findByExample(JdbcPageInfo pageInfo, int... firstResultAndMaxResults) {
 		String sql = pageInfo.getSql();
 		if (pageInfo.getOrderByList() != null && pageInfo.getOrderByList().size() > 0) {
@@ -91,6 +93,7 @@ public class BaseJdbcDao {
 		/**
 		* 处理结果集合,被接口自动调用，该类外边不应该调用
 		*/
+		@SuppressWarnings("unchecked")
 		public Object extractData(ResultSet rs) throws SQLException, DataAccessException {
 			List result = new ArrayList();
 			int rowNum = 0;

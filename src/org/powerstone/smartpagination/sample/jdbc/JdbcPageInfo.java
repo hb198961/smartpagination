@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
  * T Map:SQL->select xx from tt where p1 = :p1 and p2 like
  * :p2|example->model(p1,p2) T String:p1 asc , p2 desc ...
  */
+@SuppressWarnings("unchecked")
 public class JdbcPageInfo extends PageInfo<Map, String> {
 	public static final String JDBC_PAGE_INFO_SQL = "JDBC_PAGE_INFO_SQL";
 	public static final String JDBC_PAGE_INFO_EXAMPLE_MODEL = "JDBC_PAGE_INFO_EXAMPLE_MODEL";
