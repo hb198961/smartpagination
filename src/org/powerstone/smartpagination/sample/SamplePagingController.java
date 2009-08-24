@@ -28,7 +28,7 @@ import org.powerstone.smartpagination.sample.jdbc.UserModelJdbcQuery;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
-
+@SuppressWarnings("unchecked")
 public class SamplePagingController extends MultiActionController {
 	private BaseHibernateDao baseHibernateDao;
 
@@ -143,7 +143,6 @@ public class SamplePagingController extends MultiActionController {
 		return ctrl.handleRequest(request, response);
 	}
 
-	@SuppressWarnings("unchecked")
 	public ModelAndView initData(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		List data = baseHibernateDao.findByCriteria(DetachedCriteria

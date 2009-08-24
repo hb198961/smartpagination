@@ -9,7 +9,6 @@ import org.powerstone.smartpagination.common.PageInfo;
 public class IbatisPageInfo extends PageInfo<Map, String> {
 	String queryName;
 
-	@SuppressWarnings("unchecked")
 	public IbatisPageInfo() {
 		super();
 		super.expression = new HashMap();
