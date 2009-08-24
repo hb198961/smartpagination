@@ -22,7 +22,6 @@ public class UserModelJdbcQuery extends UserModel implements
 		this.userNameLike = userNameLike;
 	}
 
-	@SuppressWarnings("unchecked")
 	public PageInfo<Map, String> generatePageInfo() {
 		JdbcPageInfo pi = new JdbcPageInfo();
 		UserModel exampleModel = new UserModel();
