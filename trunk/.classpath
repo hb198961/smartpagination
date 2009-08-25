@@ -44,7 +44,6 @@
 	<classpathentry kind="lib" path="lib/default/commons-fileupload-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/default/commons-io-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/default/commons-validator-1.1.4.jar"/>
-	<classpathentry kind="lib" path="lib/default/ibatis2-common-2.1.5.582.jar"/>
-	<classpathentry kind="lib" path="lib/default/ibatis2-sqlmap-2.1.5.582.jar"/>
+	<classpathentry kind="lib" path="lib/default/ibatis-sqlmap-2.3.4.726.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

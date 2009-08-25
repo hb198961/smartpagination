@@ -91,4 +91,18 @@
 	<bean id="baseJdbcDao" class="org.powerstone.smartpagination.sample.jdbc.BaseJdbcDao">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<bean id="sqlMapClient"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="configLocation">
+			<value>classpath:org/powerstone/smartpagination/sample/sql-map-config.xml</value>
+		</property>
+	</bean>
+	
+	<bean id="baseIbatisDao" class="org.powerstone.smartpagination.sample.ibatis.BaseIbatisDao">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
 </beans>
