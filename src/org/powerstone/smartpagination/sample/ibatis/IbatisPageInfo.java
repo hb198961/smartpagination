@@ -1,18 +1,10 @@
 package org.powerstone.smartpagination.sample.ibatis;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.powerstone.smartpagination.common.PageInfo;
 
-@SuppressWarnings("unchecked")
-public class IbatisPageInfo extends PageInfo<Map, String> {
-	String queryName;
-
-	public IbatisPageInfo() {
-		super();
-		super.expression = new HashMap();
-	}
+public class IbatisPageInfo extends PageInfo<IbatisOrderable, String> {
+	String countQueryName;
+	String pageQueryName;
 
 	@Override
 	public void addOrderByAsc(String orderBy) {
@@ -24,12 +16,19 @@ public class IbatisPageInfo extends PageInfo<Map, String> {
 		super.getOrderByList().add(orderBy + " desc");
 	}
 
-	public String getQueryName() {
-		return queryName;
+	public String getCountQueryName() {
+		return countQueryName;
 	}
 
-	public void setQueryName(String queryName) {
-		this.queryName = queryName;
+	public void setCountQueryName(String countQueryName) {
+		this.countQueryName = countQueryName;
 	}
 
+	public String getPageQueryName() {
+		return pageQueryName;
+	}
+
+	public void setPageQueryName(String pageQueryName) {
+		this.pageQueryName = pageQueryName;
+	}
 }

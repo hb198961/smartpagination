@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+    "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="UserSQL">
+    <select id="countUserLikeUserName" parameterClass="org.powerstone.smartpagination.sample.ibatis.UserModelIbatisQuery" 
+                         resultClass="java.lang.Integer">
+     select count(id) from user_model where 1=1 
+     <dynamic>  
+         <isNotEmpty property="userName" prepend=" and ">  
+               lower(user_Name) like #userName#
+         </isNotEmpty>
+         <isNotEmpty property="email" prepend=" and ">  
+               lower(email) like #email#
+         </isNotEmpty>
+         <isNotEmpty property="realName" prepend=" and ">  
+               lower(real_Name) like #realName#
+         </isNotEmpty>
+         <isNotEmpty property="sex" prepend=" and ">  
+               sex = #sex#
+         </isNotEmpty>
+     </dynamic>  
+    </select>
+    
+    <select id="countUserEuqalUserName" parameterClass="org.powerstone.smartpagination.sample.ibatis.UserModelIbatisQuery" 
+                         resultClass="java.lang.Integer">
+     select count(id) from user_model where 1=1 
+     <dynamic>  
+         <isNotEmpty property="userName" prepend=" and ">  
+               user_Name = #userName#
+         </isNotEmpty>
+         <isNotEmpty property="email" prepend=" and ">  
+               lower(email) like #email#
+         </isNotEmpty>
+         <isNotEmpty property="realName" prepend=" and ">  
+               lower(real_Name) like #realName#
+         </isNotEmpty>
+         <isNotEmpty property="sex" prepend=" and ">  
+               sex = #sex#
+         </isNotEmpty>
+     </dynamic>  
+    </select>
+    
+    <select id="findUsersLikeUserName" parameterClass="org.powerstone.smartpagination.sample.ibatis.UserModelIbatisQuery" 
+            resultClass="org.powerstone.smartpagination.sample.UserModel">
+     select id,user_Name as userName,email,real_Name as realName,sex,birth from user_model where 1=1 
+     <dynamic>  
+         <isNotEmpty property="userName" prepend=" and ">  
+               lower(user_Name) like #userName#
+         </isNotEmpty>
+         <isNotEmpty property="email" prepend=" and ">  
+               lower(email) like #email#
+         </isNotEmpty>
+         <isNotEmpty property="realName" prepend=" and ">  
+               lower(real_Name) like #realName#
+         </isNotEmpty>
+         <isNotEmpty property="sex" prepend=" and ">  
+               sex = #sex#
+         </isNotEmpty>
+     </dynamic>  
+     <dynamic prepend=" order by ">  
+         <isNotEmpty property="orderByStr">  
+                 $orderByStr$  
+         </isNotEmpty>  
+     </dynamic>
+    </select>
+    <select id="findUsersEuqalUserName" parameterClass="org.powerstone.smartpagination.sample.ibatis.UserModelIbatisQuery" 
+            resultClass="org.powerstone.smartpagination.sample.UserModel">
+     select id,user_Name as userName,email,real_Name as realName,sex,birth from user_model where 1=1 
+     <dynamic>  
+         <isNotEmpty property="userName" prepend=" and ">  
+               user_Name = #userName#
+         </isNotEmpty>
+         <isNotEmpty property="email" prepend=" and ">  
+               lower(email) like #email#
+         </isNotEmpty>
+         <isNotEmpty property="realName" prepend=" and ">  
+               lower(real_Name) like #realName#
+         </isNotEmpty>
+         <isNotEmpty property="sex" prepend=" and ">  
+               sex = #sex#
+         </isNotEmpty>
+     </dynamic>  
+     <dynamic prepend=" order by ">  
+         <isNotEmpty property="orderByStr">  
+                 $orderByStr$  
+         </isNotEmpty>  
+     </dynamic>
+    </select>
+</sqlMap>

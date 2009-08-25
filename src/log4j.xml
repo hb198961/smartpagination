@@ -36,6 +36,14 @@
 		<priority value="info" />
 		<appender-ref ref="hdiv-stdout" />
 	</category>
+	<category name="com.ibatis.sqlmap.engine.mapping.sql">
+		<priority value="DEBUG" />
+		<appender-ref ref="log-stdout" />
+	</category>
+	<category name="java.sql">
+		<priority value="DEBUG" />
+		<appender-ref ref="log-stdout" />
+	</category>
 	<root>
        <priority value="WARN"/>
        <appender-ref ref="log-stdout"/>
