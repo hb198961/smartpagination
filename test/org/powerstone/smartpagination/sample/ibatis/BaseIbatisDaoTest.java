@@ -46,6 +46,7 @@ public class BaseIbatisDaoTest extends AbstractTransactionalDataSourceSpringCont
 		baseHibernateDao.flush();
 	}
 
+	@SuppressWarnings("unchecked")
 	public void testFindByPage() {
 		UserModelIbatisQuery query = new UserModelIbatisQuery();
 
@@ -83,4 +84,20 @@ public class BaseIbatisDaoTest extends AbstractTransactionalDataSourceSpringCont
 		Assert.assertEquals("总记录数", 17, pageResult.getTotalRecordsNumber());
 	}
 
+	public void testFindByPageQuery_LessThan1Page() {
+		UserModelIbatisQuery query = new UserModelIbatisQuery();
+		query.setUserName("liyingquan@gmail.com");
+		query.setUserName("admin");
+		query.setUserNameLike(true);
+
+		IbatisPageInfo pi = (IbatisPageInfo) query.generatePageInfo();
+		pi.addOrderByAsc("email");
+		pi.setPageNo(1);
+		pi.setPageSize(50);
+
+		PageResult pageResult = baseIbatisDao.findByPage(pi);
+		Assert.assertEquals("第1页", 17, pageResult.getPageData().size());
+		Assert.assertEquals("页数", 1, pageResult.getPageAmount());
+		Assert.assertEquals("总记录数", 17, pageResult.getTotalRecordsNumber());
+	}
 }
