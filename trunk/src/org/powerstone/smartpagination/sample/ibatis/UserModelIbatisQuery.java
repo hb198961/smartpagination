@@ -28,6 +28,8 @@ public class UserModelIbatisQuery extends UserModel implements PageQuery<IbatisO
 
 	public PageInfo<IbatisOrderable, String> generatePageInfo() {
 		IbatisPageInfo pi = new IbatisPageInfo();
+		pi.setCountQueryName("countUser");
+		pi.setPageQueryName("findUsers");
 		UserModelIbatisQuery exampleModel = new UserModelIbatisQuery();
 		exampleModel.setBirth(this.getBirth());
 		if (getEmail() != null && getEmail().trim().length() > 0) {
@@ -42,12 +44,8 @@ public class UserModelIbatisQuery extends UserModel implements PageQuery<IbatisO
 		}
 		exampleModel.setUserNameLike(isUserNameLike());
 		if (isUserNameLike()) {
-			pi.setCountQueryName("countUserLikeUserName");
-			pi.setPageQueryName("findUsersLikeUserName");
 			exampleModel.setUserName("%" + getUserName().toLowerCase() + "%");
 		} else {
-			pi.setCountQueryName("countUserEuqalUserName");
-			pi.setPageQueryName("findUsersEuqalUserName");
 			exampleModel.setUserName(getUserName());
 		}
 
