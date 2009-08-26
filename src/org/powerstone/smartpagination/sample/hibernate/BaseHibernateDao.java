@@ -63,10 +63,6 @@ public class BaseHibernateDao extends HibernateDaoSupport {
 		return result;
 	}
 
-	public <T> void delete(Class<T> entityClass, Serializable id) {
-		getHibernateTemplate().delete(get(entityClass, id));
-	}
-
 	@SuppressWarnings("unchecked")
 	public List findByCriteria(DetachedCriteria dc,
 			int... firstResultAndMaxResults) {
@@ -98,6 +94,10 @@ public class BaseHibernateDao extends HibernateDaoSupport {
 
 	public void saveOrUpdate(Object model) {
 		getHibernateTemplate().saveOrUpdate(model);
+	}
+	
+	public <T> void delete(Class<T> entityClass, Serializable id) {
+		getHibernateTemplate().delete(get(entityClass, id));
 	}
 
 	public void flush() {

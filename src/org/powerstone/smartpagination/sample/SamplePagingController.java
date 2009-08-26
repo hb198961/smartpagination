@@ -41,14 +41,6 @@ public class SamplePagingController extends MultiActionController {
 
 	private BaseIbatisDao baseIbatisDao;
 
-	public void setBaseIbatisDao(BaseIbatisDao baseIbatisDao) {
-		this.baseIbatisDao = baseIbatisDao;
-	}
-
-	public void setBaseJdbcDao(BaseJdbcDao baseJdbcDao) {
-		this.baseJdbcDao = baseJdbcDao;
-	}
-
 	public ModelAndView listHibernate(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		BaseHbmPagingController ctrl = new BaseHbmPagingController(baseHibernateDao) {
@@ -211,5 +203,13 @@ public class SamplePagingController extends MultiActionController {
 
 	public void setBaseHibernateDao(BaseHibernateDao baseHibernateDao) {
 		this.baseHibernateDao = baseHibernateDao;
+	}
+
+	public void setBaseIbatisDao(BaseIbatisDao baseIbatisDao) {
+		this.baseIbatisDao = baseIbatisDao;
+	}
+
+	public void setBaseJdbcDao(BaseJdbcDao baseJdbcDao) {
+		this.baseJdbcDao = baseJdbcDao;
 	}
 }
