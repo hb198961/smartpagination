@@ -43,8 +43,8 @@ abstract public class BasePagingController<T_Criterial, T_OrderBy> {
 	/**
 	 * 分页控制器入口
 	 */
-	public final void handleRequest(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public final void handleRequest(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		PageModel pm = new PageModel();
 		request.setAttribute(DEFAULT_PAGE_MODEL_NAME, pm);
 
@@ -59,8 +59,7 @@ abstract public class BasePagingController<T_Criterial, T_OrderBy> {
 		pm.setOrderDirection(request.getParameter(ORDER_DIR_PARAM));
 
 		String pageSizeParam = request.getParameter(PAGE_SIZE_PARAM);
-		int pageSize = (pageSizeParam != null) ? new Integer(pageSizeParam)
-				: defaultPageSize;
+		int pageSize = (pageSizeParam != null) ? new Integer(pageSizeParam) : defaultPageSize;
 		if (pageSize > 0) {
 			pm.setPageSize(pageSize);
 		} else {
@@ -101,13 +100,11 @@ abstract public class BasePagingController<T_Criterial, T_OrderBy> {
 	/**
 	 * 由子类重写，构造PageInfo(entityClass,expression,orderBy)
 	 */
-	abstract protected PageInfo<T_Criterial, T_OrderBy> makePageInfo(
-			HttpServletRequest request);
+	abstract protected PageInfo<T_Criterial, T_OrderBy> makePageInfo(HttpServletRequest request);
 
 	/**
 	 * 由子类重写，调用service查询
 	 */
-	abstract public PageResult findByPage(
-			PageInfo<T_Criterial, T_OrderBy> pageInfo);
+	abstract public PageResult findByPage(PageInfo<T_Criterial, T_OrderBy> pageInfo);
 
 }
