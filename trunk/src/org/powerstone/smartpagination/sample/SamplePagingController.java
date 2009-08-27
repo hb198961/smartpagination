@@ -23,7 +23,7 @@ import org.powerstone.smartpagination.sample.hibernate.BaseHibernateQueryFormPag
 import org.powerstone.smartpagination.sample.hibernate.HbmPageInfo;
 import org.powerstone.smartpagination.sample.hibernate.UserModelHibernateQuery;
 import org.powerstone.smartpagination.sample.ibatis.BaseIbatisDao;
-import org.powerstone.smartpagination.sample.ibatis.IbatisOrderable;
+import org.powerstone.smartpagination.sample.ibatis.IbatisPagerable;
 import org.powerstone.smartpagination.sample.ibatis.IbatisPageInfo;
 import org.powerstone.smartpagination.sample.ibatis.UserModelIbatisQuery;
 import org.powerstone.smartpagination.sample.jdbc.BaseJdbcDao;
@@ -141,14 +141,14 @@ public class SamplePagingController extends MultiActionController {
 
 	public ModelAndView listIbatis(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		BasePagingController ctrl = new BasePagingController<IbatisOrderable, String>() {
+		BasePagingController ctrl = new BasePagingController<IbatisPagerable, String>() {
 			@Override
-			public PageResult findByPage(PageInfo<IbatisOrderable, String> pageInfo) {
+			public PageResult findByPage(PageInfo<IbatisPagerable, String> pageInfo) {
 				return baseIbatisDao.findByPage((IbatisPageInfo) pageInfo);
 			}
 
 			@Override
-			protected PageInfo<IbatisOrderable, String> makePageInfo(HttpServletRequest request) {
+			protected PageInfo<IbatisPagerable, String> makePageInfo(HttpServletRequest request) {
 				return new UserModelIbatisQuery().generatePageInfo();
 			}
 		};
@@ -159,14 +159,14 @@ public class SamplePagingController extends MultiActionController {
 
 	public ModelAndView queryIbatis(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		BaseQueryFormPagingController ctrl = new BaseQueryFormPagingController<IbatisOrderable, String>() {
+		BaseQueryFormPagingController ctrl = new BaseQueryFormPagingController<IbatisPagerable, String>() {
 			@Override
-			protected PageResult findByPageInfo(PageInfo<IbatisOrderable, String> pi) {
+			protected PageResult findByPageInfo(PageInfo<IbatisPagerable, String> pi) {
 				return baseIbatisDao.findByPage((IbatisPageInfo) pi);
 			}
 
 			@Override
-			protected PageQuery<IbatisOrderable, String> makePageQuery() {
+			protected PageQuery<IbatisPagerable, String> makePageQuery() {
 				return new UserModelIbatisQuery();
 			}
 		};

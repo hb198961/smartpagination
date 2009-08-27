@@ -4,11 +4,15 @@ import org.powerstone.smartpagination.common.PageInfo;
 import org.powerstone.smartpagination.common.PageQuery;
 import org.powerstone.smartpagination.sample.UserModel;
 
-public class UserModelIbatisQuery extends UserModel implements PageQuery<IbatisOrderable, String>,
-		IbatisOrderable {
+public class UserModelIbatisQuery extends UserModel implements PageQuery<IbatisPagerable, String>,
+		IbatisPagerable {
 	private boolean userNameLike;
 
 	private String orderByStr;
+
+	private String paginationStart;
+
+	private String paginationEnd;
 
 	public boolean isUserNameLike() {
 		return userNameLike;
@@ -26,10 +30,26 @@ public class UserModelIbatisQuery extends UserModel implements PageQuery<IbatisO
 		this.orderByStr = orderByStr;
 	}
 
-	public PageInfo<IbatisOrderable, String> generatePageInfo() {
+	public String getPaginationStart() {
+		return paginationStart;
+	}
+
+	public void setPaginationStart(String paginationStart) {
+		this.paginationStart = paginationStart;
+	}
+
+	public String getPaginationEnd() {
+		return paginationEnd;
+	}
+
+	public void setPaginationEnd(String paginationEnd) {
+		this.paginationEnd = paginationEnd;
+	}
+
+	public PageInfo<IbatisPagerable, String> generatePageInfo() {
 		IbatisPageInfo pi = new IbatisPageInfo();
 		pi.setCountQueryName("countUser");
-		pi.setPageQueryName("findUsers");
+		pi.setPageQueryName("hsql_findUsers");
 		UserModelIbatisQuery exampleModel = new UserModelIbatisQuery();
 		exampleModel.setBirth(this.getBirth());
 		if (getEmail() != null && getEmail().trim().length() > 0) {

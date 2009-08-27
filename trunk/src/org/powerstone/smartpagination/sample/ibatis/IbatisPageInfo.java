@@ -2,7 +2,7 @@ package org.powerstone.smartpagination.sample.ibatis;
 
 import org.powerstone.smartpagination.common.PageInfo;
 
-public class IbatisPageInfo extends PageInfo<IbatisOrderable, String> {
+public class IbatisPageInfo extends PageInfo<IbatisPagerable, String> {
 	String countQueryName;
 	String pageQueryName;
 
