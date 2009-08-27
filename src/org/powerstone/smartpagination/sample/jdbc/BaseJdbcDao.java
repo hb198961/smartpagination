@@ -78,6 +78,11 @@ public class BaseJdbcDao {
 		}
 	}
 
+	/**
+	 * 采用滚动结果集分页算法，
+	 * 暂未实现拼SQL的物理分页，因为SQL语法与数据库相关
+	 * 物理分页可参照BaseIbatisDao及其配置
+	 */
 	class SplitPageResultSetExtractor implements ResultSetExtractor {
 		private final int start;// 起始行号
 		private final int len;// 结果集合的长度

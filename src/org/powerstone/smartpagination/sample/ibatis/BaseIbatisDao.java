@@ -43,6 +43,7 @@ public class BaseIbatisDao extends SqlMapClientDaoSupport {
 
 	@SuppressWarnings("unchecked")
 	private List findByPi(IbatisPageInfo pi, int... firstResultAndMaxResults) {
+		//set orderby to
 		if (pi.getOrderByList() != null && pi.getOrderByList().size() > 0) {
 			String orderBy = " ";
 			for (String order : pi.getOrderByList()) {
@@ -51,9 +52,13 @@ public class BaseIbatisDao extends SqlMapClientDaoSupport {
 			orderBy = orderBy.substring(0, orderBy.length() - 1);
 			pi.getExpression().setOrderByStr(orderBy);
 		}
+		//set start and end index
 		if (firstResultAndMaxResults != null && firstResultAndMaxResults.length == 2) {
-			return getSqlMapClientTemplate().queryForList(pi.getPageQueryName(),
-					pi.getExpression(), firstResultAndMaxResults[0], firstResultAndMaxResults[1]);
+			pi.getExpression().setPaginationStart(
+					new Integer(firstResultAndMaxResults[0]).toString());
+			pi.getExpression().setPaginationEnd(
+					new Integer(firstResultAndMaxResults[0] + firstResultAndMaxResults[1])
+							.toString());
 		}
 
 		return getSqlMapClientTemplate().queryForList(pi.getPageQueryName(), pi.getExpression());
