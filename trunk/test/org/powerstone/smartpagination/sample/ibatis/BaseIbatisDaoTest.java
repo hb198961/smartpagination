@@ -84,6 +84,18 @@ public class BaseIbatisDaoTest extends AbstractTransactionalDataSourceSpringCont
 		Assert.assertEquals("总记录数", 17, pageResult.getTotalRecordsNumber());
 	}
 
+	public void testFindByPage_NoOrderBy() {
+		UserModelIbatisQuery query = new UserModelIbatisQuery();
+		IbatisPageInfo pi = (IbatisPageInfo) query.generatePageInfo();
+		pi.setPageNo(2);
+		pi.setPageSize(10);
+
+		PageResult pageResult = baseIbatisDao.findByPage(pi);
+		Assert.assertEquals("第2页", 7, pageResult.getPageData().size());
+		Assert.assertEquals("页数", 2, pageResult.getPageAmount());
+		Assert.assertEquals("总记录数", 17, pageResult.getTotalRecordsNumber());
+	}
+
 	public void testFindByPageQuery_LessThan1Page() {
 		UserModelIbatisQuery query = new UserModelIbatisQuery();
 		query.setUserName("liyingquan@gmail.com");
