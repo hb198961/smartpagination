@@ -16,9 +16,8 @@ import org.hdiv.util.HDIVUtil;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 public class HdivSimpleValidateFilter extends OncePerRequestFilter {
-	/**
-	 * 
-	 */
+	public static final String HDIV_PARAMETER = "HDIVParameter";
+	
 	public static final String DATA_TYPE_TEXT = "text";
 
 	protected static Logger log = Logger.getLogger(HdivSimpleValidateFilter.class);
@@ -46,6 +45,12 @@ public class HdivSimpleValidateFilter extends OncePerRequestFilter {
 			Enumeration parameters = request.getParameterNames();
 			while (parameters.hasMoreElements()) {
 				String parameter = (String) parameters.nextElement();
+				if (!this.hdivConfig.needValidation(parameter, (String) request.getSession()
+						.getAttribute(HDIV_PARAMETER))) {
+					log.debug("parameter " + parameter + " doesn't need validation");
+					continue;
+				}
+
 				String[] values = request.getParameterValues(parameter);
 				boolean isValid = hdivConfig.areEditableParameterValuesValid(request
 						.getRequestURI(), parameter, values, DATA_TYPE_TEXT);
@@ -55,7 +60,7 @@ public class HdivSimpleValidateFilter extends OncePerRequestFilter {
 						unauthorizedValues.append("," + values[i]);
 					}
 					unauthorizedEditableParameters.put(parameter, values);
-					log.error("[HDIV]"+HDIVErrorCodes.EDITABLE_VALIDATION_ERROR + "[url="
+					log.error("[HDIV]" + HDIVErrorCodes.EDITABLE_VALIDATION_ERROR + "[url="
 							+ request.getRequestURI() + "|parameter=" + parameter + "|values="
 							+ unauthorizedValues.toString() + "]");
 				}
