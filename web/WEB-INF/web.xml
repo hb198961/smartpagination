@@ -53,6 +53,19 @@
 	</filter-mapping>
 	
 	<filter>
+		<filter-name>HdivSimpleValidateFilter</filter-name>
+		<filter-class>org.powerstone.smartpagination.hdiv.HdivSimpleValidateFilter</filter-class>
+	</filter>
+ 	<filter-mapping>
+		<filter-name>HdivSimpleValidateFilter</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>	
+	<filter-mapping>
+		<filter-name>HdivSimpleValidateFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	
+	<filter>
 		<filter-name>ValidatorFilter</filter-name>
 		<filter-class>org.hdiv.filter.ValidatorFilter</filter-class>
 	</filter>
