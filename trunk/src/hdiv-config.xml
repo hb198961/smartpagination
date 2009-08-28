@@ -40,7 +40,7 @@
 	<!--  HDIV Configuration Bean  -->
 	<bean id="config" class="org.hdiv.config.HDIVConfig">
 		<property name="userStartParameters">
-			<list></list>
+			<list><value>password</value></list>
 		</property>
 		<property name="userStartPages">
 			<list>
