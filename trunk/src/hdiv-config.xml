@@ -49,7 +49,7 @@
 			</list>
 		</property>
 		<property name="errorPage">
-			<value>/error.jsp</value>
+			<value>/hdiv_error.jsp</value>
 		</property>
 		<property name="confidentiality">
 			<ref bean="confidentiality" />
