@@ -97,7 +97,7 @@
 				<exclude name="**/web.xml" />
 				<exclude name="**/*Test.class" />
 			</fileset>
-			<lib dir="${lib.dir}/default" includes="*.jar" />
+			<lib dir="${lib.dir}/runtime" includes="*.jar" />
 		</war>
 	</target>
 
