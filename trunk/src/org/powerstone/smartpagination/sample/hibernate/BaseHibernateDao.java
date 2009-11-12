@@ -10,6 +10,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.powerstone.smartpagination.common.PageResult;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.util.Assert;
 
 public class BaseHibernateDao extends HibernateDaoSupport {
 
@@ -79,7 +80,9 @@ public class BaseHibernateDao extends HibernateDaoSupport {
 
 	@SuppressWarnings("unchecked")
 	public <T> T get(Class<T> entityClass, Serializable id) {
-		return (T) getHibernateTemplate().get(entityClass, id);
+		Object result = getHibernateTemplate().get(entityClass, id);
+		Assert.notNull(result, "Class["+entityClass+"] with id["+id+"] not found!");
+		return (T) result;
 	}
 
 	@SuppressWarnings("unchecked")

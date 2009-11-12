@@ -19,8 +19,8 @@
 			<ibiblio name="ibiblio" m2compatible="true" />
 		</chain>
 		<filesystem name="local" checkmodified="true">
-			<artifact pattern="${repository.dir}/[module]/[artifact]-[revision].jar" />
-			<ivy pattern="${repository.dir}/[module]/[module]-dependencies.xml" />
+			<ivy pattern="${repository.dir}/[organisation]/[module]/ivys/ivy-[revision].xml"/>
+  			<artifact pattern="${repository.dir}/[organisation]/[module]/[type]s/[artifact]-[revision].[ext]"/>
 		</filesystem>
 	</resolvers>
 </ivysettings>
