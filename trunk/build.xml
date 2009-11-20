@@ -29,6 +29,10 @@
 		<ivy:resolve file="ivy.xml" conf="*" />
 		<ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" />
 	</target>
+	
+	<target name="report" depends="resolve" description="--> resolve and retrieve dependencies with ivy">
+		<ivy:report />
+	</target>
 
 	<target name="compile" depends="resolve" description="--> description">
 		<mkdir dir="${classes.dir}" />
