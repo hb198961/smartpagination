@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <ivysettings>
-	<settings defaultResolver="defaultChain" checkUpToDate="true"
+	<ivy:configure>
+		<credentials host="localhost" realm="Sonatype Nexus Repository Manager"
+			username="admin" passwd="admin123" />
+	</ivy:configure>
+	<settings defaultResolver="defaultChain"
 		defaultConflictManager="latest-revision" />
+
+	<property name="nexus-public"
+		value="http://localhost:8080/nexus-webapp-1.5.0/content/groups/public" />
+	<property name="nexus-releases"
+		value="http://localhost:8080/nexus-webapp-1.5.0/content/repositories/releases" />
+	<property name="nexus-snapshots"
+		value="http://localhost:8080/nexus-webapp-1.5.0/content/repositories/snapshots" />
 	<resolvers>
-		<chain name="defaultChain">
-			<url name="com.springsource.repository.bundles.release">
-				<ivy
-					pattern="http://repository.springsource.com/ivy/bundles/release/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
-				<artifact
-					pattern="http://repository.springsource.com/ivy/bundles/release/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
-			</url>
-			<url name="com.springsource.repository.bundles.external">
-				<ivy
-					pattern="http://repository.springsource.com/ivy/bundles/external/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
-				<artifact
-					pattern="http://repository.springsource.com/ivy/bundles/external/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
-			</url>
-			<ibiblio name="ibiblio" m2compatible="true" />
+		<chain name="defaultChain" checkmodified="true" changingPattern=".*SNAPSHOT">
+			<ibiblio name="public" m2compatible="true" usepoms="true"
+				root="${nexus-public}" />
+			<ibiblio name="releases" m2compatible="true" usepoms="true"
+				root="${nexus-releases}" />
+			<ibiblio name="snapshots" m2compatible="true" usepoms="true"
+				root="${nexus-snapshots}"
+				pattern="[organisation]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]" />
 		</chain>
-		<filesystem name="local" checkmodified="true">
-			<ivy pattern="${repository.dir}/[organisation]/[module]/ivys/ivy-[revision].xml"/>
-  			<artifact pattern="${repository.dir}/[organisation]/[module]/[type]s/[artifact]-[revision].[ext]"/>
-		</filesystem>
 	</resolvers>
 </ivysettings>

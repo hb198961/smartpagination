@@ -87,11 +87,23 @@
 	</target>
 
 	<target name="publish" depends="jar" description="publish">
-		<ivy:publish resolver="local" pubrevision="${publish.version}" overwrite="true">
-			<artifacts pattern="dist/[artifact].[ext]" />
-		</ivy:publish>
-		<echo message="project ${ant.project.name} released with version ${publish.version}" />
-	</target>
+        <ivy:publish resolver="release" pubrevision="${publish.version}" overwrite="true">
+            <artifacts pattern="dist/[artifact].[ext]" />
+        </ivy:publish>
+        <echo message="project ${ant.project.name} released with version ${publish.version}" />
+    </target>
+
+    <target name="publish-releases" depends="jar">
+        <property name="revision" value="${publish.version}" />
+        <ivy:publish artifactspattern="dist/[artifact].[ext]" resolver="releases" pubrevision="${publish.version}" status="release" update="true" overwrite="true" forcedeliver="true" />
+        <echo message="released with version ${publish.version}" />
+    </target>
+
+    <target name="publish-snapshots" depends="jar">
+        <property name="revision" value="${publish.version}" />
+        <ivy:publish artifactspattern="dist/[artifact].[ext]" resolver="snapshots" pubrevision="${publish.version}-SNAPSHOT" status="release" update="true" overwrite="true" forcedeliver="true" />
+        <echo message="released with version ${publish.version}" />
+    </target>
 
 	<target name="war" depends="compile" description="Packages app as WAR">
 		<mkdir dir="dist" />

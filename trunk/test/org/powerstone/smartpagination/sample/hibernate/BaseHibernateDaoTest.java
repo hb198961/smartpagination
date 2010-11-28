@@ -8,10 +8,11 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.powerstone.smartpagination.common.PageResult;
 import org.powerstone.smartpagination.sample.UserModel;
-import org.springframework.test.AbstractTransactionalSpringContextTests;
+import org.springframework.test.AbstractTransactionalDataSourceSpringContextTests;
 
+@SuppressWarnings("deprecation")
 public class BaseHibernateDaoTest extends
-		AbstractTransactionalSpringContextTests {
+		AbstractTransactionalDataSourceSpringContextTests {
 	private BaseHibernateDao baseHibernateDao;
 	private UserModel user;
 
@@ -79,14 +80,14 @@ public class BaseHibernateDaoTest extends
 	}
 
 	public void testCountRecordsNumber() {
-		Assert.assertEquals(17, baseHibernateDao.countRecordsNumber(
-				DetachedCriteria.forClass(UserModel.class), "id"));
+		Assert.assertEquals(17, baseHibernateDao.countRecordsNumber(DetachedCriteria
+				.forClass(UserModel.class), "id"));
 	}
 
 	public void testDelete() {
 		baseHibernateDao.delete(UserModel.class, user.getId());
-		Assert.assertEquals(16, baseHibernateDao.countRecordsNumber(
-				DetachedCriteria.forClass(UserModel.class), "id"));
+		Assert.assertEquals(16, baseHibernateDao.countRecordsNumber(DetachedCriteria
+				.forClass(UserModel.class), "id"));
 	}
 
 	public void testFindByCriteria() {

@@ -9,7 +9,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hdiv.web.validator.EditableParameterValidator;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.powerstone.smartpagination.common.BasePagingController;
@@ -23,8 +22,8 @@ import org.powerstone.smartpagination.sample.hibernate.BaseHibernateQueryFormPag
 import org.powerstone.smartpagination.sample.hibernate.HbmPageInfo;
 import org.powerstone.smartpagination.sample.hibernate.UserModelHibernateQuery;
 import org.powerstone.smartpagination.sample.ibatis.BaseIbatisDao;
-import org.powerstone.smartpagination.sample.ibatis.IbatisPagerable;
 import org.powerstone.smartpagination.sample.ibatis.IbatisPageInfo;
+import org.powerstone.smartpagination.sample.ibatis.IbatisPagerable;
 import org.powerstone.smartpagination.sample.ibatis.UserModelIbatisQuery;
 import org.powerstone.smartpagination.sample.jdbc.BaseJdbcDao;
 import org.powerstone.smartpagination.sample.jdbc.JdbcPageInfo;
@@ -41,11 +40,12 @@ public class SamplePagingController extends MultiActionController {
 
 	private BaseIbatisDao baseIbatisDao;
 
-	public ModelAndView listHibernate(HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ModelAndView listHibernate(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		BaseHbmPagingController ctrl = new BaseHbmPagingController(baseHibernateDao) {
 			@Override
-			protected PageInfo<DetachedCriteria, Order> makePageInfo(HttpServletRequest request) {
+			protected PageInfo<DetachedCriteria, Order> makePageInfo(
+					HttpServletRequest request) {
 				HbmPageInfo pi = new HbmPageInfo();
 				pi.setCountDistinctProjections("id");
 				pi.setExpression(DetachedCriteria.forClass(UserModel.class));
@@ -58,8 +58,8 @@ public class SamplePagingController extends MultiActionController {
 				.getPageData(request));
 	}
 
-	public ModelAndView queryHibernate(HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ModelAndView queryHibernate(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		BaseHibernateQueryFormPagingController ctrl = new BaseHibernateQueryFormPagingController() {
 			@Override
 			protected PageResult findByPageInfo(PageInfo<DetachedCriteria, Order> pi) {
@@ -79,7 +79,6 @@ public class SamplePagingController extends MultiActionController {
 
 		ctrl.setPagingDataName("userList");
 
-		ctrl.setValidator(new EditableParameterValidator());
 		return ctrl.handleRequest(request, response);
 	}
 
@@ -112,7 +111,8 @@ public class SamplePagingController extends MultiActionController {
 			}
 		};
 		ctrl.handleRequest(request, response);
-		return new ModelAndView("listJdbc", "userList", BasePagingController.getPageData(request));
+		return new ModelAndView("listJdbc", "userList", BasePagingController
+				.getPageData(request));
 	}
 
 	public ModelAndView queryJdbc(HttpServletRequest request, HttpServletResponse response)
@@ -135,12 +135,11 @@ public class SamplePagingController extends MultiActionController {
 		ctrl.setSuccessView("redirect:/queryJdbc.htm");
 		ctrl.setPagingDataName("userList");
 		ctrl.setPagingViewName("queryJdbc");
-		ctrl.setValidator(new EditableParameterValidator());
 		return ctrl.handleRequest(request, response);
 	}
 
-	public ModelAndView listIbatis(HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ModelAndView listIbatis(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		BasePagingController ctrl = new BasePagingController<IbatisPagerable, String>() {
 			@Override
 			public PageResult findByPage(PageInfo<IbatisPagerable, String> pageInfo) {
@@ -148,7 +147,8 @@ public class SamplePagingController extends MultiActionController {
 			}
 
 			@Override
-			protected PageInfo<IbatisPagerable, String> makePageInfo(HttpServletRequest request) {
+			protected PageInfo<IbatisPagerable, String> makePageInfo(
+					HttpServletRequest request) {
 				return new UserModelIbatisQuery().generatePageInfo();
 			}
 		};
@@ -157,8 +157,8 @@ public class SamplePagingController extends MultiActionController {
 				.getPageData(request));
 	}
 
-	public ModelAndView queryIbatis(HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ModelAndView queryIbatis(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		BaseQueryFormPagingController ctrl = new BaseQueryFormPagingController<IbatisPagerable, String>() {
 			@Override
 			protected PageResult findByPageInfo(PageInfo<IbatisPagerable, String> pi) {
@@ -176,13 +176,13 @@ public class SamplePagingController extends MultiActionController {
 		ctrl.setFormView("queryIbatis");
 		ctrl.setSuccessView("redirect:/queryIbatis.htm");
 		ctrl.setPagingDataName("userList");
-		ctrl.setValidator(new EditableParameterValidator());
 		return ctrl.handleRequest(request, response);
 	}
 
 	public ModelAndView initData(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		List data = baseHibernateDao.findByCriteria(DetachedCriteria.forClass(UserModel.class));
+		List data = baseHibernateDao.findByCriteria(DetachedCriteria
+				.forClass(UserModel.class));
 		for (Object o : data) {
 			baseHibernateDao.delete(UserModel.class, ((UserModel) o).getId());
 		}
