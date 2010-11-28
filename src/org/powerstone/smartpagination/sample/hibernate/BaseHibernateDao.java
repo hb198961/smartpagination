@@ -16,8 +16,8 @@ public class BaseHibernateDao extends HibernateDaoSupport {
 
 	@SuppressWarnings("unchecked")
 	public PageResult findByPage(HbmPageInfo pageInfo) {
-		int recordsNumber = countRecordsNumber(pageInfo.getExpression(),
-				pageInfo.getCountDistinctProjections());
+		int recordsNumber = countRecordsNumber(pageInfo.getExpression(), pageInfo
+				.getCountDistinctProjections());
 
 		if (pageInfo.getPageSize() <= 0) {// PageSize==0相当于取全部
 			List all = findByCriteria(pageInfo.getExpression());
@@ -25,8 +25,7 @@ public class BaseHibernateDao extends HibernateDaoSupport {
 		}
 
 		int pageAmount = (recordsNumber % pageInfo.getPageSize() > 0) ? (recordsNumber
-				/ pageInfo.getPageSize() + 1)
-				: (recordsNumber / pageInfo.getPageSize());
+				/ pageInfo.getPageSize() + 1) : (recordsNumber / pageInfo.getPageSize());
 		int pageNo = pageInfo.getPageNo() > 0 ? pageInfo.getPageNo() : 1;
 
 		if (pageNo > pageAmount) {
@@ -44,15 +43,14 @@ public class BaseHibernateDao extends HibernateDaoSupport {
 		for (Order order : pageInfo.getOrderByList()) {
 			pageInfo.getExpression().addOrder(order);
 		}
-		List pageData = findByCriteria(pageInfo.getExpression(), firstResult,
-				pageInfo.getPageSize());
+		List pageData = findByCriteria(pageInfo.getExpression(), firstResult, pageInfo
+				.getPageSize());
 
 		return new PageResult(pageData, recordsNumber, pageAmount);
 	}
 
 	@SuppressWarnings("unchecked")
-	public int countRecordsNumber(DetachedCriteria dc,
-			String countDistinctProjections) {
+	public int countRecordsNumber(DetachedCriteria dc, String countDistinctProjections) {
 		dc.setProjection(Projections.countDistinct(countDistinctProjections));
 		List list = this.getHibernateTemplate().findByCriteria(dc);
 		int result = 0;
@@ -65,12 +63,10 @@ public class BaseHibernateDao extends HibernateDaoSupport {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List findByCriteria(DetachedCriteria dc,
-			int... firstResultAndMaxResults) {
+	public List findByCriteria(DetachedCriteria dc, int... firstResultAndMaxResults) {
 		dc.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 
-		if (firstResultAndMaxResults != null
-				&& firstResultAndMaxResults.length == 2) {
+		if (firstResultAndMaxResults != null && firstResultAndMaxResults.length == 2) {
 			return this.getHibernateTemplate().findByCriteria(dc,
 					firstResultAndMaxResults[0], firstResultAndMaxResults[1]);
 		}
@@ -81,24 +77,25 @@ public class BaseHibernateDao extends HibernateDaoSupport {
 	@SuppressWarnings("unchecked")
 	public <T> T get(Class<T> entityClass, Serializable id) {
 		Object result = getHibernateTemplate().get(entityClass, id);
-		Assert.notNull(result, "Class["+entityClass+"] with id["+id+"] not found!");
+		Assert.notNull(result, "Class[" + entityClass + "] with id[" + id
+				+ "] not found!");
 		return (T) result;
 	}
 
 	@SuppressWarnings("unchecked")
 	public <T> T load(Class<T> entityClass, Serializable id) {
-		return (T) getHibernateTemplate().load(entityClass, id);
+		return getHibernateTemplate().load(entityClass, id);
 	}
 
 	@SuppressWarnings("unchecked")
 	public <T> T merge(T model) {
-		return (T) getHibernateTemplate().merge(model);
+		return getHibernateTemplate().merge(model);
 	}
 
 	public void saveOrUpdate(Object model) {
 		getHibernateTemplate().saveOrUpdate(model);
 	}
-	
+
 	public <T> void delete(Class<T> entityClass, Serializable id) {
 		getHibernateTemplate().delete(get(entityClass, id));
 	}
