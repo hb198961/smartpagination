@@ -1,6 +1,5 @@
 <project name="HahExcel" default="compile" xmlns:ivy="antlib:org.apache.ivy.ant">
 	<!-- ivy properties used -->
-	<property name="publish.version" value="0.1" />
 	<property name="ivy.report.todir" value="build" />
 	<property name="repository.dir" value="d:/Local_Repository" />
 	<property name="build.debug" value="on" />
@@ -9,6 +8,7 @@
 	<property name="lib.dir" value="${basedir}/lib" />
 	<property name="web.dir" value="web" />
 	<property name="test.dir" value="build/test" />
+	<property file="project.properties" />
 
 	<ivy:settings file="ivysettings.xml">
 	</ivy:settings>
@@ -66,7 +66,7 @@
 	<target name="jar" depends="compile" description="--> make a jar file for this project">
 		<mkdir dir="dist" />
 		<tstamp>
-			<format property="jar.time" pattern="MM/dd/yyyy hh:mm aa" locale="en" />
+			<format property="jar.time" pattern="yyyy-MM-dd HH:mm:ss" locale="en" />
 		</tstamp>
 		<buildnumber />
 		<jar destfile="dist/${ant.project.name}.jar">
@@ -75,10 +75,8 @@
 				<attribute name="Build-On" value="${jar.time}" />
 				<attribute name="Build-Number" value="${build.number}" />
 			</manifest>
-			<metainf dir="tld" includes="*.tld" />
 			<fileset dir="${classes.dir}">
 				<include name="**/*.class" />
-				<include name="paging_messages.properties" />
 			</fileset>
 		</jar>
 	</target>
@@ -108,7 +106,6 @@
 			<fileset dir="${web.dir}">
 				<include name="**/*.*" />
 				<exclude name="**/web.xml" />
-				<exclude name="**/*Test.class" />
 			</fileset>
 			<lib dir="${lib.dir}/runtime" includes="*.jar" />
 		</war>
