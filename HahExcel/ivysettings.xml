@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <ivysettings>
 	<ivy:configure>
-		<credentials host="localhost" realm="Sonatype Nexus Repository Manager"
-			username="admin" passwd="admin123" />
-	</ivy:configure>
-	<settings defaultResolver="defaultChain"
-		defaultConflictManager="latest-revision" />
+        <credentials host="localhost" realm="Sonatype Nexus Repository Manager"
+            username="deployment" passwd="deployment123" />
+    </ivy:configure>
+    <settings defaultResolver="defaultChain"
+        defaultConflictManager="latest-revision" />
+    <caches defaultCacheDir="d:/.ivy2" />
 
 	<property name="nexus-public"
 		value="http://localhost:8080/nexus-webapp-1.5.0/content/groups/public" />

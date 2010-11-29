@@ -9,20 +9,22 @@
 	<property name="lib.dir" value="${basedir}/lib" />
 	<property name="web.dir" value="web" />
 	<property name="test.dir" value="build/test" />
-	<!-- if else then -->
-	<taskdef resource="net/sf/antcontrib/antlib.xml">
-		<classpath>
-			<pathelement location="${lib.dir}/test/ant-contrib-1.0b3.jar" />
-		</classpath>
-	</taskdef>
 
 	<ivy:settings file="ivysettings.xml">
 	</ivy:settings>
 
-	<path id="lib.path.id">
-		<fileset dir="${lib.dir}">
+	<path id="lib.compile">
+		<fileset dir="${lib.dir}/compile">
+		</fileset>
+	</path>
+	<path id="lib.test">
+		<fileset dir="${lib.dir}/test">
+		</fileset>
+		<fileset dir="${lib.dir}/compile">
 		</fileset>
 		<pathelement path="${classes.dir}" />
+		<pathelement path="src" />
+		<pathelement path="test" />
 	</path>
 
 	<target name="resolve" description="--> resolve and retrieve dependencies with ivy">
@@ -36,7 +38,8 @@
 
 	<target name="compile" depends="resolve" description="--> description">
 		<mkdir dir="${classes.dir}" />
-		<javac encoding="utf-8" destdir="${classes.dir}" classpathref="lib.path.id" debug="${build.debug}">
+		<mkdir dir="${build.dir}/test/classes" />
+		<javac destdir="${classes.dir}" classpathref="lib.compile" debug="${build.debug}" encoding="utf-8">
 			<src path="src" />
 		</javac>
 		<copy todir="${classes.dir}">
@@ -49,6 +52,15 @@
 		<copy todir="${web.dir}/WEB-INF/classes">
 			<fileset dir="${build.dir}/classes" />
 		</copy>
+		<javac destdir="${build.dir}/test/classes" classpathref="lib.test" debug="${build.debug}" encoding="utf-8">
+			<src path="test" />
+		</javac>
+		<copy todir="${build.dir}/test/classes" overwrite="true" verbose="false">
+			<fileset dir="test">
+				<include name="**/*.xml" />
+			</fileset>
+		</copy>
+		<native2ascii src="test" dest="${build.dir}/test/classes" includes="*.properties" encoding="UTF-8" />
 	</target>
 
 	<target name="jar" depends="compile" description="--> make a jar file for this project">
@@ -106,6 +118,7 @@
 		<delete dir="dist" />
 		<delete dir="${build.dir}" />
 		<delete dir="${lib.dir}" />
+		<delete dir="${web.dir}/WEB-INF/classes" />
 	</target>
 
 	<target name="test" depends="compile" description="Runs JUnit tests">
@@ -114,34 +127,28 @@
 		<mkdir dir="${test.dir}/data" />
 		<junit printsummary="yes" fork="yes" errorProperty="test.failed" failureProperty="test.failed">
 			<classpath>
-				<path refid="lib.path.id" />
-				<path location="${test.dir}" />
+				<path refid="lib.test" />
+				<path location="${test.dir}/classes" />
 			</classpath>
 			<formatter type="xml" />
 			<formatter type="brief" usefile="false" />
 			<batchtest todir="${test.dir}/data" if="testcase">
-				<fileset dir="${test.dir}">
+				<fileset dir="${test.dir}/classes">
 					<include name="**/*${testcase}*" />
 					<exclude name="**/*TestCase.class" />
 				</fileset>
 			</batchtest>
 			<batchtest todir="${test.dir}/data" unless="testcase">
-				<fileset dir="${test.dir}">
+				<fileset dir="${test.dir}/classes">
 					<include name="**/*Test.class*" />
 					<exclude name="**/AbstractBaseTest.class" />
 				</fileset>
 			</batchtest>
 		</junit>
-		<if>
-			<istrue value="${test.failed}" />
-			<then>
-				<test-report report.dir="${test.dir}/reports" data.dir="${test.dir}/data" />
-				<fail if="test.failed">
-								          Unit tests failed. For error messages, check the log files in
-								          ${test.dir}/data or run "ant test-reports"
-								          to generate reports at ${test.dir}/reports.</fail>
-			</then>
-		</if>
+		<test-report report.dir="${test.dir}/reports" data.dir="${test.dir}/data" />
+		<fail if="test.failed">Unit tests failed. For error messages, check the log files in
+				${test.dir}/data or run "ant test-reports"
+				to generate reports at ${test.dir}/reports.</fail>
 	</target>
 
 	<macrodef name="test-report">
