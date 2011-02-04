@@ -27,7 +27,7 @@
 	</tag>
 	<tag>
 		<name>hdivPagebar</name>
-		<tagclass>org.powerstone.smartpagination.tag.HdivPagingBar</tagclass>
+		<tagclass>org.powerstone.smartpagination.tag.PagingBar</tagclass>
 		<bodycontent>JSP</bodycontent>
 		<attribute>
 			<name>url</name>
@@ -77,7 +77,7 @@
 	</tag>
 	<tag>
 		<name>hdivPagehead</name>
-		<tagclass>org.powerstone.smartpagination.tag.HdivPagingHead</tagclass>
+		<tagclass>org.powerstone.smartpagination.tag.PagingHead</tagclass>
 		<bodycontent>JSP</bodycontent>
 		<attribute>
 			<name>url</name>

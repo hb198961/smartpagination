@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://www.hdiv.org/jsp/jstl/core" %>
+<%@ include file="/WEB-INF/jsps/taglibs.jsp" %>
 <tr>
 	<td colspan="5"><a href="<c:url value="/listHibernate.htm"/>">Simple query[Hibernate]</a>|</td>
 </tr>

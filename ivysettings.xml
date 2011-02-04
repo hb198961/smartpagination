@@ -8,11 +8,11 @@
 		defaultConflictManager="latest-revision" />
 
 	<property name="nexus-public"
-		value="http://localhost:8080/nexus-webapp-1.5.0/content/groups/public" />
+		value="http://localhost:8080/nexus/content/groups/public" />
 	<property name="nexus-releases"
-		value="http://localhost:8080/nexus-webapp-1.5.0/content/repositories/releases" />
+		value="http://localhost:8080/nexus/content/repositories/releases" />
 	<property name="nexus-snapshots"
-		value="http://localhost:8080/nexus-webapp-1.5.0/content/repositories/snapshots" />
+		value="http://localhost:8080/nexus/content/repositories/snapshots" />
 	<resolvers>
 		<chain name="defaultChain" checkmodified="true" changingPattern=".*SNAPSHOT">
 			<ibiblio name="public" m2compatible="true" usepoms="true"
