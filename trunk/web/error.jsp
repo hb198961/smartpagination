@@ -1,6 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://www.hdiv.org/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.hdiv.org/spring/tags/form" %>
+<%@ include file="/WEB-INF/jsps/taglibs.jsp" %>
 <tr>
 	<td colspan="5"><a href="<c:url value="/index.jsp"/>">Index</a></td>
 </tr>

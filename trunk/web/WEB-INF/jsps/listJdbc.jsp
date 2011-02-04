@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"	pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib prefix="form" uri="http://www.hdiv.org/spring/tags/form" %>
-<%@ taglib prefix="c" uri="http://www.hdiv.org/jsp/jstl/core" %>
-<%@ taglib uri="/WEB-INF/smart_pagination.tld" prefix="paging"%>
+<%@ include file="/WEB-INF/jsps/taglibs.jsp" %>
 <head>
 	<title>SmartPagination——简单查询[JDBC]</title>
 </head>

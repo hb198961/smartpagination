@@ -24,29 +24,29 @@
 			conf="runtime" />
 
 		<dependency org="org.springframework" name="spring-orm"
-			rev="3.0.0.RELEASE" conf="compile;runtime" />
+			rev="3.0.4.RELEASE" conf="compile;runtime" />
 		<dependency org="org.springframework" name="spring-aop"
-			rev="3.0.0.RELEASE" conf="compile;runtime" />
+			rev="3.0.4.RELEASE" conf="compile;runtime" />
 		<dependency org="org.springframework" name="spring-webmvc"
-			rev="3.0.0.RELEASE" conf="compile;runtime" />
+			rev="3.0.4.RELEASE" conf="compile;runtime" />
 		<dependency org="org.springframework" name="spring-jdbc"
-			rev="3.0.0.RELEASE" conf="compile;runtime" />
+			rev="3.0.4.RELEASE" conf="compile;runtime" />
 
-		<dependency org="org.hibernate" name="hibernate-core" rev="3.3.0.GA"
-			conf="compile;runtime" />
-		<dependency org="org.hibernate" name="hibernate-annotations"
-			rev="3.4.0.GA" conf="compile;runtime" />
-		<dependency org="org.hibernate" name="hibernate-entitymanager"
-			rev="3.4.0.GA" conf="compile;runtime" />
-		<dependency org="org.hibernate" name="ejb3-persistence"
-			rev="3.3.2.Beta1" conf="compile;runtime" />
+		<dependency org="org.hibernate" name="hibernate-core" rev="3.3.2.GA"
+            conf="compile;runtime" />
+        <dependency org="org.hibernate" name="hibernate-annotations"
+            rev="3.4.0.GA" conf="compile;runtime" />
+        <dependency org="org.hibernate" name="hibernate-entitymanager"
+            rev="3.4.0.GA" conf="compile;runtime" />
+        <dependency org="org.hibernate" name="ejb3-persistence"
+            rev="3.3.2.Beta1" conf="compile;runtime" />
 
 		<dependency org="org.apache.ibatis" name="ibatis-sqlmap"
 			rev="2.3.4.726" conf="compile;runtime" />
 
 		<dependency org="junit" name="junit" rev="3.8.2" conf="test->default" />
 		<dependency org="org.springframework" name="spring-test"
-			rev="3.0.0.RELEASE" conf="test->default" />
+			rev="3.0.4.RELEASE" conf="test->default" />
 		<dependency org="ant-contrib" name="ant-contrib" rev="1.0b3"
 			conf="test->default" />
 		<dependency org="org.mockito" name="mockito-all" rev="1.5"
