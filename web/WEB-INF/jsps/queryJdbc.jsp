@@ -63,13 +63,13 @@
 						<paging:hdivPagehead url="/queryJdbc.htm" orderBy="real_Name" >realName</paging:hdivPagehead>
 					</td>	
 					<td>
-						<paging:hdivPagehead  align="center" url="/queryJdbc.htm" orderBy="email" >email</paging:hdivPagehead>
+						<paging:hdivPagehead url="/queryJdbc.htm" orderBy="email" >email</paging:hdivPagehead>
 					</td>	
 					<td>
-						<paging:hdivPagehead align="center" url="/queryJdbc.htm" orderBy="birth" >birth</paging:hdivPagehead>
+						<paging:hdivPagehead url="/queryJdbc.htm" orderBy="birth" >birth</paging:hdivPagehead>
 					</td>
 					<td>
-						<paging:hdivPagehead align="center" url="/queryJdbc.htm" orderBy="sex" >sex</paging:hdivPagehead>
+						<paging:hdivPagehead url="/queryJdbc.htm" orderBy="sex" >sex</paging:hdivPagehead>
 					</td>
 				</tr>
 				

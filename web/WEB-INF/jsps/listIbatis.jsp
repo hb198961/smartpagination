@@ -27,13 +27,13 @@
 						<paging:hdivPagehead url="/listIbatis.htm" orderBy="real_Name" >realName</paging:hdivPagehead>
 					</td>	
 					<td>
-						<paging:hdivPagehead  align="center" url="/listIbatis.htm" orderBy="email" >email</paging:hdivPagehead>
+						<paging:hdivPagehead url="/listIbatis.htm" orderBy="email" >email</paging:hdivPagehead>
 					</td>	
 					<td>
-						<paging:hdivPagehead align="center" url="/listIbatis.htm" orderBy="birth" >birth</paging:hdivPagehead>
+						<paging:hdivPagehead url="/listIbatis.htm" orderBy="birth" >birth</paging:hdivPagehead>
 					</td>
 					<td>
-						<paging:hdivPagehead align="center" url="/listIbatis.htm" orderBy="sex" >sex</paging:hdivPagehead>
+						<paging:hdivPagehead url="/listIbatis.htm" orderBy="sex" >sex</paging:hdivPagehead>
 					</td>
 				</tr>
 				
@@ -49,7 +49,7 @@
 					<tr><td class="listViewHRS1" colSpan="5"></td></tr>
 				</c:forEach>
 				<tr>
-					<td colspan="5"><paging:hdivPagebar url="/listIbatis.htm" styleClass="pagebar" /></td>
+					<td colspan="5"><paging:hdivPagebar url="/listIbatis.htm"/></td>
 				</tr>
 				</c:if>
 				<tr>
