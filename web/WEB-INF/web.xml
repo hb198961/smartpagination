@@ -20,25 +20,18 @@
 
 	<listener>
 		<listener-class>
-			org.springframework.web.context.request.RequestContextListener
-		</listener-class>
+			org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 	<listener>
-		<listener-class>
-			org.springframework.web.context.ContextLoaderListener
-		</listener-class>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<listener>
-		<listener-class>
-			org.springframework.web.util.Log4jConfigListener
-		</listener-class>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
-	
+
 	<filter>
 		<filter-name>springEncodingFilter</filter-name>
-		<filter-class>
-			org.springframework.web.filter.CharacterEncodingFilter
-		</filter-class>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
@@ -48,12 +41,11 @@
 		<filter-name>springEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
 	<filter>
 		<filter-name>OpenSessionInViewFilter</filter-name>
 		<filter-class>
-			org.springframework.orm.hibernate3.support.OpenSessionInViewFilter
-		</filter-class>
+			org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
 		<init-param>
 			<param-name>sessionFactoryBeanName</param-name>
 			<param-value>sessionFactory</param-value>
@@ -66,9 +58,7 @@
 
 	<servlet>
 		<servlet-name>main</servlet-name>
-		<servlet-class>
-			org.springframework.web.servlet.DispatcherServlet
-		</servlet-class>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>classpath:mvc.xml</param-value>
@@ -79,7 +69,7 @@
 		<servlet-name>main</servlet-name>
 		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
-	
+
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
@@ -100,4 +90,10 @@
 		<error-code>403</error-code>
 		<location>/error.jsp</location>
 	</error-page>
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://www.powerstone.net/smart_pagination</taglib-uri>
+			<taglib-location>/WEB-INF/smart_pagination.tld</taglib-location>
+		</taglib>
+	</jsp-config>
 </web-app>

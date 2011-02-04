@@ -1,4 +1,4 @@
-package org.powerstone.smartpagination.sample.hibernate;
+package org.powerstone.smartpagination.hibernate;
 
 import java.io.Serializable;
 import java.util.Iterator;

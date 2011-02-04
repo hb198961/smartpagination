@@ -7,6 +7,7 @@ import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
+@SuppressWarnings("deprecation")
 public abstract class BaseQueryFormPagingController<T_Criterial, T_OrderBy> extends
 		SimpleFormController {
 	/**
@@ -26,8 +27,9 @@ public abstract class BaseQueryFormPagingController<T_Criterial, T_OrderBy> exte
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response,
-			Object command, BindException errors) throws Exception {
+	protected ModelAndView onSubmit(HttpServletRequest request,
+			HttpServletResponse response, Object command, BindException errors)
+			throws Exception {
 		PageQuery<T_Criterial, T_OrderBy> bq = (PageQuery<T_Criterial, T_OrderBy>) command;
 
 		String commandName = this.getFormSessionAttributeName(request);
@@ -62,7 +64,8 @@ public abstract class BaseQueryFormPagingController<T_Criterial, T_OrderBy> exte
 		return pageQuery;
 	}
 
-	private ModelAndView queryList(HttpServletRequest request, HttpServletResponse response,
+	private ModelAndView queryList(HttpServletRequest request,
+			HttpServletResponse response,
 			final PageQuery<T_Criterial, T_OrderBy> pageQuery) throws Exception {
 
 		BasePagingController<T_Criterial, T_OrderBy> ctrl = new BasePagingController<T_Criterial, T_OrderBy>() {
@@ -72,7 +75,8 @@ public abstract class BaseQueryFormPagingController<T_Criterial, T_OrderBy> exte
 			}
 
 			@Override
-			protected PageInfo<T_Criterial, T_OrderBy> makePageInfo(HttpServletRequest request) {
+			protected PageInfo<T_Criterial, T_OrderBy> makePageInfo(
+					HttpServletRequest request) {
 				return pageQuery.generatePageInfo();
 			}
 		};

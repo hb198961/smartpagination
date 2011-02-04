@@ -7,8 +7,11 @@ import junit.framework.Assert;
 
 import org.apache.log4j.Logger;
 import org.powerstone.smartpagination.common.PageResult;
+import org.powerstone.smartpagination.hibernate.BaseHibernateDao;
+import org.powerstone.smartpagination.ibatis.BaseIbatisDao;
+import org.powerstone.smartpagination.ibatis.IbatisPageInfo;
+import org.powerstone.smartpagination.ibatis.UserModelIbatisQuery;
 import org.powerstone.smartpagination.sample.UserModel;
-import org.powerstone.smartpagination.sample.hibernate.BaseHibernateDao;
 import org.springframework.test.AbstractTransactionalDataSourceSpringContextTests;
 
 public class BaseIbatisDaoTest extends AbstractTransactionalDataSourceSpringContextTests {

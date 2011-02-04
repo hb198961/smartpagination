@@ -7,6 +7,9 @@ import junit.framework.Assert;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.powerstone.smartpagination.common.PageResult;
+import org.powerstone.smartpagination.hibernate.BaseHibernateDao;
+import org.powerstone.smartpagination.hibernate.HbmPageInfo;
+import org.powerstone.smartpagination.hibernate.UserModelHibernateQuery;
 import org.powerstone.smartpagination.sample.UserModel;
 import org.springframework.test.AbstractTransactionalDataSourceSpringContextTests;
 

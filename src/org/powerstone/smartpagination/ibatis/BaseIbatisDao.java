@@ -1,4 +1,4 @@
-package org.powerstone.smartpagination.sample.ibatis;
+package org.powerstone.smartpagination.ibatis;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package org.powerstone.smartpagination.sample.jdbc;
+package org.powerstone.smartpagination.jdbc;
 
 import java.util.HashMap;
 import java.util.Map;

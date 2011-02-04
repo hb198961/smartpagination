@@ -1,4 +1,4 @@
-package org.powerstone.smartpagination.sample.ibatis;
+package org.powerstone.smartpagination.ibatis;
 
 import org.powerstone.smartpagination.common.PageInfo;
 import org.powerstone.smartpagination.common.PageQuery;
