@@ -10,9 +10,9 @@ import org.apache.log4j.Logger;
 abstract public class BasePagingController<T_Criterial, T_OrderBy> {
 	protected Logger log = Logger.getLogger(getClass());
 
-	public final static String DEFAULT_PAGE_MODEL_NAME = "com.bill99.golden.inf.core.paging.PageModel";
+	public final static String DEFAULT_PAGE_MODEL_NAME = "org.powerstone.smartpagination.common.PageModel";
 
-	public final static String DEFAULT_PAGE_DATA_NAME = "com.bill99.golden.inf.core.paging.PageData";
+	public final static String DEFAULT_PAGE_DATA_NAME = "org.powerstone.smartpagination.common.PageData";
 
 	public final static String QUERY_MAP_IN_SESSION = "p_QueryMapInSession";
 
