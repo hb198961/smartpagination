@@ -7,7 +7,7 @@ public class PageModel {
 
 	private int pageSize = 10;
 
-	private String currPageNo;
+	private String currPageNoOnRequest;
 
 	private String pageTo = null;
 
@@ -25,8 +25,15 @@ public class PageModel {
 
 	private String orderDirection = ORDER_DESC;
 
-	public int computeNewPageNo() {
-		Integer pageNum = (currPageNo != null ? new Integer(currPageNo)
+	/**
+	 * 查询前，根据请求参数计算要查的页码
+	 * 
+	 * 由于这时还不知道总记录数，因此无法计算首尾页号
+	 * 
+	 * @return
+	 */
+	public int computeNewPageNoForQuery() {
+		Integer pageNum = (currPageNoOnRequest != null ? new Integer(currPageNoOnRequest)
 				: new Integer("0"));
 		int newCurrPageNo = 0;
 
@@ -39,14 +46,21 @@ public class PageModel {
 		} else if (beNext) {
 			newCurrPageNo = pageNum.intValue() + 1;
 		}
+		// 由于这时还不知道总记录数，因此无法计算首尾页号，因此不检查beFirst和beEnd
+
 		if (newCurrPageNo < 1) {
 			newCurrPageNo = 1;
 		}
 		return newCurrPageNo;
 	}
 
-	public int computeNewPageNoInTag() {
-		int newCurrPageNo = this.computeNewPageNo();
+	/**
+	 * 查询后计算当前页码
+	 * 
+	 * @return
+	 */
+	public int computeDestinationPageNo() {
+		int newCurrPageNo = this.computeNewPageNoForQuery();
 		int pageCount = computePageCount();
 
 		if (beFirst) {
@@ -60,6 +74,36 @@ public class PageModel {
 		return newCurrPageNo;
 	}
 
+	// public int computeDestinationPageNo() {
+	// int pageCount = computePageCount();
+	// Integer pageNum = (currPageNoOnRequest != null ? new
+	// Integer(currPageNoOnRequest)
+	// : new Integer("0"));
+	// int destPageNo = 0;
+	//
+	// if (pageTo != null) {
+	// destPageNo = new Integer(pageTo).intValue();
+	// } else if (!beFirst && !beLast && !beNext && !beEnd) {
+	// destPageNo = 1;
+	// } else if (beLast) {
+	// destPageNo = pageNum.intValue() - 1;
+	// } else if (beNext) {
+	// destPageNo = pageNum.intValue() + 1;
+	// } else if (beFirst) {
+	// destPageNo = 1;
+	// } else if (beEnd) {
+	// destPageNo = pageCount;
+	// }
+	//
+	// if (destPageNo > pageCount) {
+	// destPageNo = pageCount;
+	// }
+	// if (destPageNo < 1) {
+	// destPageNo = 1;
+	// }
+	// return destPageNo;
+	// }
+
 	public int computePageCount() {
 		int pageCount = 0;
 		if (totalRecordsNumber % pageSize == 0) {
@@ -70,12 +114,19 @@ public class PageModel {
 		return pageCount;
 	}
 
-	public String getCurrPageNo() {
-		return currPageNo;
+	public void clear() {
+		this.setBeEnd(false);
+		this.setBeFirst(false);
+		this.setBeNext(false);
+		this.setBeLast(false);
 	}
 
-	public void setCurrPageNo(String currPageNo) {
-		this.currPageNo = currPageNo;
+	public String getCurrPageNoOnRequest() {
+		return currPageNoOnRequest;
+	}
+
+	public void setCurrPageNoOnRequest(String currPageNo) {
+		this.currPageNoOnRequest = currPageNo;
 	}
 
 	public int getPageSize() {
@@ -134,13 +185,6 @@ public class PageModel {
 		return beNext;
 	}
 
-	public void clear() {
-		this.setBeEnd(false);
-		this.setBeFirst(false);
-		this.setBeNext(false);
-		this.setBeLast(false);
-	}
-
 	public String getOrderBy() {
 		return orderBy;
 	}
@@ -162,6 +206,6 @@ public class PageModel {
 	}
 
 	public int computeRecordsBeginNo() {
-		return (computeNewPageNoInTag() - 1) * pageSize;
+		return (computeDestinationPageNo() - 1) * pageSize;
 	}
 }

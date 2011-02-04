@@ -10,9 +10,9 @@ import org.apache.log4j.Logger;
 abstract public class BasePagingController<T_Criterial, T_OrderBy> {
 	protected Logger log = Logger.getLogger(getClass());
 
-	public final static String DEFAULT_PAGE_MODEL_NAME = "org.powerstone.smartpage.PageModel";
+	public final static String DEFAULT_PAGE_MODEL_NAME = "com.bill99.golden.inf.core.paging.PageModel";
 
-	public final static String DEFAULT_PAGE_DATA_NAME = "org.powerstone.smartpage.PageData";
+	public final static String DEFAULT_PAGE_DATA_NAME = "com.bill99.golden.inf.core.paging.PageData";
 
 	public final static String QUERY_MAP_IN_SESSION = "p_QueryMapInSession";
 
@@ -43,8 +43,8 @@ abstract public class BasePagingController<T_Criterial, T_OrderBy> {
 	/**
 	 * 分页控制器入口
 	 */
-	public final void handleRequest(HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public final void handleRequest(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		PageModel pm = new PageModel();
 		request.setAttribute(DEFAULT_PAGE_MODEL_NAME, pm);
 
@@ -54,12 +54,13 @@ abstract public class BasePagingController<T_Criterial, T_OrderBy> {
 		pm.setBeEnd(request.getParameter(TO_END_PARAM) != null);
 		pm.setBeNext(request.getParameter(TO_NEXT_PARAM) != null);
 		pm.setBeLast(request.getParameter(TO_LAST_PARAM) != null);
-		pm.setCurrPageNo(request.getParameter(CURR_PAGE_PARAM));
+		pm.setCurrPageNoOnRequest(request.getParameter(CURR_PAGE_PARAM));
 		pm.setOrderBy(request.getParameter(ORDER_BY_PARAM));
 		pm.setOrderDirection(request.getParameter(ORDER_DIR_PARAM));
 
 		String pageSizeParam = request.getParameter(PAGE_SIZE_PARAM);
-		int pageSize = (pageSizeParam != null) ? new Integer(pageSizeParam) : defaultPageSize;
+		int pageSize = (pageSizeParam != null) ? new Integer(pageSizeParam)
+				: defaultPageSize;
 		if (pageSize > 0) {
 			pm.setPageSize(pageSize);
 		} else {
@@ -72,7 +73,7 @@ abstract public class BasePagingController<T_Criterial, T_OrderBy> {
 		} else if (pm.isBeEnd()) {
 			pi.setEnd(false);
 		}
-		pi.setPageNo(new Integer(pm.computeNewPageNo()));
+		pi.setPageNo(pm.computeNewPageNoForQuery());
 		pi.setPageSize(pm.getPageSize());
 
 		if (pm.getOrderBy() != null && pm.getOrderBy().trim().length() > 0) {
@@ -100,7 +101,8 @@ abstract public class BasePagingController<T_Criterial, T_OrderBy> {
 	/**
 	 * 由子类重写，构造PageInfo(entityClass,expression,orderBy)
 	 */
-	abstract protected PageInfo<T_Criterial, T_OrderBy> makePageInfo(HttpServletRequest request);
+	abstract protected PageInfo<T_Criterial, T_OrderBy> makePageInfo(
+			HttpServletRequest request);
 
 	/**
 	 * 由子类重写，调用service查询

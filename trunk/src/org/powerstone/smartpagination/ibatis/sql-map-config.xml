@@ -5,5 +5,5 @@
 <sqlMapConfig>
     <settings enhancementEnabled="true" maxTransactions="5"
         maxRequests="32" maxSessions="10"/>
-	<sqlMap resource="org/powerstone/smartpagination/sample/UserModelSql.xml" />
+	<sqlMap resource="org/powerstone/smartpagination/ibatis/UserModelSql.xml" />
 </sqlMapConfig>

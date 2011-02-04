@@ -72,7 +72,8 @@ abstract public class PageInfo<T_Criterial, T_OrderBy> {
 
 	/**
 	 * 
-	 * @param end:true->首页;false->尾页
+	 * @param end
+	 *            :true->首页;false->尾页
 	 */
 	public void setEnd(Boolean end) {
 		this.end = end;
