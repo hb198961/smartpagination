@@ -62,13 +62,13 @@
 						<paging:hdivPagehead url="/queryIbatis.htm" orderBy="real_Name" >realName</paging:hdivPagehead>
 					</td>	
 					<td>
-						<paging:hdivPagehead  align="center" url="/queryIbatis.htm" orderBy="email" >email</paging:hdivPagehead>
+						<paging:hdivPagehead url="/queryIbatis.htm" orderBy="email" >email</paging:hdivPagehead>
 					</td>	
 					<td>
-						<paging:hdivPagehead align="center" url="/queryIbatis.htm" orderBy="birth" >birth</paging:hdivPagehead>
+						<paging:hdivPagehead url="/queryIbatis.htm" orderBy="birth" >birth</paging:hdivPagehead>
 					</td>
 					<td>
-						<paging:hdivPagehead align="center" url="/queryIbatis.htm" orderBy="sex" >sex</paging:hdivPagehead>
+						<paging:hdivPagehead url="/queryIbatis.htm" orderBy="sex" >sex</paging:hdivPagehead>
 					</td>
 				</tr>
 				

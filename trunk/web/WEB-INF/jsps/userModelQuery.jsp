@@ -63,13 +63,13 @@
 						<paging:hdivPagehead url="/queryHibernate.htm" orderBy="realName" >realName</paging:hdivPagehead>
 					</td>	
 					<td>
-						<paging:hdivPagehead  align="center" url="/queryHibernate.htm" orderBy="email" >email</paging:hdivPagehead>
+						<paging:hdivPagehead url="/queryHibernate.htm" orderBy="email" >email</paging:hdivPagehead>
 					</td>	
 					<td>
-						<paging:hdivPagehead align="center" url="/queryHibernate.htm" orderBy="birth" >birth</paging:hdivPagehead>
+						<paging:hdivPagehead url="/queryHibernate.htm" orderBy="birth" >birth</paging:hdivPagehead>
 					</td>
 					<td>
-						<paging:hdivPagehead align="center" url="/queryHibernate.htm" orderBy="sex" >sex</paging:hdivPagehead>
+						<paging:hdivPagehead url="/queryHibernate.htm" orderBy="sex" >sex</paging:hdivPagehead>
 					</td>
 				</tr>
 				
