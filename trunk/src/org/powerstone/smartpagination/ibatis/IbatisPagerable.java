@@ -5,11 +5,11 @@ public interface IbatisPagerable {
 
 	public void setOrderByStr(String orderByStr);
 
-	public String getPaginationStart();
+	public int getOffset();
 
-	public void setPaginationStart(String paginationStart);
+	public void setOffset(int offset);
 
-	public String getPaginationEnd();
+	public int getLimit();
 
-	public void setPaginationEnd(String paginationEnd);
+	public void setLimit(int limit);
 }

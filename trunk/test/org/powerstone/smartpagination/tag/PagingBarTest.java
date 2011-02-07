@@ -6,6 +6,8 @@ import javax.servlet.jsp.PageContext;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mockito;
 import org.powerstone.smartpagination.common.PageModel;
 
@@ -21,10 +23,12 @@ public class PagingBarTest extends TestCase {
 			+ "        return true;\n    }\n" + "}\n" + "</script>\n";
 
 	@Override
+	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
 	}
 
+	@Test
 	public void testGenerateMap2Render() {
 		PagingBar bar = new PagingBar();
 		PageContext mockPageContext = Mockito.mock(PageContext.class);

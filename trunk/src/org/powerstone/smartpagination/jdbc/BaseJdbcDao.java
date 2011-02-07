@@ -9,18 +9,22 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.powerstone.smartpagination.common.PageResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
+@Repository
 public class BaseJdbcDao {
 	protected Logger log = Logger.getLogger(getClass());
 
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
@@ -29,9 +33,9 @@ public class BaseJdbcDao {
 	public PageResult findByPage(JdbcPageInfo pageInfo) {
 		int recordsNumber = countRecordsNumberByExample(pageInfo);
 
-		if (pageInfo.getPageSize() <= 0) {//PageSize==0相当于取全部
+		if (pageInfo.getPageSize() <= 0) {// PageSize==0相当于取全部
 			List all = findByExample(pageInfo);
-			return new PageResult(all, recordsNumber, 1);//取全部，所以页数为1
+			return new PageResult(all, recordsNumber, 1);// 取全部，所以页数为1
 		}
 
 		int pageAmount = (recordsNumber % pageInfo.getPageSize() > 0) ? (recordsNumber
@@ -42,10 +46,10 @@ public class BaseJdbcDao {
 			pageNo = pageAmount;
 		}
 
-		if (pageInfo.getEnd() != null && pageInfo.getEnd().booleanValue()) {//end=true:首页
+		if (pageInfo.getEnd() != null && pageInfo.getEnd().booleanValue()) {// end=true:首页
 			pageNo = 1;
 		}
-		if (pageInfo.getEnd() != null && !pageInfo.getEnd().booleanValue()) {//end=false:尾页
+		if (pageInfo.getEnd() != null && !pageInfo.getEnd().booleanValue()) {// end=false:尾页
 			pageNo = pageAmount;
 		}
 
@@ -69,19 +73,19 @@ public class BaseJdbcDao {
 		}
 		log.debug("===============SQL:" + sql);
 		if (firstResultAndMaxResults != null && firstResultAndMaxResults.length == 2) {
-			return (List) namedParameterJdbcTemplate.query(sql, new BeanPropertySqlParameterSource(
-					pageInfo.getExampleModel()), new SplitPageResultSetExtractor(pageInfo
-					.getRowMapper(), firstResultAndMaxResults[0], firstResultAndMaxResults[1]));
+			return (List) namedParameterJdbcTemplate.query(sql,
+					new BeanPropertySqlParameterSource(pageInfo.getExampleModel()),
+					new SplitPageResultSetExtractor(pageInfo.getRowMapper(),
+							firstResultAndMaxResults[0], firstResultAndMaxResults[1]));
 		} else {
-			return namedParameterJdbcTemplate.query(sql, new BeanPropertySqlParameterSource(
-					pageInfo.getExampleModel()), pageInfo.getRowMapper());
+			return namedParameterJdbcTemplate.query(sql,
+					new BeanPropertySqlParameterSource(pageInfo.getExampleModel()),
+					pageInfo.getRowMapper());
 		}
 	}
 
 	/**
-	 * 采用滚动结果集分页算法，
-	 * 暂未实现拼SQL的物理分页，因为SQL语法与数据库相关
-	 * 物理分页可参照BaseIbatisDao及其配置
+	 * 采用滚动结果集分页算法， 暂未实现拼SQL的物理分页，因为SQL语法与数据库相关 物理分页可参照BaseIbatisDao及其配置
 	 */
 	class SplitPageResultSetExtractor implements ResultSetExtractor {
 		private final int start;// 起始行号
@@ -96,8 +100,8 @@ public class BaseJdbcDao {
 		}
 
 		/**
-		* 处理结果集合,被接口自动调用，该类外边不应该调用
-		*/
+		 * 处理结果集合,被接口自动调用，该类外边不应该调用
+		 */
 		@SuppressWarnings("unchecked")
 		public Object extractData(ResultSet rs) throws SQLException, DataAccessException {
 			List result = new ArrayList();
@@ -120,7 +124,7 @@ public class BaseJdbcDao {
 	private int countRecordsNumberByExample(JdbcPageInfo pageInfo) {
 		String sql = "select count(0) from (" + pageInfo.getSql() + ")";
 		log.debug("===========count SQL:" + sql);
-		return namedParameterJdbcTemplate.queryForInt(sql, new BeanPropertySqlParameterSource(
-				pageInfo.getExampleModel()));
+		return namedParameterJdbcTemplate.queryForInt(sql,
+				new BeanPropertySqlParameterSource(pageInfo.getExampleModel()));
 	}
 }

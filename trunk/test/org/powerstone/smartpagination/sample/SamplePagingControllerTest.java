@@ -6,6 +6,7 @@ import java.util.List;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
+import org.junit.Test;
 import org.mockito.Matchers;
 import org.mockito.Mockito;
 import org.powerstone.smartpagination.common.BasePagingController;
@@ -22,6 +23,7 @@ public class SamplePagingControllerTest extends TestCase {
 	protected MockHttpServletResponse response;
 
 	@SuppressWarnings("unchecked")
+	@Test
 	public void testList() throws Exception {
 		request = new MockHttpServletRequest();
 		response = new MockHttpServletResponse();
@@ -52,5 +54,4 @@ public class SamplePagingControllerTest extends TestCase {
 		Assert.assertEquals(10, pm.getPageSize());
 		Assert.assertEquals(1, pm.computeDestinationPageNo());
 	}
-
 }

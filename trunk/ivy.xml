@@ -46,8 +46,10 @@
 			
 		<dependency org="org.freemarker" name="freemarker" rev="2.3.9"
             conf="compile;runtime" />
+        <dependency org="org.codehaus.jackson" name="jackson-core-asl" rev="1.7.1" conf="compile;runtime"/>
+        <dependency org="org.codehaus.jackson" name="jackson-mapper-asl" rev="1.7.1" conf="compile;runtime"/>
 
-		<dependency org="junit" name="junit" rev="3.8.2" conf="test->default" />
+		<dependency org="junit" name="junit" rev="4.8.2" conf="test->default" />
 		<dependency org="org.springframework" name="spring-test"
 			rev="3.0.4.RELEASE" conf="test->default" />
 		<dependency org="ant-contrib" name="ant-contrib" rev="1.0b3"

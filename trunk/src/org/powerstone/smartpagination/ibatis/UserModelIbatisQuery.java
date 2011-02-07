@@ -4,15 +4,15 @@ import org.powerstone.smartpagination.common.PageInfo;
 import org.powerstone.smartpagination.common.PageQuery;
 import org.powerstone.smartpagination.sample.UserModel;
 
-public class UserModelIbatisQuery extends UserModel implements PageQuery<IbatisPagerable, String>,
-		IbatisPagerable {
+public class UserModelIbatisQuery extends UserModel implements
+		PageQuery<IbatisPagerable, String>, IbatisPagerable {
 	private boolean userNameLike;
 
 	private String orderByStr;
 
-	private String paginationStart;
+	private int offset;
 
-	private String paginationEnd;
+	private int limit;
 
 	public boolean isUserNameLike() {
 		return userNameLike;
@@ -30,20 +30,20 @@ public class UserModelIbatisQuery extends UserModel implements PageQuery<IbatisP
 		this.orderByStr = orderByStr;
 	}
 
-	public String getPaginationStart() {
-		return paginationStart;
+	public int getOffset() {
+		return offset;
 	}
 
-	public void setPaginationStart(String paginationStart) {
-		this.paginationStart = paginationStart;
+	public void setOffset(int offset) {
+		this.offset = offset;
 	}
 
-	public String getPaginationEnd() {
-		return paginationEnd;
+	public int getLimit() {
+		return limit;
 	}
 
-	public void setPaginationEnd(String paginationEnd) {
-		this.paginationEnd = paginationEnd;
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
 
 	public PageInfo<IbatisPagerable, String> generatePageInfo() {
