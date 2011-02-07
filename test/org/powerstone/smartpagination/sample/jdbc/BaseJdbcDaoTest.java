@@ -5,9 +5,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.annotation.Resource;
+
 import junit.framework.Assert;
 
 import org.apache.log4j.Logger;
+import org.junit.Before;
+import org.junit.Test;
 import org.powerstone.smartpagination.common.PageResult;
 import org.powerstone.smartpagination.hibernate.BaseHibernateDao;
 import org.powerstone.smartpagination.jdbc.BaseJdbcDao;
@@ -15,23 +19,21 @@ import org.powerstone.smartpagination.jdbc.JdbcPageInfo;
 import org.powerstone.smartpagination.jdbc.UserModelJdbcQuery;
 import org.powerstone.smartpagination.sample.UserModel;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.test.AbstractTransactionalDataSourceSpringContextTests;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
-public class BaseJdbcDaoTest extends
-		AbstractTransactionalDataSourceSpringContextTests {
+@ContextConfiguration(locations = { "classpath:spring-common.xml" })
+public class BaseJdbcDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	Logger log = Logger.getLogger(getClass());
+	@Resource
 	private BaseHibernateDao baseHibernateDao;
+	@Resource
 	private BaseJdbcDao baseJdbcDao;
 
 	private UserModel user;
 
-	@Override
-	protected String[] getConfigLocations() {
-		return new String[] { "classpath:spring-common.xml" };
-	}
-
-	@Override
-	protected void onSetUpInTransaction() throws Exception {
+	@Before
+	public void onSetUpInTransaction() throws Exception {
 		logger.debug(super.applicationContext.getBean("baseHibernateDao"));
 		for (int i = 0; i < 17; i++) {
 			user = new UserModel();
@@ -46,11 +48,11 @@ public class BaseJdbcDaoTest extends
 	}
 
 	@SuppressWarnings("unchecked")
+	@Test
 	public void testFindByPage() {
 		JdbcPageInfo pi = new JdbcPageInfo();
-		pi
-				.putSql("select * from user_model where lower(user_name) like :userName "
-						+ "and lower(email) like :email");
+		pi.putSql("select * from user_model where lower(user_name) like :userName "
+				+ "and lower(email) like :email");
 		pi.putRowMapper(new RowMapper() {
 			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 				UserModel u = new UserModel();
@@ -98,6 +100,7 @@ public class BaseJdbcDaoTest extends
 	}
 
 	@SuppressWarnings("unchecked")
+	@Test
 	public void testFindByPage_BlankExample() {
 		JdbcPageInfo pi = new JdbcPageInfo();
 		pi.putSql("select * from User_Model");
@@ -137,6 +140,7 @@ public class BaseJdbcDaoTest extends
 	}
 
 	@SuppressWarnings("unchecked")
+	@Test
 	public void testFindByPageQuery() {
 		UserModelJdbcQuery pq = new UserModelJdbcQuery();
 
@@ -167,6 +171,7 @@ public class BaseJdbcDaoTest extends
 				((UserModel) pageResult.getPageData().get(0)).getEmail());
 	}
 
+	@Test
 	public void testFindByPageQuery_LessThan1Page() {
 		UserModelJdbcQuery pq = new UserModelJdbcQuery();
 
@@ -183,13 +188,5 @@ public class BaseJdbcDaoTest extends
 		Assert.assertEquals("第1页", 17, pageResult.getPageData().size());
 		Assert.assertEquals("页数", 1, pageResult.getPageAmount());
 		Assert.assertEquals("总记录数", 17, pageResult.getTotalRecordsNumber());
-	}
-
-	public void setBaseJdbcDao(BaseJdbcDao baseJdbcDao) {
-		this.baseJdbcDao = baseJdbcDao;
-	}
-
-	public void setBaseHibernateDao(BaseHibernateDao baseHibernateDao) {
-		this.baseHibernateDao = baseHibernateDao;
 	}
 }

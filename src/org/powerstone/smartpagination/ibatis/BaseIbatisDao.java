@@ -3,9 +3,19 @@ package org.powerstone.smartpagination.ibatis;
 import java.util.List;
 
 import org.powerstone.smartpagination.common.PageResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+import org.springframework.stereotype.Repository;
 
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+@Repository
 public class BaseIbatisDao extends SqlMapClientDaoSupport {
+	@Autowired
+	public void initSqlMapClient(SqlMapClient sqlMapClient) {
+		super.setSqlMapClient(sqlMapClient);
+	}
+
 	@SuppressWarnings("unchecked")
 	public PageResult findByPage(IbatisPageInfo pageInfo) {
 		int recordsNumber = countRecordsNumber(pageInfo);
@@ -43,7 +53,7 @@ public class BaseIbatisDao extends SqlMapClientDaoSupport {
 
 	@SuppressWarnings("unchecked")
 	private List findByPi(IbatisPageInfo pi, int... firstResultAndMaxResults) {
-		//set orderby to
+		// set orderby to
 		if (pi.getOrderByList() != null && pi.getOrderByList().size() > 0) {
 			String orderBy = " ";
 			for (String order : pi.getOrderByList()) {
@@ -52,15 +62,13 @@ public class BaseIbatisDao extends SqlMapClientDaoSupport {
 			orderBy = orderBy.substring(0, orderBy.length() - 1);
 			pi.getExpression().setOrderByStr(orderBy);
 		}
-		//set start and end index
+		// set start and end index
 		if (firstResultAndMaxResults != null && firstResultAndMaxResults.length == 2) {
-			pi.getExpression().setPaginationStart(
-					new Integer(firstResultAndMaxResults[0]).toString());
-			pi.getExpression().setPaginationEnd(
-					new Integer(firstResultAndMaxResults[0] + firstResultAndMaxResults[1])
-							.toString());
+			pi.getExpression().setOffset(firstResultAndMaxResults[0]);
+			pi.getExpression().setLimit(firstResultAndMaxResults[1]);
 		}
 
-		return getSqlMapClientTemplate().queryForList(pi.getPageQueryName(), pi.getExpression());
+		return getSqlMapClientTemplate().queryForList(pi.getPageQueryName(),
+				pi.getExpression());
 	}
 }

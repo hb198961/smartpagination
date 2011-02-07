@@ -6,26 +6,26 @@ import junit.framework.Assert;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.junit.Before;
+import org.junit.Test;
 import org.powerstone.smartpagination.common.PageResult;
 import org.powerstone.smartpagination.hibernate.BaseHibernateDao;
 import org.powerstone.smartpagination.hibernate.HbmPageInfo;
 import org.powerstone.smartpagination.hibernate.UserModelHibernateQuery;
 import org.powerstone.smartpagination.sample.UserModel;
-import org.springframework.test.AbstractTransactionalDataSourceSpringContextTests;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
-@SuppressWarnings("deprecation")
-public class BaseHibernateDaoTest extends
-		AbstractTransactionalDataSourceSpringContextTests {
+@ContextConfiguration(locations = { "classpath:spring-common.xml" })
+public class BaseHibernateDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
+	@Autowired
 	private BaseHibernateDao baseHibernateDao;
+
 	private UserModel user;
 
-	@Override
-	protected String[] getConfigLocations() {
-		return new String[] { "classpath:spring-common.xml" };
-	}
-
-	@Override
-	protected void onSetUpInTransaction() throws Exception {
+	@Before
+	public void onSetUpInTransaction() throws Exception {
 		logger.debug(super.applicationContext.getBean("baseHibernateDao"));
 		for (int i = 0; i < 17; i++) {
 			user = new UserModel();
@@ -39,6 +39,7 @@ public class BaseHibernateDaoTest extends
 		baseHibernateDao.flush();
 	}
 
+	@Test
 	public void testFindByPage() {
 		HbmPageInfo pi = new HbmPageInfo();
 		pi.setCountDistinctProjections("id");
@@ -52,6 +53,7 @@ public class BaseHibernateDaoTest extends
 		Assert.assertEquals(17, pageResult.getTotalRecordsNumber());
 	}
 
+	@Test
 	public void testFindByPage_WithPageQuery() {
 		UserModelHibernateQuery umq = new UserModelHibernateQuery();
 		umq.setEmail("liyingquan@gmail.com");
@@ -68,6 +70,7 @@ public class BaseHibernateDaoTest extends
 		Assert.assertEquals(17, pageResult.getTotalRecordsNumber());
 	}
 
+	@Test
 	public void testFindByPage_NoResult() {
 		HbmPageInfo pi = new HbmPageInfo();
 		pi.setCountDistinctProjections("id");
@@ -82,28 +85,27 @@ public class BaseHibernateDaoTest extends
 		Assert.assertEquals(0, pageResult.getTotalRecordsNumber());
 	}
 
+	@Test
 	public void testCountRecordsNumber() {
 		Assert.assertEquals(17, baseHibernateDao.countRecordsNumber(DetachedCriteria
 				.forClass(UserModel.class), "id"));
 	}
 
+	@Test
 	public void testDelete() {
 		baseHibernateDao.delete(UserModel.class, user.getId());
 		Assert.assertEquals(16, baseHibernateDao.countRecordsNumber(DetachedCriteria
 				.forClass(UserModel.class), "id"));
 	}
 
+	@Test
 	public void testFindByCriteria() {
 		Assert.assertEquals(17, baseHibernateDao.findByCriteria(
 				DetachedCriteria.forClass(UserModel.class)).size());
 	}
 
+	@Test
 	public void testSaveOrUpdate() {
 		Assert.assertNotNull(user.getId());
 	}
-
-	public void setBaseHibernateDao(BaseHibernateDao baseHibernateDao) {
-		this.baseHibernateDao = baseHibernateDao;
-	}
-
 }

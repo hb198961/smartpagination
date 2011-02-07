@@ -24,9 +24,9 @@
 	
 	<sql id="hsql_pagination_limit">
 		<dynamic>
-			<isNotEmpty property="paginationStart">
-			    <isNotEmpty property="paginationEnd">
-			     <![CDATA[ limit #paginationStart# #paginationEnd# ]]>
+			<isNotEmpty property="offset">
+			    <isNotEmpty property="limit">
+			     <![CDATA[ limit #offset# #limit# ]]>
 				</isNotEmpty>
 			</isNotEmpty>
 		</dynamic>

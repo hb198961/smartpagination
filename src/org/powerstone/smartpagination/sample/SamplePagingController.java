@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,17 +30,21 @@ import org.powerstone.smartpagination.jdbc.BaseJdbcDao;
 import org.powerstone.smartpagination.jdbc.JdbcPageInfo;
 import org.powerstone.smartpagination.jdbc.UserModelJdbcQuery;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 @SuppressWarnings("unchecked")
-public class SamplePagingController extends MultiActionController {
+@Controller
+public class SamplePagingController {
+	@Resource
 	private BaseHibernateDao baseHibernateDao;
-
+	@Resource
 	private BaseJdbcDao baseJdbcDao;
-
+	@Resource
 	private BaseIbatisDao baseIbatisDao;
 
+	@RequestMapping("/listHibernate")
 	public ModelAndView listHibernate(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		BaseHbmPagingController ctrl = new BaseHbmPagingController(baseHibernateDao) {
@@ -58,6 +63,7 @@ public class SamplePagingController extends MultiActionController {
 				.getPageData(request));
 	}
 
+	@RequestMapping("/queryHibernate")
 	public ModelAndView queryHibernate(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		BaseHibernateQueryFormPagingController ctrl = new BaseHibernateQueryFormPagingController() {
@@ -82,6 +88,7 @@ public class SamplePagingController extends MultiActionController {
 		return ctrl.handleRequest(request, response);
 	}
 
+	@RequestMapping("/listJdbc")
 	public ModelAndView listJdbc(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		BasePagingController<Map, String> ctrl = new BasePagingController<Map, String>() {
@@ -115,6 +122,7 @@ public class SamplePagingController extends MultiActionController {
 				.getPageData(request));
 	}
 
+	@RequestMapping("/queryJdbc")
 	public ModelAndView queryJdbc(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		BaseQueryFormPagingController<Map, String> ctrl = new BaseQueryFormPagingController<Map, String>() {
@@ -138,6 +146,7 @@ public class SamplePagingController extends MultiActionController {
 		return ctrl.handleRequest(request, response);
 	}
 
+	@RequestMapping("/listIbatis")
 	public ModelAndView listIbatis(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		BasePagingController ctrl = new BasePagingController<IbatisPagerable, String>() {
@@ -157,6 +166,7 @@ public class SamplePagingController extends MultiActionController {
 				.getPageData(request));
 	}
 
+	@RequestMapping("/queryIbatis")
 	public ModelAndView queryIbatis(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		BaseQueryFormPagingController ctrl = new BaseQueryFormPagingController<IbatisPagerable, String>() {
@@ -179,6 +189,7 @@ public class SamplePagingController extends MultiActionController {
 		return ctrl.handleRequest(request, response);
 	}
 
+	@RequestMapping("/initData")
 	public ModelAndView initData(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		List data = baseHibernateDao.findByCriteria(DetachedCriteria
@@ -203,13 +214,5 @@ public class SamplePagingController extends MultiActionController {
 
 	public void setBaseHibernateDao(BaseHibernateDao baseHibernateDao) {
 		this.baseHibernateDao = baseHibernateDao;
-	}
-
-	public void setBaseIbatisDao(BaseIbatisDao baseIbatisDao) {
-		this.baseIbatisDao = baseIbatisDao;
-	}
-
-	public void setBaseJdbcDao(BaseJdbcDao baseJdbcDao) {
-		this.baseJdbcDao = baseJdbcDao;
 	}
 }

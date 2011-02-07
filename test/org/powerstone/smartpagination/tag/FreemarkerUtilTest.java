@@ -5,8 +5,10 @@ import java.util.HashMap;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-public class FreemarkerUtilTest extends TestCase {
+import org.junit.Test;
 
+public class FreemarkerUtilTest extends TestCase {
+	@Test
 	public void testRentPageHead() {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("paging_fullUrl", "TTTT");
@@ -15,6 +17,7 @@ public class FreemarkerUtilTest extends TestCase {
 		Assert.assertTrue(html.indexOf("TTTT") > 0);
 	}
 
+	@Test
 	public void testRentPageBar() {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("paging_totalPages", "100");

@@ -26,13 +26,4 @@ abstract public class BaseHbmPagingController extends
 		super();
 		this.baseHibernateDao = baseHibernateDao;
 	}
-
-	public BaseHibernateDao getBaseHibernateDao() {
-		return baseHibernateDao;
-	}
-
-	public void setBaseHibernateDao(BaseHibernateDao baseHibernateDao) {
-		this.baseHibernateDao = baseHibernateDao;
-	}
-
 }
