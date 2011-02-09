@@ -21,19 +21,19 @@
 				</tr>
 				<tr>
 					<td>
-						<paging:hdivPagehead url="/listIbatis.htm" orderBy="user_Name" >userName</paging:hdivPagehead>
+						<paging:hdivPagehead url="/sample/listIbatis.htm" orderBy="user_Name" >userName</paging:hdivPagehead>
 					</td>
 					<td>
-						<paging:hdivPagehead url="/listIbatis.htm" orderBy="real_Name" >realName</paging:hdivPagehead>
+						<paging:hdivPagehead url="/sample/listIbatis.htm" orderBy="real_Name" >realName</paging:hdivPagehead>
 					</td>	
 					<td>
-						<paging:hdivPagehead url="/listIbatis.htm" orderBy="email" >email</paging:hdivPagehead>
+						<paging:hdivPagehead url="/sample/listIbatis.htm" orderBy="email" >email</paging:hdivPagehead>
 					</td>	
 					<td>
-						<paging:hdivPagehead url="/listIbatis.htm" orderBy="birth" >birth</paging:hdivPagehead>
+						<paging:hdivPagehead url="/sample/listIbatis.htm" orderBy="birth" >birth</paging:hdivPagehead>
 					</td>
 					<td>
-						<paging:hdivPagehead url="/listIbatis.htm" orderBy="sex" >sex</paging:hdivPagehead>
+						<paging:hdivPagehead url="/sample/listIbatis.htm" orderBy="sex" >sex</paging:hdivPagehead>
 					</td>
 				</tr>
 				
@@ -53,7 +53,7 @@
 				</tr>
 				</c:if>
 				<tr>
-					<td colspan="5"><a href="<c:url value="/queryIbatis.htm"/>">高级查询[iBATIS]</a></td>
+					<td colspan="5"><a href="<c:url value="/sample/queryIbatis.htm"/>">高级查询[iBATIS]</a></td>
 				</tr>
 				<tr>
 					<td colspan="5"><a href="<c:url value="/index.jsp"/>">首页</a></td>

@@ -34,8 +34,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings( { "unchecked", "deprecation" })
 @Controller
+@RequestMapping("/sample")
 public class SamplePagingController {
 	@Resource
 	private BaseHibernateDao baseHibernateDao;
@@ -82,6 +83,37 @@ public class SamplePagingController {
 		ctrl.setCommandName("userModel");
 		ctrl.setFormView("userModelQuery");
 		ctrl.setSuccessView("redirect:/query.htm");
+
+		ctrl.setPagingDataName("userList");
+
+		return ctrl.handleRequest(request, response);
+	}
+
+	@RequestMapping("/queryHibernateAjaxForm")
+	public ModelAndView queryHibernateAjaxForm(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		return new ModelAndView("queryHibernateAjaxForm");
+	}
+
+	@RequestMapping("/queryHibernateAjax")
+	public ModelAndView queryHibernateAjax(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		BaseHibernateQueryFormPagingController ctrl = new BaseHibernateQueryFormPagingController() {
+			@Override
+			protected PageResult findByPageInfo(PageInfo<DetachedCriteria, Order> pi) {
+				return baseHibernateDao.findByPage((HbmPageInfo) pi);
+			}
+
+			@Override
+			protected PageQuery<DetachedCriteria, Order> makePageQuery() {
+				return new UserModelHibernateQuery();
+			}
+		};
+
+		ctrl.setCommandClass(UserModel.class);
+		ctrl.setCommandName("userModel");
+		ctrl.setFormView("userModelQuery");
+		ctrl.setSuccessView("queryHibernateAjax");
 
 		ctrl.setPagingDataName("userList");
 
