@@ -21,19 +21,19 @@
 				</tr>
 				<tr>
 					<td>
-						<paging:hdivPagehead url="/listJdbc.htm" orderBy="user_Name" >userName</paging:hdivPagehead>
+						<paging:hdivPagehead url="/sample/listJdbc.htm" orderBy="user_Name" >userName</paging:hdivPagehead>
 					</td>
 					<td>
-						<paging:hdivPagehead url="/listJdbc.htm" orderBy="real_Name" >realName</paging:hdivPagehead>
+						<paging:hdivPagehead url="/sample/listJdbc.htm" orderBy="real_Name" >realName</paging:hdivPagehead>
 					</td>	
 					<td>
-						<paging:hdivPagehead url="/listJdbc.htm" orderBy="email" >email</paging:hdivPagehead>
+						<paging:hdivPagehead url="/sample/listJdbc.htm" orderBy="email" >email</paging:hdivPagehead>
 					</td>	
 					<td>
-						<paging:hdivPagehead url="/listJdbc.htm" orderBy="birth" >birth</paging:hdivPagehead>
+						<paging:hdivPagehead url="/sample/listJdbc.htm" orderBy="birth" >birth</paging:hdivPagehead>
 					</td>
 					<td>
-						<paging:hdivPagehead url="/listJdbc.htm" orderBy="sex" >sex</paging:hdivPagehead>
+						<paging:hdivPagehead url="/sample/listJdbc.htm" orderBy="sex" >sex</paging:hdivPagehead>
 					</td>
 				</tr>
 				
@@ -49,11 +49,11 @@
 					<tr><td class="listViewHRS1" colSpan="5"></td></tr>
 				</c:forEach>
 				<tr>
-					<td colspan="5"><paging:hdivPagebar url="/listJdbc.htm"/></td>
+					<td colspan="5"><paging:hdivPagebar url="/sample/listJdbc.htm"/></td>
 				</tr>
 				</c:if>
 				<tr>
-					<td colspan="5"><a href="<c:url value="/queryJdbc.htm"/>">高级查询[JDBC]</a></td>
+					<td colspan="5"><a href="<c:url value="/sample/queryJdbc.htm"/>">高级查询[JDBC]</a></td>
 				</tr>
 				<tr>
 					<td colspan="5"><a href="<c:url value="/index.jsp"/>">首页</a></td>
