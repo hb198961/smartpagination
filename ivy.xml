@@ -46,24 +46,23 @@
 			
 		<dependency org="org.freemarker" name="freemarker" rev="2.3.9"
             conf="compile;runtime" />
+        <dependency org="javax.servlet" name="jstl" rev="1.1.2"
+			conf="runtime" />
+		<dependency org="taglibs" name="standard" rev="1.1.2"
+			conf="runtime" />
+			
         <dependency org="org.codehaus.jackson" name="jackson-core-asl" rev="1.7.1" conf="compile;runtime"/>
         <dependency org="org.codehaus.jackson" name="jackson-mapper-asl" rev="1.7.1" conf="compile;runtime"/>
 
 		<dependency org="junit" name="junit" rev="4.8.2" conf="test->default" />
 		<dependency org="org.springframework" name="spring-test"
 			rev="3.0.4.RELEASE" conf="test->default" />
-		<dependency org="ant-contrib" name="ant-contrib" rev="1.0b3"
-			conf="test->default" />
 		<dependency org="org.mockito" name="mockito-all" rev="1.8.4"
 			conf="test->default" />
 
 		<dependency org="javax.servlet" name="servlet-api" rev="2.5"
 			conf="provided->compile(*),master(*)" />
 		<dependency org="javax.servlet" name="jsp-api" rev="2.0"
-			conf="provided->compile(*),master(*)" />
-		<dependency org="javax.servlet" name="jstl" rev="1.1.2"
-			conf="provided->compile(*),master(*)" />
-		<dependency org="taglibs" name="standard" rev="1.1.2"
 			conf="provided->compile(*),master(*)" />
 	</dependencies>
 </ivy-module>

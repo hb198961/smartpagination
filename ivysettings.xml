@@ -2,11 +2,11 @@
 <ivysettings>
 	<ivy:configure>
 		<credentials host="localhost" realm="Sonatype Nexus Repository Manager"
-			username="admin" passwd="admin123" />
+			username="deployment" passwd="deployment123" />
 	</ivy:configure>
 	<settings defaultResolver="defaultChain"
 		defaultConflictManager="latest-revision" />
-
+	<caches defaultCacheDir="d:/.ivy2" />	
 	<property name="nexus-public"
 		value="http://localhost:8080/nexus/content/groups/public" />
 	<property name="nexus-releases"
