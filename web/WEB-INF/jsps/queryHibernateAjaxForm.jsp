@@ -6,18 +6,26 @@
 	<link type="text/css" href="${ctxPath}/css/smoothness/jquery-ui-1.8.9.custom.css" rel="Stylesheet" />  
     <script type="text/javascript" src="${ctxPath}/js/jquery-1.5.min.js"></script>
     <script type="text/javascript" src="${ctxPath}/js/jquery-ui-1.8.9.custom.min.js"></script>
+    <script type="text/javascript" src="${ctxPath}/js/jquery.form.js"></script>
 	<script>
 	$(function() {
 	    $("#query").click(function(){
-	        alert('');
-	        $("form").submit();
+	        $("#queryForm").ajaxSubmit({
+		        success:showResponse,
+		        type:"POST",
+		        url:"${ctxPath}/sample/queryHibernateAjax.htm"
+		        });
 		});
+
+	    function showResponse(result){
+		    $("#dataDiv").html(result);
+	    } 
 	});
 	</script>
 </head>
 <body>
 	<table width="100%" height="100%" border="0" align="center" valign="top" cellpadding="0" cellspacing="0">
-		<form id="form" method="POST">
+		<form id="queryForm">
 		<tr height="55px" valign="top"><td>
 			<table width="50%" align="center" border="0" cellspacing="1" cellpadding="1">
 				<tr>
@@ -29,7 +37,7 @@
 				<tr>
 					<td align="right">UserName:</td>
 					<td><input name="userName" maxlength="50"/>like
-                        <checkbox name="userNameLike"/>
+                        <input type="checkbox" name="userNameLike"/>
 					</td>
 					<td align="right">Email:</td>
 					<td><input name="email" maxlength="50"/>(LIKE)
@@ -49,7 +57,7 @@
 			</table>
 		</td></tr>
 		</form>
-		<div id="dataDiv">
-		</div>
+		<tr>
+		<td id="dataDiv">xx</td></tr>
 	</table>
 </body>
