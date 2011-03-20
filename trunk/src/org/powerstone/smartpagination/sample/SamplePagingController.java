@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.powerstone.smartpagination.common.BasePagingController;
@@ -38,6 +39,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/sample")
 public class SamplePagingController {
+	Logger logger = Logger.getLogger(SamplePagingController.class);
 	@Resource
 	private BaseHibernateDao baseHibernateDao;
 	@Resource
@@ -95,29 +97,22 @@ public class SamplePagingController {
 		return new ModelAndView("queryHibernateAjaxForm");
 	}
 
-	@RequestMapping("/queryHibernateAjax")
-	public ModelAndView queryHibernateAjax(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		BaseHibernateQueryFormPagingController ctrl = new BaseHibernateQueryFormPagingController() {
+	@RequestMapping(value = "/queryHibernateAjax")
+	public ModelAndView queryHibernateAjax(
+			final UserModelHibernateQuery userModelHibernateQuery,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		logger.debug(userModelHibernateQuery);
+		BaseHbmPagingController ctrl = new BaseHbmPagingController(baseHibernateDao) {
 			@Override
-			protected PageResult findByPageInfo(PageInfo<DetachedCriteria, Order> pi) {
-				return baseHibernateDao.findByPage((HbmPageInfo) pi);
-			}
-
-			@Override
-			protected PageQuery<DetachedCriteria, Order> makePageQuery() {
-				return new UserModelHibernateQuery();
+			protected PageInfo<DetachedCriteria, Order> makePageInfo(
+					HttpServletRequest request) {
+				return userModelHibernateQuery.generatePageInfo();
 			}
 		};
-
-		ctrl.setCommandClass(UserModel.class);
-		ctrl.setCommandName("userModel");
-		ctrl.setFormView("userModelQuery");
-		ctrl.setSuccessView("queryHibernateAjax");
-
-		ctrl.setPagingDataName("userList");
-
-		return ctrl.handleRequest(request, response);
+		ctrl.handleRequest(request, response);
+		logger.debug(BaseHbmPagingController.getPageData(request));
+		request.setAttribute("userList", BaseHbmPagingController.getPageData(request));
+		return new ModelAndView("queryHibernateAjax");
 	}
 
 	@RequestMapping("/listJdbc")
