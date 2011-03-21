@@ -6,7 +6,7 @@
 	<shortname>smart_pagination</shortname>
 	<uri>http://www.powerstone.net/smart_pagination</uri>
 	<tag>
-		<name>pagebar</name>
+		<name>pageBar</name>
 		<tagclass>org.powerstone.smartpagination.tag.PagingBar</tagclass>
 		<bodycontent>JSP</bodycontent>
 		<attribute>
@@ -26,7 +26,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>pagehead</name>
+		<name>pageHead</name>
 		<tagclass>org.powerstone.smartpagination.tag.PagingHead</tagclass>
 		<bodycontent>JSP</bodycontent>
 		<attribute>

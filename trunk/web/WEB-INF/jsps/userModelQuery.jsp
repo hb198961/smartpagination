@@ -57,19 +57,19 @@
 				</tr>
 				<tr>
 					<td>
-						<paging:pagehead url="/sample/queryHibernate.htm" orderBy="userName" >userName</paging:pagehead>
+						<paging:pageHead url="/sample/queryHibernate.htm" orderBy="userName" >userName</paging:pageHead>
 					</td>
 					<td>
-						<paging:pagehead url="/sample/queryHibernate.htm" orderBy="realName" >realName</paging:pagehead>
+						<paging:pageHead url="/sample/queryHibernate.htm" orderBy="realName" >realName</paging:pageHead>
 					</td>	
 					<td>
-						<paging:pagehead url="/sample/queryHibernate.htm" orderBy="email" >email</paging:pagehead>
+						<paging:pageHead url="/sample/queryHibernate.htm" orderBy="email" >email</paging:pageHead>
 					</td>	
 					<td>
-						<paging:pagehead url="/sample/queryHibernate.htm" orderBy="birth" >birth</paging:pagehead>
+						<paging:pageHead url="/sample/queryHibernate.htm" orderBy="birth" >birth</paging:pageHead>
 					</td>
 					<td>
-						<paging:pagehead url="/sample/queryHibernate.htm" orderBy="sex" >sex</paging:pagehead>
+						<paging:pageHead url="/sample/queryHibernate.htm" orderBy="sex" >sex</paging:pageHead>
 					</td>
 				</tr>
 				
@@ -85,7 +85,7 @@
 					<tr><td class="listViewHRS1" colSpan="5"></td></tr>
 				</c:forEach>
 				<tr>
-					<td colspan="5"><paging:pagebar url="/sample/queryHibernate.htm"/></td>
+					<td colspan="5"><paging:pageBar url="/sample/queryHibernate.htm"/></td>
 				</tr>
 				</c:if>
 				<tr>

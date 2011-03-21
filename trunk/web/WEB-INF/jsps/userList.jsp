@@ -21,19 +21,19 @@
 				</tr>
 				<tr>
 					<td>
-						<paging:hdivPagehead url="/sample/listHibernate.htm" orderBy="userName" >userName</paging:hdivPagehead>
+						<paging:pageHead url="/sample/listHibernate.htm" orderBy="userName" >userName</paging:pageHead>
 					</td>
 					<td>
-						<paging:hdivPagehead url="/sample/listHibernate.htm" orderBy="realName" >realName</paging:hdivPagehead>
+						<paging:pageHead url="/sample/listHibernate.htm" orderBy="realName" >realName</paging:pageHead>
 					</td>	
 					<td>
-						<paging:hdivPagehead url="/sample/listHibernate.htm" orderBy="email" >email</paging:hdivPagehead>
+						<paging:pageHead url="/sample/listHibernate.htm" orderBy="email" >email</paging:pageHead>
 					</td>	
 					<td>
-						<paging:hdivPagehead url="/sample/listHibernate.htm" orderBy="birth" >birth</paging:hdivPagehead>
+						<paging:pageHead url="/sample/listHibernate.htm" orderBy="birth" >birth</paging:pageHead>
 					</td>
 					<td>
-						<paging:hdivPagehead url="/sample/listHibernate.htm" orderBy="sex" >sex</paging:hdivPagehead>
+						<paging:pageHead url="/sample/listHibernate.htm" orderBy="sex" >sex</paging:pageHead>
 					</td>
 				</tr>
 				
@@ -49,7 +49,7 @@
 					<tr><td class="listViewHRS1" colSpan="5"></td></tr>
 				</c:forEach>
 				<tr>
-					<td colspan="5"><paging:hdivPagebar url="/sample/listHibernate.htm" /></td>
+					<td colspan="5"><paging:pageBar url="/sample/listHibernate.htm" /></td>
 				</tr>
 				</c:if>
 				<tr>
