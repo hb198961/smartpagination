@@ -33,6 +33,7 @@ import org.powerstone.smartpagination.jdbc.UserModelJdbcQuery;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @SuppressWarnings( { "unchecked", "deprecation" })
@@ -91,13 +92,13 @@ public class SamplePagingController {
 		return ctrl.handleRequest(request, response);
 	}
 
-	@RequestMapping("/queryHibernateAjaxForm")
+	@RequestMapping(value = "/queryHibernateAjax", method = RequestMethod.GET)
 	public ModelAndView queryHibernateAjaxForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		return new ModelAndView("queryHibernateAjaxForm");
 	}
 
-	@RequestMapping(value = "/queryHibernateAjax")
+	@RequestMapping(value = "/queryHibernateAjax", method = RequestMethod.POST)
 	public ModelAndView queryHibernateAjax(
 			final UserModelHibernateQuery userModelHibernateQuery,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -112,7 +113,7 @@ public class SamplePagingController {
 		ctrl.handleRequest(request, response);
 		logger.debug(BaseHbmPagingController.getPageData(request));
 		request.setAttribute("userList", BaseHbmPagingController.getPageData(request));
-		return new ModelAndView("queryHibernateAjax");
+		return new ModelAndView("queryHibernateAjaxResult");
 	}
 
 	@RequestMapping("/listJdbc")
