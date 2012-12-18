@@ -1,0 +1,85 @@
+<zk>
+	<window id="userQueryWindow" apply="com.cs.uaas.controller.UserQueryController" width="100%" height="100%">
+		<borderlayout height="100%">
+			<north id="north" height="52px" splittable="true" collapsible="true" title="查询条件">
+				<panel>
+					<panelchildren>
+						<div style="float:left;">
+							用户名(like)
+							<textbox id="userNameTextbox" type="text"></textbox>
+							email
+							<textbox id="emailTextbox"></textbox>
+							姓名(like)
+							<textbox id="realNameTextbox"></textbox>
+							性别
+							<listbox id="gentleListbox" multiple="false" mold="select" rows="1">
+								<listitem label="请选择" selected="true"></listitem>
+							</listbox>
+							<button id="cmdBtn_userQuery" forward="onQuery" label="查询"></button>
+							<button id="btn_Reset" forward="onReset" label="重置"></button>
+						</div>
+						<div style="float:right;">
+							<button id="cmdBtn_NewUser" forward="onNewUser" width="80px" label="新建用户">
+								<custom-attributes newUserUrl="/pages/admin/user/userForm.zul"></custom-attributes>
+							</button>
+							<button id="btn_CloseTab" forward="onClose" width="80px" label="关闭页签"></button>
+							<button id="btn_RefreshData" forward="onRefresh" width="50px" label="刷新"></button>
+						</div>
+					</panelchildren>
+				</panel>
+			</north>
+			<center border="0" title="查询结果>>">
+				<panel height="100%">
+					<panelchildren>
+						<listbox id="dataListbox" mold="paging" multiple="true" checkmark="true" emptyMessage="搜索结果为空"
+							width="100%" vflex="true"><!-- 设vflex否则无滚动条，显示不全-->
+							<listhead menupopup="auto" width="100%" sizable="true"><!-- sizable列宽度可调 -->
+								<listheader label="用户名" sort="auto(userName)" width="200px"/>
+								<listheader label="email" sort="auto(contactInfo.email)" />
+								<listheader label="姓名" sort="auto(realName)" width="100px" align="center" />
+								<listheader label="性别" sort="auto(gentle)" width="40px" align="center" />
+								<listheader label="手机" sort="auto(contactInfo.mobile)" width="100px" align="center" />
+								<listheader label="座机" sort="auto(contactInfo.telephone)" width="150px" />
+								<listheader label="出生日期" sort="auto(birthday)" width="100px" align="center" />
+								<listheader label="操作" width="60px" align="center" />
+							</listhead>
+							<template name="model">
+								<!-- forward会把eventOriginal转到所在window的eventAlias -->
+								<listitem style="cursor:hand;cursor:pointer;"
+									forward="onDoubleClick=onDetailUser(${each.id})">
+									<listcell>
+										<label value="${each.userName}" />
+									</listcell>
+									<listcell>
+										<label value="${each.contactInfo.email}" />
+									</listcell>
+									<listcell>
+										<label value="${each.realName}" />
+									</listcell>
+									<listcell>
+										<label value="${each.gentleText}" />
+									</listcell>
+									<listcell>
+										<label value="${each.contactInfo.mobile}" />
+									</listcell>
+									<listcell>
+										<label value="${each.contactInfo.telephone}" />
+									</listcell>
+									<listcell>
+										<label value="${empty each.birthday ? '' : c:formatDate(each.birthday, 'yyyy-MM-dd')}" />
+									</listcell>
+									<listcell>
+										<button label="编辑" forward="onEditUser(${each.id})">
+											<custom-attributes newUserUrl="/pages/admin/user/userForm.zul"></custom-attributes>
+										</button>
+									</listcell>
+								</listitem>
+							</template>
+						</listbox>
+						<paging id="userPaging" mold="default" detailed="true" />
+					</panelchildren>
+				</panel>
+			</center>
+		</borderlayout>
+	</window>
+</zk>

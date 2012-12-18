@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="data-generator"/>
+	<classpathentry kind="src" path="it"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=UAAS&amp;ivyXmlPath=ivy.xml&amp;confs=*"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="theme-lib/BlueTheme.jar"/>
+	<classpathentry kind="lib" path="theme-lib/DarkGreenTheme.jar"/>
+	<classpathentry kind="lib" path="theme-lib/AdvancedGrayTheme.jar"/>
+	<classpathentry kind="lib" path="theme-lib/PurpleTheme.jar"/>
+	<classpathentry kind="lib" path="test-lib/zats-common.jar"/>
+	<classpathentry kind="lib" path="test-lib/zats-mimic-ext6.jar"/>
+	<classpathentry kind="lib" path="test-lib/zats-mimic.jar"/>
+	<classpathentry kind="lib" path="test-lib/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="test-lib/jetty-continuation.jar"/>
+	<classpathentry kind="lib" path="test-lib/jetty-http.jar"/>
+	<classpathentry kind="lib" path="test-lib/jetty-io.jar"/>
+	<classpathentry kind="lib" path="test-lib/jetty-security.jar"/>
+	<classpathentry kind="lib" path="test-lib/jetty-server.jar"/>
+	<classpathentry kind="lib" path="test-lib/jetty-servlet.jar"/>
+	<classpathentry kind="lib" path="test-lib/jetty-util.jar"/>
+	<classpathentry kind="lib" path="test-lib/jetty-webapp.jar"/>
+	<classpathentry kind="lib" path="test-lib/jetty-xml.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

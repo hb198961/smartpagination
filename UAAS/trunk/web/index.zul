@@ -1,0 +1,12 @@
+<zk>
+<window>
+<zscript>
+
+<![CDATA[
+	   Executions.sendRedirect("/login.html");
+	]]>
+	
+	</zscript>
+
+</window>
+</zk>

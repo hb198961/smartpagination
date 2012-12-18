@@ -1,0 +1,97 @@
+<?page title="Bean Validation" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./win${arg.userId}"?>
+<zk>
+	<window id="win${arg.userId}" apply="com.cs.uaas.controller.UserFormController" position="center,center">
+		<longbox value="@{$composer.user.id, save-when='btn_submit.onClick'}" id="userId" visible="false" />
+		<vlayout spacing="15px">
+			<hbox spacing="15px">
+				<groupbox width="300px">
+					<caption label="基本信息" />
+					<grid>
+						<columns>
+							<column width="90px" align="right"></column>
+							<column></column>
+						</columns>
+						<rows>
+							<row>
+								<vlayout>
+									<hbox>用户名：</hbox>
+									<hbox>（登录账号）</hbox>
+								</vlayout>
+								<label id="userNameLabel" value="@{$composer.user.userName}" width="150px"
+									unless="${$composer.newUserFlag}" />
+								<textbox id="userName"
+									value="@{$composer.user.userName, save-when='btn_submit.onClick'}" width="150px" if="${$composer.newUserFlag}" />
+							</row>
+							<row>
+								全名:
+								<textbox value="@{$composer.user.realName, save-when='btn_submit.onClick'}"
+									width="150px" />
+							</row>
+							<row>
+								密码:
+								<textbox type="password"
+									value="@{$composer.user.password, save-when='btn_submit.onClick'}" width="150px" />
+							</row>
+							<row>
+								确认密码
+								<textbox type="password"
+									value="@{$composer.user.confirmPassword, save-when='btn_submit.onClick'}" width="150px" />
+							</row>
+							<row>
+								性别
+								<combobox width="150px" readonly="true" model="@{$composer.sexList}"
+									selectedItem="@{$composer.user.gentle, save-when='btn_submit.onClick'}">
+									<comboitem self="@{each='item'}" height="20px" label="@{item.text}" />
+								</combobox>
+							</row>
+							<row>
+								Email
+								<textbox value="@{$composer.user.contactInfo.email, save-when='btn_submit.onClick'}"
+									width="150px" />
+							</row>
+							<row>
+								手机
+								<textbox value="@{$composer.user.contactInfo.mobile, save-when='btn_submit.onClick'}"
+									width="150px" />
+							</row>
+							<row>
+								座机
+								<textbox value="@{$composer.user.contactInfo.telephone, save-when='btn_submit.onClick'}"
+									width="150px" />
+							</row>
+							<row>
+								生日
+								<datebox id="birthday" format="yyyy-MM-dd"
+									value="@{$composer.user.birthday save-when='btn_submit.onClick'}" width="150px" mold="rounded" />
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				<groupbox width="300px">
+					<caption label="组信息" />
+					<grid>
+						<columns>
+							<column width="90px" align="right"></column>
+							<column></column>
+						</columns>
+						<rows>
+							<row>
+								<checkbox label="测试组" value="testGroup" />
+								<checkbox label="品控组" value="testGroup" />
+							</row>
+							<row>
+								<checkbox label="质检组" value="testGroup" />
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+
+			</hbox>
+			<toolbar align="center">
+				<button id="btn_submit" label="提交" />
+				<button id="btn_cancel" label="取消" ></button>
+			</toolbar>
+		</vlayout>
+	</window>
+</zk>

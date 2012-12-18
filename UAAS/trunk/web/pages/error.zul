@@ -1,0 +1,9 @@
+<window title="Error${requestScope['javax.servlet.error.status_code']}" width="400px" border="normal" mode="modal">
+	<vbox>
+		系统服务端出现错误！【${requestScope['javax.servlet.error.message']}】
+		<hbox style="margin-left:auto; margin-right:auto">
+			<button label="确认" onClick="spaceOwner.detach()" />
+		</hbox>
+	</vbox>
+
+</window>

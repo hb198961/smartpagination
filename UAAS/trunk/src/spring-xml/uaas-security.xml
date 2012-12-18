@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zksp="http://www.zkoss.org/2008/zkspring/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+             http://www.springframework.org/schema/security 
+             http://www.springframework.org/schema/security/spring-security-3.0.xsd
+             http://www.zkoss.org/2008/zkspring/security 
+             http://www.zkoss.org/2008/zkspring/security/zkspring-security.xsd">
+	<http auto-config='true' access-denied-page="/error.html">
+	    <intercept-url pattern="/images/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	    <intercept-url pattern="/login.html*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/pages/admin/**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/pages/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<form-login login-page="/login.html" authentication-failure-url="/login.html?login_error=1"
+			default-target-url="/main.html" always-use-default-target="true" />
+		<!-- Following is list of ZK Spring Security custom filters. They needs to be exactly in the same order as shown below 
+			in order to work. -->
+		<custom-filter ref="zkDesktopReuseFilter" position="FIRST" />
+		<custom-filter ref="zkDisableSessionInvalidateFilter" before="FORM_LOGIN_FILTER" />
+		<custom-filter ref="zkEnableSessionInvalidateFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+		<custom-filter ref="zkLoginOKFilter" after="FILTER_SECURITY_INTERCEPTOR" />
+		<custom-filter ref="zkError403Filter" after="LOGOUT_FILTER" />
+	</http>
+	
+	<authentication-manager>
+		<authentication-provider>
+			<user-service properties="classpath:/properties/security-users.properties" />
+		</authentication-provider>
+	</authentication-manager>
+
+	<zksp:zk-event login-template-close-delay="1" path-type="ant">
+		<zksp:intercept-event event="onClick" path="//**/cmdBtn_*" access="ROLE_ADMIN" />
+		<zksp:intercept-event event="onClick" path="//**/menu_*" access="ROLE_ADMIN" />
+		<zksp:intercept-event event="onClick" path="//**/treemenu_*" access="ROLE_ADMIN" />
+		<zksp:intercept-event event="onClick" path="//**/btn_*" access="ROLE_USER" />
+		<zksp:intercept-event path="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<zksp:form-login login-page="/popupLogin.html"/>
+	</zksp:zk-event>
+</beans:beans>

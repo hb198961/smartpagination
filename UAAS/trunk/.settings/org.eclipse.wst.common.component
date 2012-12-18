@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="UAAS">
+        <wb-resource deploy-path="/" source-path="/web" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/it"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/data-generator"/>
+        <property name="context-root" value="UAAS"/>
+        <property name="java-output-path" value="/UAAS/bin"/>
+    </wb-module>
+</project-modules>

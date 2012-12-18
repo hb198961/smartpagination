@@ -1,0 +1,40 @@
+<?page id="testZul" title="欢迎！"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native">
+	<window border="normal" width="400px" title="客户服务用户权限系统" mode="overlapped" position="center,center">
+		<html style="color:red" if="${not empty param.login_error}">
+			<![CDATA[登录失败[${SPRING_SECURITY_LAST_EXCEPTION.message}]，请重试！ ]]>
+    	</html>
+
+		<groupbox>
+			<caption>登录</caption>
+			<h:form id="f" name="f" action="j_spring_security_check" method="POST">
+				<grid>
+					<columns>
+						<column hflex="min" align="right" />
+						<column hflex="min" align="left"/>
+					</columns>
+					<rows>
+						<row>
+							用户名:
+							<textbox id="u" name="j_username" value="admin"/>
+						</row>
+						<row>
+							密码:
+							<textbox id="p" type="password" name="j_password" value="admin123"/>
+						</row>
+						<!-- <row>
+							<checkbox id="r" name="_spring_security_remember_me" />
+							两周内无需登录
+							</row> -->
+						<row>
+							<hbox>
+								<h:input type="submit" value="登录" />
+								<h:input type="reset" value="重置" />
+							</hbox>
+						</row>
+					</rows>
+				</grid>
+			</h:form>
+		</groupbox>
+	</window>
+</zk>

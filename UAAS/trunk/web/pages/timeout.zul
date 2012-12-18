@@ -1,0 +1,10 @@
+<window title="Error${requestScope['javax.servlet.error.status_code']}" width="400px" border="normal" mode="modal" position="center,center">
+	<vbox>
+		会话过期！
+		<hbox style="margin-left:auto; margin-right:auto">
+			<button label="确认" onClick="spaceOwner.detach()" />
+			<button label="重新登录" href="/login.html" />
+		</hbox>
+	</vbox>
+
+</window>

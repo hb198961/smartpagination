@@ -1,0 +1,59 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./resourceWindow"?>
+<zk>
+	<window id="resourceWindow" apply="com.cs.uaas.controller.ResourceController" width="100%" height="100%">
+		<borderlayout height="100%">
+			<north id="north" height="52px" splittable="true" collapsible="true" title="查询条件">
+				<panel>
+					<panelchildren>
+						<div style="float:left;">
+							子系统
+							<listbox id="subSystem" multiple="false" mold="select" rows="1">
+								<listitem label="请选择" selected="true"></listitem>
+							</listbox>
+							资源名称(like)
+							<textbox
+								value="@{$composer.resource.resourceName, save-when='cmdBtn_resourceQuery.onClick'}" id="resourceName">
+							</textbox>
+							URL(like)
+							<textbox value="@{$composer.resource.url, save-when='cmdBtn_resourceQuery.onClick'}"
+								id="url">
+							</textbox>
+							<button id="cmdBtn_resourceQuery" label="查询"></button>
+							<button id="btn_Reset" label="重置"></button>
+						</div>
+						<div style="float:right;">
+							<button id="cmdBtn_NewResource" width="80px" label="添加资源">
+								<custom-attributes newUserUrl="/pages/admin/resource/resourceForm.zul"></custom-attributes>
+							</button>
+							<button id="btn_RefreshData" width="50px" label="刷新"></button>
+						</div>
+					</panelchildren>
+				</panel>
+			</north>
+			<center border="0" title="查询结果>>">
+				<panel height="100%">
+					<panelchildren>
+						<grid id="dataGrid" vflex="true" emptyMessage="搜索结果为空" width="100%" sizedByContent="false">
+							<columns menupopup="auto" width="100%" sizable="true">
+								<column label="资源名称" sort="auto(resourceName)" width="200px" />
+								<column label="URL" sort="auto(url)" />
+								<column label="子系统" sort="auto(subSystem.id)" width="100px" align="center" />
+								<column label="操作" width="100px" align="center" />
+							</columns>
+							<template name="model">
+								<row>
+									<label value="${each.resourceName}" />
+									<label value="${each.url}" />
+									<label value="${each.subSystem.subSystemName}" />
+									<div>
+										<button label="修改" />
+									</div>
+								</row>
+							</template>
+						</grid>
+					</panelchildren>
+				</panel>
+			</center>
+		</borderlayout>
+	</window>
+</zk>

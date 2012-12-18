@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk>
+	<session-config>
+		<session-timeout>1800</session-timeout>
+	</session-config>
+	<session-config>
+		<timeout-uri>/pages/timeout.zul</timeout-uri>
+	</session-config>
+	<listener>
+		<description>ZK Exception Translation Listener</description>
+		<listener-class>org.zkoss.spring.security.ui.ZkExceptionTranslationListener</listener-class>
+	</listener>
+	<preference>
+		<name>org.zkoss.zul.Window.defaultActionOnShow</name>
+		<value></value>
+	</preference>
+
+	<library-property>
+		<name>org.zkoss.zul.Button.mold</name>
+		<value>trendy</value>
+	</library-property>
+
+	<client-config>
+		<debug-js>true</debug-js>
+	</client-config>
+
+	<!-- Configure the error page -->
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/pages/error.zul</location>
+	</error-page>
+
+	<!-- Font and Size -->
+	<language-config>
+		<addon-uri>/WEB-INF/lang-addon.xml </addon-uri>
+	</language-config>
+
+</zk>

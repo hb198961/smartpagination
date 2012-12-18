@@ -1,0 +1,115 @@
+<zk>
+    <style src="/widgets/input/form_sample/style.css" />
+    <div apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm') @init('com.cs.uaas.viewModel.UserFormViewModel')"
+        validationMessages="@id('vmsgs')"
+        form="@id('fx') @load(vm.user) @save(vm.user, before='submit') @validator('com.cs.uaas.validator.UserFormValidator', retypedPassword=vm.retypedPassword)">
+        <grid>
+            <columns>
+                <column label="Type" width="120px" />
+                <column label="Content" />
+                <column label="Component" width="200px" />
+            </columns>
+            <rows>
+                <row>
+                    <label value="UserName" width="150px"/>
+                    <hlayout>
+                        <textbox constraint="no empty" value="@bind(fx.userName)"
+                            width="150px" tabindex="1" />
+                    </hlayout>
+                    <div>
+                        <label sclass="hightlight">Textbox</label>
+                    </div>
+                </row>
+                <row>
+                    Password
+                    <textbox type="password" value="@bind(fx.password)"
+                        width="150px" tabindex="2" />
+                    <div>
+                        <label sclass="hightlight">Textbox</label>
+                        type = "password"
+                    </div>
+                </row>
+                <row>
+                    Re-type Password
+                    <cell>
+                        <textbox type="password" value="@bind(vm.retypedPassword)"
+                             width="150px"  tabindex="3" />
+                        <label class="error"
+                            value="@load(vmsgs['password'])" />
+                    </cell>
+                    <div>
+                        <label sclass="hightlight">Textbox</label>
+                        with value validate
+                    </div>
+                </row>
+                <row>
+                    Phone:
+                    <textbox constraint="no empty" value="@bind(fx.telephone)"
+                        width="150px" maxlength="15" tabindex="5" />
+                    <div>
+                        <label sclass="hightlight">Textbox</label>
+                        with max length limit
+                    </div>
+                </row>
+                <row>
+                    Weight:
+                    <cell>
+                        <doublebox constraint="no empty"  format="###.##" value="@bind(fx.weight)"
+                            width="150px"  tabindex="6" />
+                        <label class="error"
+                            value="@load(vmsgs['weight'])" />
+                    </cell>
+                    <div>
+                        <label sclass="hightlight">Doublebox</label>
+                        with format
+                    </div>
+                </row>
+                <row>
+                    Birthday:
+                        <datebox value="@bind(fx.birthday)" constraint="no empty"
+                            format="yyyy-MM-dd HH:mm:ss" width="150px"  tabindex="7"/>
+                    <div>
+                        <label sclass="hightlight">Datebox</label>
+                        and
+                        <label sclass="hightlight">Listbox</label>
+                        in select mold
+                    </div>
+                </row>
+                <row>
+                    E-mail:
+                    <cell>
+                        <textbox value="@bind(fx.email)" width="150px" tabindex="9" />
+                        <label class="error"
+                            value="@load(vmsgs['email'])" />
+                    </cell>
+                    <div>
+                        <label sclass="hightlight">Textbox</label>
+                        with regexp constraint
+                    </div>
+ 
+                </row>
+                <row>
+                    Memo:
+                        <textbox rows="5" value="@bind(fx.memo)"
+                            width="370px;" tabindex="11" />
+                    <div>
+                        <label sclass="hightlight">Textbox</label>
+                        with multiple rows and
+                        <label sclass="hightlight">Spinner</label>
+                    </div>
+                </row>
+                <row>
+                    <cell colspan="3" style="text-align:center">
+                        <vlayout>
+                            <label visible="@load(empty vmsgs)"
+                                value="@load(empty vmsgs ? 'Form successfully submitted!' : '', before='submit')" />
+                            <button label="Submit" onClick="@command('submit')"
+                                width="100px" height="30px" />
+                        </vlayout>
+                    </cell>
+                </row>
+            </rows>
+        </grid>
+    </div>
+</zk>

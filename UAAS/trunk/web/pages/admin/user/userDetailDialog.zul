@@ -1,0 +1,56 @@
+<?page title="Bean Validation" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./userDetailWin${arg.userId}"?>
+<zk>
+	<window id="userDetailWin${arg.userId}" apply="com.cs.uaas.controller.UserDetailController" position="center,center"
+		closable="true" title="用户信息" sizable="true" maximizable="true" >
+		<vlayout spacing="15px">
+			<hbox spacing="15px">
+				<groupbox width="300px">
+					<caption label="基本信息" />
+					<grid>
+						<columns>
+							<column width="100px" align="center"></column>
+							<column></column>
+						</columns>
+						<rows>
+							<row>
+								<vlayout>
+									<hbox>用户名</hbox>
+									<hbox>（登录账号）</hbox>
+								</vlayout>
+								<label id="userNameLabel" value="${$composer.user.userName}" width="150px" />
+							</row>
+							<row>
+								显示名
+								<label value="${$composer.user.realName}" width="150px" />
+							</row>
+							<row>
+								性别
+								<label value="${$composer.user.gentleText}" width="150px" />
+							</row>
+							<row>
+								Email
+								<label value="${$composer.user.contactInfo.email}" width="150px" />
+							</row>
+							<row>
+								手机
+								<label value="${$composer.user.contactInfo.mobile}" width="150px" />
+							</row>
+							<row>
+								座机
+								<label value="${$composer.user.contactInfo.telephone}" width="150px" />
+							</row>
+							<row>
+								生日
+								<label
+									value="${empty $composer.user.birthday ? '' : c:formatDate($composer.user.birthday, 'yyyy-MM-dd')}"
+									width="150px" />
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+			</hbox>
+		</vlayout>
+	</window>
+</zk>
