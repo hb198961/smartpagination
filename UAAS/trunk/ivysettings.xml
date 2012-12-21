@@ -15,13 +15,12 @@
 		value="http://192.168.1.119:8081/nexus/content/repositories/snapshots" />
 	<resolvers>
 		<chain name="defaultChain" checkmodified="true" changingPattern=".*SNAPSHOT">
-			<ibiblio name="public" m2compatible="true" usepoms="true"
-				root="${nexus-public}" />
-			<ibiblio name="releases" m2compatible="true" usepoms="true"
+			<ibiblio name="public" m2compatible="true" usepoms="true" />
+			<!-- <ibiblio name="releases" m2compatible="true" usepoms="true"
 				root="${nexus-releases}" />
 			<ibiblio name="snapshots" m2compatible="true" usepoms="true"
 				root="${nexus-snapshots}"
-				pattern="[organisation]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]" />
+				pattern="[organisation]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]" /> -->
 			
 		    <ibiblio name="zk" m2compatible="true" usepoms="true"
 				root="http://mavensync.zkoss.org/maven2" />

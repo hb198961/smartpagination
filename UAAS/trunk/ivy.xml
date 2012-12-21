@@ -50,7 +50,7 @@
 		<dependency org="org.hibernate" name="hibernate-entitymanager" rev="3.6.4.Final" conf="compile;runtime" />
 		<dependency org="org.hibernate" name="hibernate-ehcache" rev="3.6.4.Final" conf="compile;runtime" />
 		
-		<dependency org="com.mysql" name="mysql-connector-java" rev="5.1.6" conf="runtime" />
+		<dependency org="mysql" name="mysql-connector-java" rev="5.1.6" conf="runtime" />
 
 		<dependency org="org.freemarker" name="freemarker" rev="2.3.16" conf="compile;runtime" />
 
@@ -69,7 +69,7 @@
 		<dependency org="com.googlecode.ehcache-spring-annotations" name="ehcache-spring-annotations" rev="1.1.2"
 			conf="compile;runtime" />
 
-		<dependency org="javamail" name="javamail" rev="1.4" conf="runtime" />
+		<dependency org="javax.mail" name="mail" rev="1.4.3" conf="runtime" />
 
 		<dependency org="org.bouncycastle" name="bcmail-jdk16" rev="1.46" conf="compile" />
 		<dependency org="org.bouncycastle" name="bcprov-jdk16" rev="1.46" conf="compile" />

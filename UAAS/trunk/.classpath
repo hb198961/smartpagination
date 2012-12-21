@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="data-generator"/>
 	<classpathentry kind="src" path="it"/>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=UAAS&amp;ivyXmlPath=ivy.xml&amp;confs=*"/>
+	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=UAAS-ZK&amp;ivyXmlPath=ivy.xml&amp;confs=*"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="theme-lib/BlueTheme.jar"/>
 	<classpathentry kind="lib" path="theme-lib/DarkGreenTheme.jar"/>

@@ -90,7 +90,7 @@
 			</hbox>
 			<toolbar align="center">
 				<button id="btn_submit" label="提交" />
-				<button id="btn_cancel" label="取消" ></button>
+				<button id="btn_cancel" label="取消"></button>
 			</toolbar>
 		</vlayout>
 	</window>
